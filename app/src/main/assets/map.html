@@ -56,14 +56,17 @@ let mapOptions = {
 <!-- Marker einfügen -->
 <script>
 
-
-
-
-         var url_string = window.location.href
+var url_string = window.location.href
 var url = new URL(url_string);
-var x = url.searchParams.get("x");
-var y = url.searchParams.get("y");
-var marker = L.marker([x,y]).addTo(map);
+var x = url.searchParams.get("x").split(",");
+
+var pathCoords =[];
+for (let i = 0; i< x.length; i+=2){
+    L.marker([x[i],x[i+1]]).addTo(map);
+    pathCoords.push([x[i],x[i+1]]);
+}
+
+var pathLine = L.polyline(pathCoords).addTo(map)
 
 
 

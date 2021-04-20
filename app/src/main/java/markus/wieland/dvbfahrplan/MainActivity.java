@@ -1,5 +1,6 @@
 package markus.wieland.dvbfahrplan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -12,9 +13,12 @@ import markus.wieland.defaultappelements.api.APIResult;
 import markus.wieland.dvbfahrplan.api.DVBApi;
 import markus.wieland.dvbfahrplan.api.models.coordinates.GKCoordinate;
 import markus.wieland.dvbfahrplan.api.models.coordinates.WGSCoordinate;
+import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
+import markus.wieland.dvbfahrplan.ui.departures.DepartureActivity;
+import markus.wieland.dvbfahrplan.ui.departures.DepartureAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,39 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DVBApi dvbApi = new DVBApi(this);
-        dvbApi.searchStops(new APIResult<PointFinder>() {
-            @Override
-            public void onLoad(PointFinder pointFinder) {
-                List<Point> points = pointFinder.getResult();
-                int x = 0;
 
-
-
-                /*dvbApi.searchRoute(new APIResult<Routes>() {
-                    @Override
-                    public void onLoad(Routes routes) {
-                        int x = 0;
-                    }
-                }, points.get(0).getId(), points.get(1).getId());*/
-
-
-
-
-            }
-        }, "Schneeberg");
-
-        dvbApi.searchRoute(new APIResult<Routes>() {
-            @Override
-            public void onLoad(Routes routes) {
-                int x = 0;
-            }
-        }, "33000028", "33000016");
-
+        startActivity(new Intent(this, DepartureActivity.class).putExtra(DepartureActivity.DEPARTURE_STOP_ID, "33000016"));
 
 
         Optional<WGSCoordinate> coordinate = new GKCoordinate(4646320.0, 5633913.0).asWGS();
-        int x = 0;
+
         WebView webView = findViewById(R.id.webview);
 
         webView.getSettings().setJavaScriptEnabled(true);

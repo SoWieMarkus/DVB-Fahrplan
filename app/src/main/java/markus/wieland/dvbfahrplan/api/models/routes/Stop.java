@@ -40,20 +40,6 @@ public class Stop {
     @SerializedName("Platform")
     private Platform platform;
 
-    public Stop(String arrivalTime, String departureTime, String arrivalRealTime, String departureRealTime, String name, String place, State departureState, State arrivalState, long latitude, long longitude, Platform platform) {
-        this.arrivalTime = arrivalTime;
-        this.departureTime = departureTime;
-        this.arrivalRealTime = arrivalRealTime;
-        this.departureRealTime = departureRealTime;
-        this.name = name;
-        this.place = place;
-        this.departureState = departureState;
-        this.arrivalState = arrivalState;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.platform = platform;
-    }
-
     public String getArrivalTime() {
         return arrivalTime;
     }

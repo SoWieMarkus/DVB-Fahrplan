@@ -2,42 +2,63 @@ package markus.wieland.dvbfahrplan.api.models.departure;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
 
-public class Departure {
+public class Departure implements QueryableEntity<String> {
 
-    @SerializedName(value="Id")
+    @SerializedName(value = "Id")
     private String id;
 
-    @SerializedName(value="DlId")
+    @SerializedName(value = "DlId")
     private String dlId;
 
-    @SerializedName(value="LineName")
+    @SerializedName(value = "LineName")
     private String lineName;
 
-    @SerializedName(value="Direction")
+    @SerializedName(value = "Direction")
     private String direction;
 
-    @SerializedName(value="Platform")
+    @SerializedName(value = "Platform")
     private Platform platform;
 
-    @SerializedName(value="Mot")
+    @SerializedName(value = "Mot")
     private Mode mode;
 
-    @SerializedName(value="RealTime")
+    @SerializedName(value = "RealTime")
     private String realTime;
 
-    @SerializedName(value="ScheduledTime")
+    @SerializedName(value = "ScheduledTime")
     private String scheduledTime;
 
     @SerializedName("State")
     private State state;
 
-    //TODO Changes and CancelReasons
+    @SerializedName("RouteChanges")
+    private List<String> routeChanges;
 
+    public List<String> getRouteChanges() {
+        return routeChanges;
+    }
+
+    public void setRouteChanges(List<String> routeChanges) {
+        this.routeChanges = routeChanges;
+    }
+
+    @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getStringToApplyQuery() {
+        return lineName + direction;
     }
 
     public void setId(String id) {
@@ -107,4 +128,32 @@ public class Departure {
     public void setState(State state) {
         this.state = state;
     }
+
+
+    public LocalDateTime getRealTimeAsLocalDate() {
+        if (realTime == null) return getScheduledTimeAsLocalDate();
+        return TimeConverter.convertToLocalDateTime(realTime);
+    }
+
+    public LocalDateTime getScheduledTimeAsLocalDate() {
+        return TimeConverter.convertToLocalDateTime(scheduledTime);
+    }
+
+    public long getDelay() {
+        return TimeConverter.getMinutesBetween(getScheduledTimeAsLocalDate(),getRealTimeAsLocalDate());
+    }
+
+    public long getMinutesUntilArriving() {
+        return TimeConverter.getMinutesBetween(LocalDateTime.now(),getRealTimeAsLocalDate());
+    }
+
+    public String getFancyRealTime(){
+        return getRealTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public String getFancyScheduledTime(){
+        return getScheduledTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+
 }

@@ -15,7 +15,9 @@ public class ShowMapActivity extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.loadUrl("file:///android_asset/map.html?c=12");
+        String test = getIntent().getStringExtra("test");
+
+        webView.loadUrl("file:///android_asset/map.html?x="+test);
 
         setContentView(webView);
 

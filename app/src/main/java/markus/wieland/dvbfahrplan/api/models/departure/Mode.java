@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 public enum Mode {
 
-    @SerializedName("tram") TRAM("tram"),
-    @SerializedName("citybus") CITY_BUS("citybus"),
-    @SerializedName("intercitybus") INTER_CITY_BUS("intercitybus"),
-    @SerializedName("train") TRAIN("train"),
-    @SerializedName("lift") LIFT("lift"),
-    @SerializedName("ferry") FERRY("ferry"),
-    @SerializedName("alita") ALITA_TAXI("alita"),
+    @SerializedName("Tram") TRAM("tram"),
+    @SerializedName("CityBus") CITY_BUS("citybus"),
+    @SerializedName("IntercityBus") INTER_CITY_BUS("intercitybus"),
+    @SerializedName("Train") TRAIN("train"),
+    @SerializedName("Lift") LIFT("lift"),
+    @SerializedName("Ferry") FERRY("ferry"),
+    @SerializedName("Alita") ALITA_TAXI("alita"),
     @SerializedName("footpath") WALKING("footpath"),
-    @SerializedName("rapidtransit") RAPID_TRANSIT("rapidtransit"),
+    @SerializedName("RapidTransit") RAPID_TRANSIT("rapidtransit"),
     UNKNOWN("unkown");
 
     private final String value;
