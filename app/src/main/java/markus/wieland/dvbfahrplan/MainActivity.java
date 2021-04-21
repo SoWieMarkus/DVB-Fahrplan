@@ -1,42 +1,40 @@
 package markus.wieland.dvbfahrplan;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.webkit.WebView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
-import java.util.Optional;
 
 import markus.wieland.defaultappelements.api.APIResult;
+import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.api.DVBApi;
-import markus.wieland.dvbfahrplan.api.models.coordinates.GKCoordinate;
-import markus.wieland.dvbfahrplan.api.models.coordinates.WGSCoordinate;
-import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
-import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
-import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.ui.departures.DepartureActivity;
-import markus.wieland.dvbfahrplan.ui.departures.DepartureAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DefaultActivity {
+
+    public MainActivity() {
+        super(R.layout.activity_main);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void bindViews() {
 
+    }
 
-        startActivity(new Intent(this, DepartureActivity.class).putExtra(DepartureActivity.DEPARTURE_STOP_ID, "33000016"));
+    @Override
+    public void initializeViews() {
 
+    }
 
-        Optional<WGSCoordinate> coordinate = new GKCoordinate(4646320.0, 5633913.0).asWGS();
+    @Override
+    public void execute() {
 
-        WebView webView = findViewById(R.id.webview);
+        startActivity(new Intent(this, DepartureActivity.class).putExtra(DepartureActivity.DEPARTURE_STOP_ID, "33000084"));
 
-        webView.getSettings().setJavaScriptEnabled(true);
-
-        webView.loadUrl("file:///android_asset/map.html?x=" + coordinate.get().getLatitude() + "&y=" + coordinate.get().getLongitude());
+        DVBApi dvbApi = new DVBApi(this);
+        dvbApi.searchStops(new APIResult<PointFinder>() {
+            @Override
+            public void onLoad(PointFinder pointFinder) {
+                int x = 0;
+            }
+        }, "Centrum");
     }
 }

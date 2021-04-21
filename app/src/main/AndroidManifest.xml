@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DVBFahrplan">
-        <activity android:name=".ui.routes.RouteDetailActivity"></activity>
+        <activity android:name=".ui.trip.TripActivity"></activity>
+        <activity android:name=".ui.routes.RouteDetailActivity" />
         <activity android:name=".ui.routes.RouteActivity" />
         <activity android:name=".ui.departures.DepartureActivity" />
         <activity android:name=".ShowMapActivity" />

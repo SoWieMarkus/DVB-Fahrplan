@@ -5,20 +5,13 @@ import android.content.Intent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Optional;
-
-import markus.wieland.defaultappelements.api.APIResult;
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.ShowMapActivity;
 import markus.wieland.dvbfahrplan.api.DVBApi;
-import markus.wieland.dvbfahrplan.api.models.coordinates.GKCoordinate;
-import markus.wieland.dvbfahrplan.api.models.coordinates.WGSCoordinate;
 import markus.wieland.dvbfahrplan.api.models.departure.Departure;
 import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.lines.Lines;
-import markus.wieland.dvbfahrplan.api.models.trip.Node;
-import markus.wieland.dvbfahrplan.api.models.trip.Trip;
+import markus.wieland.dvbfahrplan.ui.trip.TripActivity;
 
 public class DepartureActivity extends DefaultActivity implements DepartureItemInteractListener {
 
@@ -60,7 +53,7 @@ public class DepartureActivity extends DefaultActivity implements DepartureItemI
     public void execute() {
         setTitle("...");
 
-        String departureStopId = getIntent().getStringExtra(DEPARTURE_STOP_ID);
+        String departureStopId = getDepartureStopId();
         if (departureStopId == null) {
             finish();
             return;
@@ -71,44 +64,25 @@ public class DepartureActivity extends DefaultActivity implements DepartureItemI
         dvbApi.searchLines(this::onLoad, departureStopId);
     }
 
+    public String getDepartureStopId() {
+        return getIntent().getStringExtra(DEPARTURE_STOP_ID);
+    }
 
     public void onLoad(DepartureMonitor departureMonitor) {
         setTitle(departureMonitor.getPlace() + " " + departureMonitor.getName());
         departureAdapter.submitList(departureMonitor.getDepartures());
     }
 
-
     public void onLoad(Lines lines) {
         linesAdapter.submitList(lines.getLinesList());
     }
 
-
-
     @Override
     public void onClick(Departure departure) {
-        DVBApi dvbApi = new DVBApi(this);
-        dvbApi.searchTrip(new APIResult<Trip>() {
-            @Override
-            public void onLoad(Trip s) {
-                int x = 0;
-
-                String test = "";
-
-                int i = 0;
-                for (Node node : s.getStops()) {
-                    i++;
-                    if(i!= 1)test+=",";
-                    Optional<WGSCoordinate> coordinate = new GKCoordinate((double)node.getLongitude(),(double)node.getLatitude()).asWGS();
-                    test+=""+coordinate.get().getLatitude() +","+coordinate.get().getLongitude()+"";
-                }
-
-
-
-
-
-                startActivity(new Intent(DepartureActivity.this, ShowMapActivity.class).putExtra("test",test));
-
-            }
-        },departure.getRealTime(),getIntent().getStringExtra(DEPARTURE_STOP_ID),departure.getId().split(":")[1]);
+        Intent intent = new Intent(this, TripActivity.class);
+        intent.putExtra(TripActivity.TRIP_ID, departure.getIdForQuery())
+                .putExtra(TripActivity.TRIP_STOP_ID, getDepartureStopId())
+                .putExtra(TripActivity.TRIP_TIME, departure.getRealTime());
+        startActivity(intent);
     }
 }

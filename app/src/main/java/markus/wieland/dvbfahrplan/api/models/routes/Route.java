@@ -24,13 +24,15 @@ public class Route {
     @SerializedName("PartialRoutes")
     private List<PartialRoute> partialRoutes;
 
-    public Route(int duration, int destinationZone, int originZone, String price, int priceLevel, List<PartialRoute> partialRoutes) {
-        this.duration = duration;
-        this.destinationZone = destinationZone;
-        this.originZone = originZone;
-        this.price = price;
-        this.priceLevel = priceLevel;
-        this.partialRoutes = partialRoutes;
+    @SerializedName("RouteId")
+    private long routeId;
+
+    public long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(long routeId) {
+        this.routeId = routeId;
     }
 
     public int getDuration() {

@@ -2,6 +2,10 @@ package markus.wieland.dvbfahrplan.api.models.trip;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
 
@@ -115,5 +119,27 @@ public class Node {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public LocalDateTime getRealTimeAsDateTime() {
+        return TimeConverter.convertToLocalDateTime(realTime);
+    }
+
+    public LocalDateTime getTimeAsDateTime(){
+        return TimeConverter.convertToLocalDateTime(time);
+    }
+
+    public String getFancyRealTime(){
+        if (realTime == null) return getFancyTime();
+        return getRealTimeAsDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public String getFancyTime(){
+        return getTimeAsDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public long delay(){
+        if (getRealTime() == null) return 0;
+        return TimeConverter.getMinutesBetween(getTimeAsDateTime(), getRealTimeAsDateTime());
     }
 }

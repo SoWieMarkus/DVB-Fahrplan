@@ -11,17 +11,18 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
+    <script src="map.js"></script>
 
     <style>
-    #mapid {
-        height: 100vh;
-        width: 100vw;
-    }
-    * {
-        margin: 0;
-        padding: 0;
-    }
+        #mapid {
+            height: 100vh;
+            width: 100vw;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
 
     </style>
@@ -33,45 +34,12 @@
 
 <script type='text/javascript'>
 
-let mapOptions = {
- center: [50.95, 13.45], // Zentrum der Karte
- zoom: 8, //Zoomlevel
- layers: [] // Layer der Map, hier erstmal leer, wird gleich erweitert.
- };
-
- let divIdOfMap = "mapid";
- var map = L.map(divIdOfMap, mapOptions);
-
-
-
-
-         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-         'attribution':  'Kartendaten &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Mitwirkende',
-         'useCache': true
-         }).addTo(map);
+    initializeMap();
 
 
 
 </script>
-<!-- Marker einfügen -->
-<script>
 
-var url_string = window.location.href
-var url = new URL(url_string);
-var x = url.searchParams.get("x").split(",");
-
-var pathCoords =[];
-for (let i = 0; i< x.length; i+=2){
-    L.marker([x[i],x[i+1]]).addTo(map);
-    pathCoords.push([x[i],x[i+1]]);
-}
-
-var pathLine = L.polyline(pathCoords).addTo(map)
-
-
-
-
-</script>
 
 </body>
 </html>

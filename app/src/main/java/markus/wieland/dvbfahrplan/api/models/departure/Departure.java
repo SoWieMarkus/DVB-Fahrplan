@@ -47,6 +47,11 @@ public class Departure implements QueryableEntity<String> {
         return routeChanges;
     }
 
+    public String getIdForQuery() {
+        String[] contents = getId().split(":");
+        return contents[0] + ":" + contents[1];
+    }
+
     public void setRouteChanges(List<String> routeChanges) {
         this.routeChanges = routeChanges;
     }
@@ -140,18 +145,18 @@ public class Departure implements QueryableEntity<String> {
     }
 
     public long getDelay() {
-        return TimeConverter.getMinutesBetween(getScheduledTimeAsLocalDate(),getRealTimeAsLocalDate());
+        return TimeConverter.getMinutesBetween(getScheduledTimeAsLocalDate(), getRealTimeAsLocalDate());
     }
 
     public long getMinutesUntilArriving() {
-        return TimeConverter.getMinutesBetween(LocalDateTime.now(),getRealTimeAsLocalDate());
+        return TimeConverter.getMinutesBetween(LocalDateTime.now(), getRealTimeAsLocalDate());
     }
 
-    public String getFancyRealTime(){
+    public String getFancyRealTime() {
         return getRealTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public String getFancyScheduledTime(){
+    public String getFancyScheduledTime() {
         return getScheduledTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 

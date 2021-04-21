@@ -18,13 +18,6 @@ public class PartialRoute {
     @SerializedName("Mot")
     private Mot line;
 
-    public PartialRoute(int duration, List<String> infos, List<Stop> regularStops, Mot line) {
-        this.duration = duration;
-        this.infos = infos;
-        this.regularStops = regularStops;
-        this.line = line;
-    }
-
     public Mot getLine() {
         return line;
     }
