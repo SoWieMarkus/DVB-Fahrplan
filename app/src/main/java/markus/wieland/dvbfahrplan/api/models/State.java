@@ -8,6 +8,4 @@ public enum State {
     @SerializedName("Delayed") DELAYED,
     @SerializedName("Unkown") UNKOWN;
 
-
-
 }

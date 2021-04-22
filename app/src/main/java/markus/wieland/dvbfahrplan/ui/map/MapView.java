@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.routes.Stop;
@@ -56,10 +57,12 @@ public class MapView extends WebView {
         });
     }
 
-    public void showTrip(Trip trip) {
+    public void showTrip(Trip trip, Mode mode) {
         List<TripNode> nodes = new ArrayList<>();
         for (Node node : trip.getStops()) {
-            nodes.add(new TripNode(node));
+            TripNode tripNode = new TripNode(node);
+            tripNode.setMode(mode);
+            nodes.add(tripNode);
         }
         loadUrl("javascript:showTrip(" + gson.toJson(nodes) + ")");
     }
@@ -77,14 +80,12 @@ public class MapView extends WebView {
     }
 
     public void showRoute(Route route) {
-        List<TripNode> nodes = new ArrayList<>();
+        List<MapRoute> nodes = new ArrayList<>();
 
-        for (PartialRoute partialRoute : route.getPartialRoutes()) {
-            for (Stop stop : partialRoute.getRegularStops()) {
-                nodes.add(new TripNode(stop));
-            }
+        for (PartialRoute partialRoute : route.getRouteList()) {
+            nodes.add(new MapRoute(partialRoute));
         }
-        loadUrl("javascript:showTrip(" + gson.toJson(nodes) + ")");
+        loadUrl("javascript:showRoute(" + gson.toJson(nodes) + ")");
 
     }
 

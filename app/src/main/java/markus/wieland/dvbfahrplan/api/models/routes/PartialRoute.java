@@ -95,6 +95,10 @@ public class PartialRoute {
             backPart = context.getString(R.string.route_waiting_time);
         if (line.getMode() == Mode.CHANGE_PLATFORM)
             backPart = context.getString(R.string.route_transfer_time);
+        if (line.getMode() == Mode.STAY_FOR_CONNECTION)
+            return context.getString(R.string.secure_connection);
+        if (line.getMode() == Mode.WALKING)
+            backPart = context.getString(R.string.footpath);
 
         return hoursPart + minutesPart + (backPart.length() == 0 ? "" : " ") + backPart;
     }

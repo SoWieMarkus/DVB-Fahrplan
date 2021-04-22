@@ -1,21 +1,16 @@
 package markus.wieland.dvbfahrplan.ui.routes.route;
 
+import android.content.Intent;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.api.Mode;
-import markus.wieland.dvbfahrplan.api.TimeConverter;
-import markus.wieland.dvbfahrplan.api.models.routes.Mot;
-import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
+import markus.wieland.dvbfahrplan.ShowMapActivity;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
-import markus.wieland.dvbfahrplan.api.models.routes.Stop;
 
 public class RouteDetailActivity extends DefaultActivity {
 
@@ -48,10 +43,9 @@ public class RouteDetailActivity extends DefaultActivity {
         return gson.fromJson(getIntent().getStringExtra(ROUTE), Route.class);
     }
 
-
-
     @Override
     public void execute() {
         routeAdapter.submitList(getRoute().getRouteList());
+        startActivity(new Intent(this, ShowMapActivity.class).putExtra(ShowMapActivity.ROUTE,getIntent().getStringExtra(ROUTE)));
     }
 }

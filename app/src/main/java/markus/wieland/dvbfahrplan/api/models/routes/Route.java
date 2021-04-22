@@ -155,7 +155,8 @@ public class Route implements QueryableEntity<Long> {
 
     private void addBetweenRoute(List<PartialRoute> partialRoutes, PartialRoute partialRoute, PartialRoute next) {
         if (next == null) return;
-        if (partialRoute.getLine().getMode().equals(Mode.WALKING)) return;
+        if (partialRoute.getLine().getMode().equals(Mode.WALKING) ||partialRoute.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION)) return;
+        if (next.getLine().getMode().equals(Mode.WALKING) || next.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION)) return;
         if (partialRoute.getDestination() == null || next.getOrigin() == null) return;
 
         long durationBetweenRoutes = TimeConverter.getMinutesBetween(partialRoute.getDestination().getRealArrivalTimeAsLocalDateTime(),

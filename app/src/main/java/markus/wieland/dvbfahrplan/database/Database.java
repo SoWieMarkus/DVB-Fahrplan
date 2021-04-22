@@ -6,9 +6,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
+import markus.wieland.dvbfahrplan.database.point.PointDataAccessObject;
 
 @androidx.room.Database(entities = Point.class, version = 1)
 public abstract class Database extends RoomDatabase {
+
+    public abstract PointDataAccessObject getPointDataAccessObject();
 
     private static Database instance;
 

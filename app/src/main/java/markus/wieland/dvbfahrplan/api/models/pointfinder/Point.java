@@ -4,10 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import markus.wieland.databases.DatabaseEntity;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 
 @Entity
-public class Point implements QueryableEntity<String> {
+public class Point implements QueryableEntity<String>, DatabaseEntity {
 
     @PrimaryKey @NonNull
     private String id;
@@ -16,6 +17,8 @@ public class Point implements QueryableEntity<String> {
 
     private long latitude;
     private long longitude;
+
+    private long latestUse;
 
     public Point(){}
 
@@ -28,7 +31,15 @@ public class Point implements QueryableEntity<String> {
         this.latitude = Long.parseLong(parts[5]);
     }
 
-    public void setId(String id) {
+    public long getLatestUse() {
+        return latestUse;
+    }
+
+    public void setLatestUse(long latestUse) {
+        this.latestUse = latestUse;
+    }
+
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -73,5 +84,10 @@ public class Point implements QueryableEntity<String> {
 
     public long getLongitude() {
         return longitude;
+    }
+
+    @Override
+    public long getUniqueId() {
+        return 0;
     }
 }

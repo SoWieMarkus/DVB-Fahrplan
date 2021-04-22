@@ -10,4 +10,6 @@
     <string name="stops">stops</string>
     <string name="stops_singular">stop</string>
     <string name="error_no_stop">Couldn\'t find a stop with that name.</string>
+    <string name="secure_connection">secure connection</string>
+    <string name="footpath">footpath</string>
 </resources>

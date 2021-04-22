@@ -1,0 +1,11 @@
+
+J
+java:S1604Z"(Make this anonymous inner class a lambda(«άσόÿÿÿÿ8°¦¶‹/
+H
+java:S1481]"&Remove this unused "x" local variable.(Ύ„λόÿÿÿÿ8°¦¶‹/
+[
+java:S3655f"9Call "coordinate.isPresent()" before accessing the value.(όϊΧ±ώÿÿÿÿ8φ‹/
+>
+java:S1643f"Use a StringBuilder instead.(όϊΧ±ώÿÿÿÿ8φ‹/
+>
+java:S1643d"Use a StringBuilder instead.(Σªϊÿÿÿÿ8ƒΊπ‹/

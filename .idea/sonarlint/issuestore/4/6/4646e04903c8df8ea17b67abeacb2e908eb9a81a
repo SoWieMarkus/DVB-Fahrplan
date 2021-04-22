@@ -1,0 +1,19 @@
+
+x
+java:S1128"VRemove this unused import 'markus.wieland.dvbfahrplan.ui.departures.DepartureAdapter'.(¶ƒÊïûÿÿÿÿ8ñ™Ö‰/
+|
+java:S1128"ZRemove this unused import 'markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder'.(İÙÂ²ÿÿÿÿÿ8äÎğ‰/
+d
+java:S1128"BRemove this unused import 'markus.wieland.dvbfahrplan.api.DVBApi'.(™–êÊşÿÿÿÿ8äÎğ‰/
+n
+java:S1128"LRemove this unused import 'markus.wieland.defaultappelements.api.APIResult'.(ë«Æ³ùÿÿÿÿ8äÎğ‰/
+m
+java:S1128"PRemove this unused import 'markus.wieland.dvbfahrplan.api.models.routes.Routes'.(ØıÄü8äÎğ‰/
+[
+java:S3655("9Call "coordinate.isPresent()" before accessing the value.(å©¬úÿÿÿÿ8ŞÔ¶†/
+
+java:S1128"]Remove this unused import 'markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor'.(ŸÃë²ùÿÿÿÿ8äÎğ‰/
+M
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8äÎğ‰/
+v
+java:S1128"TRemove this unused import 'markus.wieland.dvbfahrplan.api.models.pointfinder.Point'.(ÍÎúÜúÿÿÿÿ8äÎğ‰/

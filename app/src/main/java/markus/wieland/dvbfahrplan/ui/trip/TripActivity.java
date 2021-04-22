@@ -68,11 +68,11 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
     @Override
     public void onLoad(Trip trip) {
-        mapViewTrip.showTrip(trip);
+        mapViewTrip.showTrip(trip, getMode());
         mapViewTrip.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                mapViewTrip.showTrip(trip);
+                mapViewTrip.showTrip(trip, getMode());
             }
         });
         tripAdapter.submitList(trip.getStops());

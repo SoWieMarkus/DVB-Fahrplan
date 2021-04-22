@@ -50,7 +50,6 @@ public class MainActivity extends DefaultActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, DepartureActivity.class));
-
             }
         });
 
@@ -140,8 +139,9 @@ public class MainActivity extends DefaultActivity {
                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
         // TODO shimmer
-        // TODO Farben
         // TODO Abfahrtszeiten
+        // TODO fußweg am Anfang oder am ende
+        // TODO Empty Messages
     }
 
     @Override
