@@ -6,7 +6,6 @@ import android.util.Log;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.google.gson.Gson;
 
@@ -18,7 +17,6 @@ import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.routes.Stop;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
-import markus.wieland.dvbfahrplan.ui.map.TripNode;
 
 public class MapView extends WebView {
 
@@ -66,8 +64,16 @@ public class MapView extends WebView {
         loadUrl("javascript:showTrip(" + gson.toJson(nodes) + ")");
     }
 
-    public void focus(Node node){
+    public void focus(Node node) {
         loadUrl("javascript:focus(" + gson.toJson(new TripNode(node)) + ")");
+    }
+
+    public void focus(Coordinate coordinate) {
+        loadUrl("javascript:focus(" + gson.toJson(coordinate) + ")");
+    }
+
+    public void show(Coordinate coordinate) {
+        loadUrl("javascript:show(" + gson.toJson(coordinate) + ")");
     }
 
     public void showRoute(Route route) {

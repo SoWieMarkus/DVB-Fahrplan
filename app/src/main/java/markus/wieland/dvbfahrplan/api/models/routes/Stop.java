@@ -2,6 +2,10 @@ package markus.wieland.dvbfahrplan.api.models.routes;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
 
@@ -126,5 +130,45 @@ public class Stop {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public LocalDateTime getArrivalTimeAsLocalDate() {
+        return TimeConverter.convertToLocalDateTime(arrivalTime);
+    }
+
+    public LocalDateTime getRealArrivalTimeAsLocalDateTime() {
+        if (arrivalRealTime == null) return getArrivalTimeAsLocalDate();
+        return TimeConverter.convertToLocalDateTime(arrivalRealTime);
+    }
+
+    public LocalDateTime getDepartureTimeAsLocalDate() {
+        return TimeConverter.convertToLocalDateTime(departureTime);
+    }
+
+    public LocalDateTime getRealDepartureTimeAsLocalDate() {
+        if (departureRealTime == null) return getDepartureTimeAsLocalDate();
+        return TimeConverter.convertToLocalDateTime(departureRealTime);
+    }
+
+    public long getDelayArrival() {
+        return TimeConverter.getMinutesBetween(getArrivalTimeAsLocalDate(), getRealArrivalTimeAsLocalDateTime());
+    }
+
+    public long getDelayDeparture() {
+        return TimeConverter.getMinutesBetween(getDepartureTimeAsLocalDate(), getRealDepartureTimeAsLocalDate());
+    }
+
+    public String getFancyArrivalTime() {
+        return getArrivalTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public String getFancyDepartureTime() {
+        return getDepartureTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    @Override
+    public String toString(){
+        if (getPlace().equalsIgnoreCase("Dresden")) return getName();
+        return getPlace() + " " + getName();
     }
 }

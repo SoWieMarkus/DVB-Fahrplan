@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import markus.wieland.dvbfahrplan.api.models.departure.Mode;
+import markus.wieland.dvbfahrplan.api.Mode;
 
 public class Line {
 
@@ -32,6 +32,7 @@ public class Line {
     }
 
     public Mode getMode() {
+        if (mode == null) return Mode.UNKNOWN;
         return mode;
     }
 

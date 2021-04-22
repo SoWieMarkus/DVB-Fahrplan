@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import markus.wieland.dvbfahrplan.api.models.departure.Mode;
+import markus.wieland.dvbfahrplan.api.Mode;
 
 public class Mot {
 
@@ -20,14 +20,8 @@ public class Mot {
     @SerializedName("Changes")
     private List<String> changes;
 
-    public Mot(Mode mode, String name, String direction, List<String> changes) {
-        this.mode = mode;
-        this.name = name;
-        this.direction = direction;
-        this.changes = changes;
-    }
-
     public Mode getMode() {
+        if (mode == null) return Mode.UNKNOWN;
         return mode;
     }
 

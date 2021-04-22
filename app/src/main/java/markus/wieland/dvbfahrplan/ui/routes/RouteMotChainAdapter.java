@@ -1,7 +1,5 @@
 package markus.wieland.dvbfahrplan.ui.routes;
 
-import android.graphics.drawable.PictureDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.StreamEncoder;
-import com.caverock.androidsvg.SVG;
-
-import java.io.InputStream;
-
 import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.api.models.departure.Mode;
+import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.routes.Mot;
 
 import static android.view.View.GONE;

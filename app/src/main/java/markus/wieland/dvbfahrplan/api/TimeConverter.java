@@ -2,7 +2,6 @@ package markus.wieland.dvbfahrplan.api;
 
 import androidx.annotation.NonNull;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;

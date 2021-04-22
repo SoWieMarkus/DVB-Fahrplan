@@ -5,4 +5,10 @@
     <string name="minute_short">Min.</string>
     <string name="departure_selected_station">AUSGEWÄHLTE STATION</string>
     <string name="departure_lines">Linien</string>
+    <string name="route_transfer_time">Umstiegszeit</string>
+    <string name="route_waiting_time">Wartezeit</string>
+    <string name="hour_short_term">Std.</string>
+    <string name="stops">Zwischenhalte</string>
+    <string name="stops_singular">Zwischenhalt</string>
+    <string name="error_no_stop">Es konnte keine Haltestelle mit diesem Namen gefunden werden.</string>
 </resources>

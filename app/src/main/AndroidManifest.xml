@@ -3,6 +3,7 @@
     package="markus.wieland.dvbfahrplan">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DVBFahrplan">
         <activity android:name=".ui.trip.TripActivity"/>
-        <activity android:name=".ui.routes.RouteDetailActivity" />
+        <activity android:name=".ui.routes.route.RouteDetailActivity" />
         <activity android:name=".ui.routes.RouteActivity" />
         <activity android:name=".ui.departures.DepartureActivity" />
         <activity android:name=".ShowMapActivity" />

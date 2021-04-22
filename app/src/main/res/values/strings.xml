@@ -4,4 +4,10 @@
     <string name="minute_short">min.</string>
     <string name="departure_selected_station">SELECTED STATION</string>
     <string name="departure_lines">Lines</string>
+    <string name="route_transfer_time">transfer time</string>
+    <string name="route_waiting_time">waiting time</string>
+    <string name="hour_short_term">h</string>
+    <string name="stops">stops</string>
+    <string name="stops_singular">stop</string>
+    <string name="error_no_stop">Couldn\'t find a stop with that name.</string>
 </resources>

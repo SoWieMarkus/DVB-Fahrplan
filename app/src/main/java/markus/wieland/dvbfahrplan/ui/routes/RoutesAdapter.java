@@ -69,6 +69,13 @@ public class RoutesAdapter extends QueryableAdapter<Long,Route, RoutesAdapter.Ro
             itemRoutePrice.setText(route.getPrice() + "€");
             itemRouteChanges.setText(route.getInterchanges() + "");
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getOnItemInteractListener().onClick(route);
+                }
+            });
+
         }
     }
 }

@@ -2,10 +2,13 @@ package markus.wieland.dvbfahrplan.api.models.routes;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+import markus.wieland.dvbfahrplan.api.Mode;
+import markus.wieland.dvbfahrplan.api.TimeConverter;
+import markus.wieland.dvbfahrplan.api.models.Platform;
 
 public class Route implements QueryableEntity<Long> {
 
@@ -124,4 +127,61 @@ public class Route implements QueryableEntity<Long> {
     public String getStringToApplyQuery() {
         return partialRoutes.toString();
     }
+
+    public List<PartialRoute> getRouteList() {
+        List<PartialRoute> partialRoutesFiltered = new ArrayList<>();
+        List<PartialRoute> baseSet = removeRedundant();
+
+        for (int i = 0; i < baseSet.size(); i++) {
+            PartialRoute partialRoute = baseSet.get(i);
+            PartialRoute partialRouteNext = i == baseSet.size() - 1 ? null : baseSet.get(i + 1);
+
+            if (partialRoute.getRegularStops() == null) continue;
+            partialRoutesFiltered.add(partialRoute);
+
+            addBetweenRoute(partialRoutesFiltered, partialRoute, partialRouteNext);
+
+        }
+        return partialRoutesFiltered;
+    }
+
+    private List<PartialRoute> removeRedundant() {
+        List<PartialRoute> partialRoutesFiltered = new ArrayList<>();
+        for (PartialRoute partialRoute : getPartialRoutes()) {
+            if (partialRoute.getRegularStops() != null) partialRoutesFiltered.add(partialRoute);
+        }
+        return partialRoutesFiltered;
+    }
+
+    private void addBetweenRoute(List<PartialRoute> partialRoutes, PartialRoute partialRoute, PartialRoute next) {
+        if (next == null) return;
+        if (partialRoute.getLine().getMode().equals(Mode.WALKING)) return;
+        if (partialRoute.getDestination() == null || next.getOrigin() == null) return;
+
+        long durationBetweenRoutes = TimeConverter.getMinutesBetween(partialRoute.getDestination().getRealArrivalTimeAsLocalDateTime(),
+                next.getOrigin().getRealDepartureTimeAsLocalDate());
+
+        Platform platform = partialRoute.getDestination().getPlatform();
+        Platform platformNext = partialRoute.getOrigin().getPlatform();
+
+        boolean samePlatform;
+        if (platform == null || platformNext == null) samePlatform = false;
+        else samePlatform = platform.equals(platformNext);
+
+        PartialRoute betweenRoute = new PartialRoute();
+        Mot mot = new Mot();
+        mot.setMode(samePlatform ? Mode.WAITING : Mode.CHANGE_PLATFORM);
+        betweenRoute.setDuration((int) durationBetweenRoutes);
+        betweenRoute.setLine(mot);
+
+        List<Stop> stops = new ArrayList<>();
+        stops.add(partialRoute.getDestination());
+        stops.add(next.getOrigin());
+        betweenRoute.setRegularStops(stops);
+
+        partialRoutes.add(betweenRoute);
+    }
+
+
 }
+

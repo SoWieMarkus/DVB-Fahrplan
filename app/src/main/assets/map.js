@@ -48,6 +48,10 @@ function focus(node) {
     map.flyTo([node.x, node.y], 15);
 }
 
+function show(node) {
+    map.setView([node.x, node.y], 15);
+}
+
 /*var url_string = window.location.href;
    var url = new URL(url_string);
    var x = url.searchParams.get("x").split(",");

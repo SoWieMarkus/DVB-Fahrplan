@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,9 @@ import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
+import markus.wieland.dvbfahrplan.ui.routes.route.RouteDetailActivity;
 
 public class RouteActivity extends DefaultActivity implements APIResult<Routes>, SelectPointInteractListener, TextWatcher {
-
-    public static final String ORIGIN_STOP_ID = "markus.wieland.dvbfahrplan.ui.routes.ORIGIN_STOP_ID";
-    public static final String DESTINATION_STOP_ID = "markus.wieland.dvbfahrplan.ui.routes.DESTINATION_STOP_ID";
 
     private TextInputLayout textInputLayoutOrigin;
     private TextInputLayout textInputLayoutDestination;
@@ -78,6 +77,13 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
     }
 
     private void searchForRoute() {
+        textInputLayoutDestination.setError(null);
+        textInputLayoutOrigin.setError(null);
+        if (getOrigin().equals(getDestination())) return;
+
+        if (getOrigin() == null) textInputLayoutOrigin.setError(getString(R.string.error_no_stop));
+        if (getDestination() == null) textInputLayoutOrigin.setError(getString(R.string.error_no_stop));
+
         dvbApi.searchRoute(this, getOrigin(), getDestination());
         loadFragment(routeFragment);
     }
@@ -89,8 +95,7 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
     public void onLoad(PointFinder pointFinder) {
         if (pointFinder.getPointStatus() != null && pointFinder.getPointStatus().equals(PointStatus.IDENTIFIED)) {
             if (originHasFocus) originStopId = pointFinder.getResult().get(0).getId();
-            if (destinationHasFocus)
-                destinationStopId = pointFinder.getResult().get(0).getId();
+            if (destinationHasFocus) destinationStopId = pointFinder.getResult().get(0).getId();
         }
         pointFinderFragment.update(pointFinder.getResult());
     }
@@ -100,10 +105,16 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
         originStopId = destinationStopId;
         destinationStopId = tempId;
 
+        textInputLayoutDestination.getEditText().removeTextChangedListener(this);
+        textInputLayoutOrigin.getEditText().removeTextChangedListener(this);
+
         String valueDestination = textInputLayoutDestination.getEditText().getText().toString();
         String valueOrigin = textInputLayoutOrigin.getEditText().getText().toString();
         textInputLayoutDestination.getEditText().setText(valueOrigin);
         textInputLayoutOrigin.getEditText().setText(valueDestination);
+
+        textInputLayoutDestination.getEditText().addTextChangedListener(this);
+        textInputLayoutOrigin.getEditText().addTextChangedListener(this);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -177,6 +188,7 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
     }
 
     public void onClick(Route route) {
-        startActivity(new Intent(this, RouteDetailActivity.class));
+        startActivity(new Intent(this, RouteDetailActivity.class)
+                .putExtra(RouteDetailActivity.ROUTE, new Gson().toJson(route)));
     }
 }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
-<rotate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fromDegrees="90"
-    android:toDegrees="90"
-    android:pivotX="50%"
-    android:pivotY="50%"
-    android:drawable="@drawable/item_dotted_line">
-</rotate>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:left="-1000dp"
+        android:right="-1000dp">
+
+        <rotate
+            android:drawable="@drawable/item_dotted_line"
+            android:fromDegrees="90"
+            android:visible="true" />
+    </item>
+</layer-list>

@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/item_partial_route_start_marker"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
@@ -38,19 +38,19 @@
                 android:background="#2196F3"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
             <LinearLayout
-                android:id="@+id/item_trip_bottom"
+                android:id="@+id/item_partial_route_marker_line"
                 android:layout_width="7dp"
                 android:layout_height="0dp"
                 android:background="#2196F3"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
 
             <LinearLayout
@@ -58,10 +58,10 @@
                 android:layout_width="11dp"
                 android:layout_height="11dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView"></LinearLayout>
+                app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout

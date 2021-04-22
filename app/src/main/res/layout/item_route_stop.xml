@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/item_stop_line"
+            android:layout_width="7dp"
+            android:layout_height="0dp"
+            android:background="#2196F3"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_stop_marker"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"
+            app:srcCompat="@drawable/item_marker" />
+
+        <ImageView
+            android:id="@+id/item_partial_route_start_marker"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/item_marker" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/item_stop_arriving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:12" />
+
+        <TextView
+            android:id="@+id/item_stop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

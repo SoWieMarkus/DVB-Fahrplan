@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,13 +14,17 @@ import androidx.annotation.NonNull;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
 import markus.wieland.dvbfahrplan.R;
+import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Position;
 
 public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder> {
 
-    public TripAdapter(TripItemInteractListener onItemInteractListener) {
+    private final Mode mode;
+
+    public TripAdapter(TripItemInteractListener onItemInteractListener, Mode mode) {
         super(onItemInteractListener);
+        this.mode = mode;
     }
 
     @Override
@@ -48,6 +53,8 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
         private LinearLayout itemTripBottomLine;
         private LinearLayout itemTripTopLine;
 
+        private ImageView itemTripMarker;
+
         private TextView itemTripTime;
         private TextView itemTripStopName;
         private TextView itemTripPlatform;
@@ -61,10 +68,11 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
         @Override
         public void bindViews() {
             itemTripTopLine = findViewById(R.id.item_trip_top);
-            itemTripBottomLine = findViewById(R.id.item_trip_bottom);
+            itemTripBottomLine = findViewById(R.id.item_partial_route_marker_line);
             itemTripStopName = findViewById(R.id.item_trip_name);
             itemTripPlatform = findViewById(R.id.item_trip_platform);
             itemTripTime = findViewById(R.id.item_trip_time);
+            itemTripMarker = findViewById(R.id.item_partial_route_start_marker);
         }
 
         @Override
@@ -77,12 +85,20 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
             itemTripStopName.setText(node.getName());
             itemTripStopName.setTypeface(null, node.getPosition().equals(Position.CURRENT) ? Typeface.BOLD : Typeface.NORMAL);
 
-            itemTripPlatform.setText(node.getPlatform().toString(itemView.getContext()));
+            itemTripPlatform.setText(node.getPlatform() == null
+                    ? ""
+                    : node.getPlatform().toString(itemView.getContext()));
 
             itemView.setAlpha(node.getPosition().equals(Position.PREVIOUS) ? 0.3f : 1f);
 
             itemTripBottomLine.setVisibility(getAdapterPosition() == list.size() - 1 ? View.INVISIBLE : View.VISIBLE);
             itemTripTopLine.setVisibility(getAdapterPosition() == 0 ? View.INVISIBLE : View.VISIBLE);
+
+            itemTripTopLine.setBackgroundColor(mode.getColor());
+            itemTripBottomLine.setBackgroundColor(mode.getColor());
+            itemTripMarker.setImageDrawable(mode.getMarker(itemView.getContext()));
+
+
 
             itemView.setOnClickListener(this);
 

@@ -10,6 +10,7 @@ import markus.wieland.defaultappelements.api.APIResult;
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.DVBApi;
+import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
@@ -19,7 +20,7 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
     public static final String TRIP_STOP_ID = "markus.wieland.dvbfahrplan.ui.trip.TRIP_STOP_ID";
     public static final String TRIP_ID = "markus.wieland.dvbfahrplan.ui.trip.TRIP_ID";
-    public static final String TRIP_TIME = "markus.wieland.dvbfahrplan.ui.trip.TRIP_TIME";
+    public static final String TRIP_MODE = "markus.wieland.dvbfahrplan.ui.trip.MODE";
 
     private RecyclerView recyclerViewTrip;
     private MapView mapViewTrip;
@@ -37,7 +38,7 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
     @Override
     public void initializeViews() {
-        tripAdapter = new TripAdapter(this);
+        tripAdapter = new TripAdapter(this, getMode());
 
         recyclerViewTrip.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTrip.setAdapter(tripAdapter);
@@ -45,6 +46,10 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
     private String getTime() {
         return TimeConverter.getTimeAsSAP();
+    }
+
+    private Mode getMode() {
+        return (Mode) getIntent().getSerializableExtra(TRIP_MODE);
     }
 
     private String getStopId() {

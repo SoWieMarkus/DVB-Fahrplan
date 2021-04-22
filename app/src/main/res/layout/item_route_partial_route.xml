@@ -5,84 +5,283 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/item_partial_route_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_partial_route_origin_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="?attr/main_text_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_partial_route_origin_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_partial_route_mode_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="2dp"
+                    android:text="TextView"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/item_partial_route_mode_direction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item_partial_route_expand_stops"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_partial_route_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="?attr/main_text_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/item_partial_route_amount_stops"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="?attr/main_text_color"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/item_partial_route_expand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_expand" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_partial_route_end_marker"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/item_marker" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_end_marker"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_end_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_end_marker"
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_end_marker"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_partial_route_start_marker"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/item_marker" />
+
+        <LinearLayout
+            android:id="@+id/item_partial_route_marker_line"
+            android:layout_width="7dp"
+            android:layout_height="0dp"
+            android:background="#2196F3"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/item_marker" />
-
-            <LinearLayout
-                android:id="@+id/item_trip_bottom"
-                android:layout_width="7dp"
-                android:layout_height="0dp"
-                android:background="#2196F3"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView"></LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/linearLayout5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/item_trip_name"
+                android:id="@+id/item_partial_route_arrival"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="?attr/main_text_color"
-                android:textSize="16sp" />
+                android:gravity="center"
+                android:text="01:10" />
 
             <TextView
-                android:id="@+id/item_trip_time"
+                android:id="@+id/item_partial_route_delay_departure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00:10" />
-
+                android:gravity="center"
+                android:text="+1"
+                android:textColor="@android:color/holo_red_light" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/item_partial_route_destination_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="08:88" />
+
+            <TextView
+                android:id="@+id/item_partial_route_delay_arrival"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="+1"
+                android:textColor="@android:color/holo_red_light" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_partial_route_mode_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:srcCompat="@drawable/ic_transport_bus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_partial_route_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        tools:listitem="@layout/item_route_stop" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/item_partial_route_recycler_view">
+
         <TextView
-            android:id="@+id/item_trip_platform"
+            android:id="@+id/item_partial_route_destination_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="TextView" />
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="?attr/main_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/item_partial_route_destination_platform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

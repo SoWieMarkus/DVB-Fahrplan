@@ -99,7 +99,7 @@ public class DepartureActivity extends DefaultActivity implements TextWatcher, S
         Intent intent = new Intent(this, TripActivity.class);
         intent.putExtra(TripActivity.TRIP_ID, departure.getIdForQuery())
                 .putExtra(TripActivity.TRIP_STOP_ID, currentPoint.getId())
-                .putExtra(TripActivity.TRIP_TIME, departure.getRealTime());
+                .putExtra(TripActivity.TRIP_MODE, departure.getMode());
         startActivity(intent);
     }
 

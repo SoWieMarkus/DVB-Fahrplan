@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
@@ -103,6 +104,7 @@ public class Departure implements QueryableEntity<String> {
     }
 
     public Mode getMode() {
+        if (mode == null) return Mode.UNKNOWN;
         return mode;
     }
 

@@ -1,7 +1,5 @@
 package markus.wieland.dvbfahrplan.ui.map;
 
-import java.util.Optional;
-
 import markus.wieland.dvbfahrplan.api.models.coordinates.GKCoordinate;
 import markus.wieland.dvbfahrplan.api.models.coordinates.WGSCoordinate;
 import markus.wieland.dvbfahrplan.api.models.routes.Stop;
@@ -15,13 +13,12 @@ public class TripNode {
     private double x;
     private double y;
 
-    public TripNode (Node node) {
+    public TripNode(Node node) {
         this.name = node.getName();
         this.position = node.getPosition();
         WGSCoordinate coordinate = new GKCoordinate((double) node.getLongitude(), (double) node.getLatitude()).asWGS().get();
         this.x = coordinate.getLatitude();
         this.y = coordinate.getLongitude();
-
     }
 
     public TripNode(Stop stop) {
