@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DVB Fahrplan</string>
+    <string name="platform_short">Gl.</string>
+    <string name="minute_short">Min.</string>
+    <string name="departure_selected_station">AUSGEWÄHLTE STATION</string>
+    <string name="departure_lines">Linien</string>
+</resources>

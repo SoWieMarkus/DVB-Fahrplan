@@ -2,8 +2,10 @@ package markus.wieland.dvbfahrplan.api.models.departure;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Status;
 
 public class DepartureMonitor {
@@ -61,5 +63,9 @@ public class DepartureMonitor {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getExpirationTimeAsLocalDateTime(){
+        return TimeConverter.convertToLocalDateTime(expirationTime);
     }
 }

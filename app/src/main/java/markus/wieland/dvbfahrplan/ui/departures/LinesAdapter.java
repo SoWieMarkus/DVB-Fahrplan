@@ -40,6 +40,7 @@ public class LinesAdapter extends DefaultAdapter<Line, LinesAdapter.LinesViewHol
         @Override
         public void bindItemToViewHolder(Line line) {
             this.lineName.setText(line.getName());
+            this.lineName.setBackground(line.getMode().getBackground(itemView.getContext()));
         }
     }
 }

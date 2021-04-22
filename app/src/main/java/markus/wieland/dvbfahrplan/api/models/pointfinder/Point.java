@@ -1,13 +1,23 @@
 package markus.wieland.dvbfahrplan.api.models.pointfinder;
 
-public class Point {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    private final String id;
-    private final String place;
-    private final String name;
+import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 
-    private final long latitude;
-    private final long longitude;
+@Entity
+public class Point implements QueryableEntity<String> {
+
+    @PrimaryKey @NonNull
+    private String id;
+    private String place;
+    private String name;
+
+    private long latitude;
+    private long longitude;
+
+    public Point(){}
 
     public Point(String point) {
         String[] parts = point.split("\\|");
@@ -18,8 +28,35 @@ public class Point {
         this.latitude = Long.parseLong(parts[5]);
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
+    }
+
+    @NonNull
+    @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getStringToApplyQuery() {
+        return name + place;
     }
 
     public String getPlace() {

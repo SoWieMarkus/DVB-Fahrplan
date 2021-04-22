@@ -22,6 +22,7 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
         super(onItemInteractListener);
     }
 
+    @Override
     public TripItemInteractListener getOnItemInteractListener() {
         return (TripItemInteractListener) super.getOnItemInteractListener();
     }
@@ -76,7 +77,7 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
             itemTripStopName.setText(node.getName());
             itemTripStopName.setTypeface(null, node.getPosition().equals(Position.CURRENT) ? Typeface.BOLD : Typeface.NORMAL);
 
-            itemTripPlatform.setText(node.getPlatform().getName());
+            itemTripPlatform.setText(node.getPlatform().toString(itemView.getContext()));
 
             itemView.setAlpha(node.getPosition().equals(Position.PREVIOUS) ? 0.3f : 1f);
 

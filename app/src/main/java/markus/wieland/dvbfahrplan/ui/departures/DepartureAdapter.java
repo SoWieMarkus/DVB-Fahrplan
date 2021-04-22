@@ -1,5 +1,6 @@
 package markus.wieland.dvbfahrplan.ui.departures;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,19 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
         return new DepartureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_departure, parent, false));
     }
 
-    public DepartureItemInteractListener getItemInteractListener(){
+    public DepartureItemInteractListener getItemInteractListener() {
         return (DepartureItemInteractListener) onItemInteractListener;
     }
 
     public class DepartureViewHolder extends DefaultViewHolder<Departure> {
+
+        private TextView itemDepartureLine;
+        private TextView itemDepartureName;
+        private TextView itemDepartureTime;
+        private TextView itemDeparturePlatform;
+        private TextView itemDepartureInMinutes;
+        private TextView itemDepartureDelay;
+        private TextView itemDepartureMinutes;
 
         public DepartureViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -36,24 +45,37 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
 
         @Override
         public void bindViews() {
-
+            itemDepartureDelay = findViewById(R.id.item_departure_delay);
+            itemDepartureLine = findViewById(R.id.item_departure_line);
+            itemDepartureName = findViewById(R.id.item_departure_name);
+            itemDeparturePlatform = findViewById(R.id.item_departure_platform);
+            itemDepartureTime = findViewById(R.id.item_departure_time);
+            itemDepartureInMinutes = findViewById(R.id.item_departure_arrival);
+            itemDepartureMinutes = findViewById(R.id.item_departure_minutes);
         }
 
         @Override
         public void bindItemToViewHolder(Departure departure) {
-            ((TextView)findViewById(R.id.textView2)).setText(departure.getFancyRealTime());
-            ((TextView)findViewById(R.id.textView3)).setText(departure.getFancyScheduledTime());
-            ((TextView)findViewById(R.id.textView4)).setText(departure.getLineName());
-            ((TextView)findViewById(R.id.textView5)).setText(departure.getDirection());
-            ((TextView)findViewById(R.id.textView6)).setText(departure.getMinutesUntilArriving() + "");
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getItemInteractListener().onClick(departure);
-                }
-            });
+            itemDepartureDelay.setVisibility(departure.getDelay() == 0 ? View.GONE : View.VISIBLE);
+            itemDepartureMinutes.setVisibility(departure.getMinutesUntilArriving() > 60 ? View.GONE : View.VISIBLE);
+
+            itemDepartureLine.setText(departure.getLineName());
+            itemDepartureLine.setBackground(departure.getMode().getBackground(itemView.getContext()));
+            itemDepartureName.setText(departure.getDirection());
+
+            itemDepartureInMinutes.setText(departure.getArrivalTimeAsString());
+            itemDeparturePlatform.setText(departure.getPlatform().toString(itemView.getContext()));
+            itemDepartureDelay.setText(departure.getDelayAsString());
+
+            itemDepartureDelay.setTextColor(Color.RED);
+
+            itemDepartureTime.setText(departure.getFancyScheduledTime());
+
+            itemView.setOnClickListener(view -> getItemInteractListener().onClick(departure));
         }
+
+
     }
 
 }

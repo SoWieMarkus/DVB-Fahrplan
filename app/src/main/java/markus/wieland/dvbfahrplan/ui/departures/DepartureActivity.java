@@ -1,9 +1,14 @@
 package markus.wieland.dvbfahrplan.ui.departures;
 
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
@@ -11,16 +16,29 @@ import markus.wieland.dvbfahrplan.api.DVBApi;
 import markus.wieland.dvbfahrplan.api.models.departure.Departure;
 import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.lines.Lines;
+import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
+import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
+import markus.wieland.dvbfahrplan.api.models.pointfinder.PointStatus;
+import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
+import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
 import markus.wieland.dvbfahrplan.ui.trip.TripActivity;
 
-public class DepartureActivity extends DefaultActivity implements DepartureItemInteractListener {
+public class DepartureActivity extends DefaultActivity implements TextWatcher, SelectPointInteractListener, SwipeRefreshLayout.OnRefreshListener, View.OnFocusChangeListener {
 
     public static final String DEPARTURE_STOP_ID = "markus.wieland.dvbfahrplan.ui.departures.DEPARTURE_STOP_ID";
 
-    private RecyclerView recyclerViewDepartures;
-    private RecyclerView recyclerViewLines;
-    private DepartureAdapter departureAdapter;
-    private LinesAdapter linesAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private DepartureFragment departureFragment;
+    private PointFinderFragment pointFinderFragment;
+
+    private Fragment currentFragment;
+
+    private TextInputLayout textInputLayoutStop;
+
+    private Point currentPoint;
+
+    private DVBApi dvbApi;
 
     public DepartureActivity() {
         super(R.layout.activity_departure);
@@ -28,61 +46,109 @@ public class DepartureActivity extends DefaultActivity implements DepartureItemI
 
     @Override
     public void bindViews() {
-        recyclerViewDepartures = findViewById(R.id.activity_departures_recycler_view_departures);
-        recyclerViewLines = findViewById(R.id.activity_departures_recycler_view_lines);
+        swipeRefreshLayout = findViewById(R.id.activity_departures_swipe_refresh);
+        textInputLayoutStop = findViewById(R.id.activity_departure_station);
     }
 
     @Override
     public void initializeViews() {
+        swipeRefreshLayout.setOnRefreshListener(this);
+        textInputLayoutStop.getEditText().addTextChangedListener(this);
+        textInputLayoutStop.getEditText().setOnFocusChangeListener(this);
+    }
 
-        linesAdapter = new LinesAdapter();
-        departureAdapter = new DepartureAdapter(this);
-
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewLines.setLayoutManager(layoutManager);
-        recyclerViewLines.setHasFixedSize(true);
-        recyclerViewLines.setAdapter(linesAdapter);
-
-        recyclerViewDepartures.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewDepartures.setHasFixedSize(true);
-        recyclerViewDepartures.setAdapter(departureAdapter);
+    private void loadFragment(Fragment fragment) {
+        if (currentFragment != null && currentFragment.equals(fragment)) return;
+        currentFragment = fragment;
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right_animation, R.anim.slide_out_left_animation)
+                .addToBackStack(null)
+                .replace(R.id.frame_layout, currentFragment).commit();
     }
 
     @Override
     public void execute() {
         setTitle("...");
 
-        String departureStopId = getDepartureStopId();
-        if (departureStopId == null) {
-            finish();
-            return;
-        }
+        dvbApi = new DVBApi(this);
 
-        DVBApi dvbApi = new DVBApi(this);
-        dvbApi.searchDepartures(this::onLoad, departureStopId);
-        dvbApi.searchLines(this::onLoad, departureStopId);
-    }
+        departureFragment = new DepartureFragment(this::onClick);
+        pointFinderFragment = new PointFinderFragment(this);
 
-    public String getDepartureStopId() {
-        return getIntent().getStringExtra(DEPARTURE_STOP_ID);
+        loadFragment(pointFinderFragment);
     }
 
     public void onLoad(DepartureMonitor departureMonitor) {
-        setTitle(departureMonitor.getPlace() + " " + departureMonitor.getName());
-        departureAdapter.submitList(departureMonitor.getDepartures());
+        swipeRefreshLayout.setRefreshing(false);
+        departureFragment.update(departureMonitor);
     }
 
     public void onLoad(Lines lines) {
-        linesAdapter.submitList(lines.getLinesList());
+        swipeRefreshLayout.setRefreshing(false);
+        departureFragment.update(lines);
     }
 
-    @Override
+    public void onLoad(PointFinder pointFinder) {
+        pointFinderFragment.update(pointFinder.getResult());
+        if (pointFinder.getPointStatus().equals(PointStatus.IDENTIFIED)) {
+            this.currentPoint = pointFinder.getResult().get(0);
+        }
+    }
+
     public void onClick(Departure departure) {
         Intent intent = new Intent(this, TripActivity.class);
         intent.putExtra(TripActivity.TRIP_ID, departure.getIdForQuery())
-                .putExtra(TripActivity.TRIP_STOP_ID, getDepartureStopId())
+                .putExtra(TripActivity.TRIP_STOP_ID, currentPoint.getId())
                 .putExtra(TripActivity.TRIP_TIME, departure.getRealTime());
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(Point point) {
+        this.currentPoint = point;
+        loadFragment(departureFragment);
+        search();
+    }
+
+    @Override
+    public void onLocate(Point point) {
+        // Will be implemented later
+    }
+
+    private void search() {
+        dvbApi.searchDepartures(this::onLoad, currentPoint.getId());
+        dvbApi.searchLines(this::onLoad, currentPoint.getId());
+    }
+
+    @Override
+    public void onRefresh() {
+        if (!currentFragment.equals(departureFragment)) {
+            swipeRefreshLayout.setRefreshing(false);
+            return;
+        }
+        search();
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) loadFragment(pointFinderFragment);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // Just because I have to implement the method with TextWatcher
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        String query = s.toString().trim();
+        if (query.length() < 3) return;
+        dvbApi.searchStops(this::onLoad, query);
+        loadFragment(pointFinderFragment);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        // Just because I have to implement the method with TextWatcher
     }
 }

@@ -15,6 +15,9 @@ public class PointFinder {
     @SerializedName("Points")
     private List<String> points;
 
+    @SerializedName("PointStatus")
+    private PointStatus pointStatus;
+
     public Status getStatus() {
         return status;
     }
@@ -33,9 +36,18 @@ public class PointFinder {
 
     public List<Point> getResult(){
         List<Point> pointsResult = new ArrayList<>();
+        if (points == null) return pointsResult;
         for (String point : points) {
             pointsResult.add(new Point(point));
         }
         return pointsResult;
+    }
+
+    public PointStatus getPointStatus() {
+        return pointStatus;
+    }
+
+    public void setPointStatus(PointStatus pointStatus) {
+        this.pointStatus = pointStatus;
     }
 }

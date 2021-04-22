@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DVB Fahrplan</string>
+    <string name="platform_short">Platform</string>
+    <string name="minute_short">min.</string>
+    <string name="departure_selected_station">SELECTED STATION</string>
+    <string name="departure_lines">Lines</string>
 </resources>

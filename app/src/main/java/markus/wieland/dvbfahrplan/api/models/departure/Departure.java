@@ -160,5 +160,15 @@ public class Departure implements QueryableEntity<String> {
         return getScheduledTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
+    public String getArrivalTimeAsString() {
+        long minutes = getMinutesUntilArriving();
+        if (minutes <= 60) return String.valueOf(minutes);
+        return getFancyRealTime();
+    }
+
+    public String getDelayAsString() {
+        return "+" + getDelay();
+    }
+
 
 }

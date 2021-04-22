@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public abstract class Coordinate {
 
-    abstract public Optional<GKCoordinate> asGK();
+    public abstract Optional<GKCoordinate> asGK();
 
-    abstract public Optional<WGSCoordinate> asWGS();
+    public abstract Optional<WGSCoordinate> asWGS();
 
     @NonNull
     @Override

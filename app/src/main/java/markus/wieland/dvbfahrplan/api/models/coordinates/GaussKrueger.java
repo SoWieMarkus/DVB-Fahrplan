@@ -43,48 +43,48 @@ public class GaussKrueger {
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
-        final Double a = 6377397.155;
-        final Double f = 3.342773154e-3;
-        final Double pi = Math.PI;
+        final double a = 6377397.155;
+        final double f = 3.342773154e-3;
+        final double pi = Math.PI;
 
         // Polkrümmungshalbmesser c
-        final Double c = a / (1 - f);
+        final double c = a / (1 - f);
 
         // Quadrat der zweiten numerischen Exzentrizität
-        final Double ex2 = (2 * f - f * f) / ((1 - f) * (1 - f));
-        final Double ex4 = ex2 * ex2;
-        final Double ex6 = ex4 * ex2;
-        final Double ex8 = ex4 * ex4;
+        final double ex2 = (2 * f - f * f) / ((1 - f) * (1 - f));
+        final double ex4 = ex2 * ex2;
+        final double ex6 = ex4 * ex2;
+        final double ex8 = ex4 * ex4;
 
         // Koeffizienten zur Berechnung der geographischen Breite aus gegebener Meridianbogenlänge
-        final Double e0 = c * (pi / 180) * (1 - 3 * ex2 / 4 + 45 * ex4 / 64 - 175 * ex6 / 256 + 11025 * ex8 / 16384);
-        final Double f2 = (180 / pi) * (3 * ex2 / 8 - 3 * ex4 / 16 + 213 * ex6 / 2048 - 255 * ex8 / 4096);
-        final Double f4 = (180 / pi) * (21 * ex4 / 256 - 21 * ex6 / 256 + 533 * ex8 / 8192);
-        final Double f6 = (180 / pi) * (151 * ex6 / 6144 - 453 * ex8 / 12288);
+        final double e0 = c * (pi / 180) * (1 - 3 * ex2 / 4 + 45 * ex4 / 64 - 175 * ex6 / 256 + 11025 * ex8 / 16384);
+        final double f2 = (180 / pi) * (3 * ex2 / 8 - 3 * ex4 / 16 + 213 * ex6 / 2048 - 255 * ex8 / 4096);
+        final double f4 = (180 / pi) * (21 * ex4 / 256 - 21 * ex6 / 256 + 533 * ex8 / 8192);
+        final double f6 = (180 / pi) * (151 * ex6 / 6144 - 453 * ex8 / 12288);
 
         // Geographische Breite bf zur Meridianbogenlänge gh = hw
-        final Double sigma = hw / e0;
-        final Double sigmr = sigma * pi / 180;
-        final Double bf = sigma + f2 * Math.sin(2 * sigmr) + f4 * Math.sin(4 * sigmr) + f6 * Math.sin(6 * sigmr);
+        final double sigma = hw / e0;
+        final double sigmr = sigma * pi / 180;
+        final double bf = sigma + f2 * Math.sin(2 * sigmr) + f4 * Math.sin(4 * sigmr) + f6 * Math.sin(6 * sigmr);
 
         // Breite bf in Radianten
-        final Double br = bf * pi / 180;
+        final double br = bf * pi / 180;
         final Double tan1 = Math.tan(br);
-        final Double tan2 = tan1 * tan1;
-        final Double tan4 = tan2 * tan2;
+        final double tan2 = tan1 * tan1;
+        final double tan4 = tan2 * tan2;
 
-        final Double cos1 = Math.cos(br);
-        final Double cos2 = cos1 * cos1;
+        final double cos1 = Math.cos(br);
+        final double cos2 = cos1 * cos1;
 
-        final Double etasq = ex2 * cos2;
+        final double etasq = ex2 * cos2;
 
         // Querkrümmungshalbmesser nd
         final Double nd = c / Math.sqrt(1 + etasq);
         final Double nd2 = nd * nd;
         final Double nd4 = nd2 * nd2;
-        final Double nd6 = nd4 * nd2;
-        final Double nd3 = nd2 * nd;
-        final Double nd5 = nd4 * nd;
+        final double nd6 = nd4 * nd2;
+        final double nd3 = nd2 * nd;
+        final double nd5 = nd4 * nd;
 
         // Längendifferenz dl zum Bezugsmeridian lh
         final Double kzNR = rw / 1e6;
@@ -102,13 +102,13 @@ public class GaussKrueger {
         final Double b4 = tan1 * (5 + 3 * tan2 + 6 * etasq * (1 - tan2)) / (24 * nd4);
         final Double b6 = -tan1 * (61 + 90 * tan2 + 45 * tan4) / (720 * nd6);
 
-        final Double l1 = 1 / (nd * cos1);
-        final Double l3 = -(1 + 2 * tan2 + etasq) / (6 * nd3 * cos1);
-        final Double l5 = (5 + 28 * tan2 + 24 * tan4) / (120 * nd5 * cos1);
+        final double l1 = 1 / (nd * cos1);
+        final double l3 = -(1 + 2 * tan2 + etasq) / (6 * nd3 * cos1);
+        final double l5 = (5 + 28 * tan2 + 24 * tan4) / (120 * nd5 * cos1);
 
         // Geographischer Breite bp und Länge lp als Funktion von Rechts- und Hochwert
-        final Double bp = bf + (180 / pi) * (b2 * dy2 + b4 * dy4 + b6 * dy6);
-        final Double lp = lh + (180 / pi) * (l1 * dy + l3 * dy3 + l5 * dy5);
+        final double bp = bf + (180 / pi) * (b2 * dy2 + b4 * dy4 + b6 * dy6);
+        final double lp = lh + (180 / pi) * (l1 * dy + l3 * dy3 + l5 * dy5);
 
         if (lp < 5 || lp > 16 || bp < 46 || bp > 56) {
             // RW und/oder HW ungültig für das deutsche Gauss-Krüger-System

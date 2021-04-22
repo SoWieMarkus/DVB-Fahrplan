@@ -2,9 +2,12 @@ package markus.wieland.dvbfahrplan.api.models.routes;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class Route {
+import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+
+public class Route implements QueryableEntity<Long> {
 
     @SerializedName("Duration")
     private int duration;
@@ -18,14 +21,36 @@ public class Route {
     @SerializedName("Price")
     private String price;
 
+    @SerializedName("Interchanges")
+    private int interchanges;
+
     @SerializedName("PriceLevel")
     private int priceLevel;
+
+    @SerializedName("MotChain")
+    private List<Mot> motChain;
 
     @SerializedName("PartialRoutes")
     private List<PartialRoute> partialRoutes;
 
     @SerializedName("RouteId")
     private long routeId;
+
+    public int getInterchanges() {
+        return interchanges;
+    }
+
+    public void setInterchanges(int interchanges) {
+        this.interchanges = interchanges;
+    }
+
+    public List<Mot> getMotChain() {
+        return motChain;
+    }
+
+    public void setMotChain(List<Mot> motChain) {
+        this.motChain = motChain;
+    }
 
     public long getRouteId() {
         return routeId;
@@ -81,5 +106,22 @@ public class Route {
 
     public void setPartialRoutes(List<PartialRoute> partialRoutes) {
         this.partialRoutes = partialRoutes;
+    }
+
+    public String getDurationAsString() {
+        int hours = duration / 60;
+        int minutes = duration % 60;
+        if (hours > 0) return hours + "h " + minutes + "min";
+        return minutes + "min";
+    }
+
+    @Override
+    public Long getId() {
+        return getRouteId();
+    }
+
+    @Override
+    public String getStringToApplyQuery() {
+        return partialRoutes.toString();
     }
 }

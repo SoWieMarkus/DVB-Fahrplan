@@ -1,6 +1,10 @@
 package markus.wieland.dvbfahrplan.api.models;
 
+import android.content.Context;
+
 import com.google.gson.annotations.SerializedName;
+
+import markus.wieland.dvbfahrplan.R;
 
 public class Platform {
 
@@ -29,5 +33,10 @@ public class Platform {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String toString(Context context){
+        return context.getString(R.string.platform_short) + " " + name;
+
     }
 }

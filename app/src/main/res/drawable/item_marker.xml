@@ -4,15 +4,15 @@
     <item>
         <shape android:shape="oval">
             <size
-                android:width="10dp"
-                android:height="10dp" />
+                android:width="100dp"
+                android:height="100dp" />
             <padding
                 android:bottom="5dp"
                 android:left="5dp"
                 android:right="5dp"
                 android:top="5dp" />
             <stroke
-                android:width="3dp"
+                android:width="20dp"
                 android:color="#2196F3" />
         </shape>
     </item>
@@ -20,8 +20,8 @@
     <item>
         <shape android:shape="oval">
             <size
-                android:width="8dp"
-                android:height="8dp" />
+                android:width="80dp"
+                android:height="80dp" />
             <solid android:color="@android:color/transparent" />
         </shape>
     </item>
