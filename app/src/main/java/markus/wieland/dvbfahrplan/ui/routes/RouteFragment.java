@@ -3,6 +3,8 @@ package markus.wieland.dvbfahrplan.ui.routes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import markus.wieland.defaultappelements.uielements.fragments.DefaultFragment;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
@@ -25,6 +27,7 @@ public class RouteFragment extends DefaultFragment {
     }
 
     public void update(Routes routes) {
-        routesAdapter.submitList(routes.getRouteList());
+        if (routes == null) routesAdapter.submitList(new ArrayList<>());
+        else routesAdapter.submitList(routes.getRouteList());
     }
 }

@@ -13,4 +13,6 @@
     <string name="error_no_stop">Es konnte keine Haltestelle mit diesem Namen gefunden werden.</string>
     <string name="secure_connection">sicherer Anschluss</string>
     <string name="footpath">Fußweg</string>
+    <string name="error_duplicated_stop">Der Startpunkt ist identisch zum Ziel.</string>
+    <string name="now">jetzt</string>
 </resources>

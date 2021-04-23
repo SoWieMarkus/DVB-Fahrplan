@@ -88,7 +88,8 @@ public class Route implements QueryableEntity<Long> {
     }
 
     public String getPrice() {
-        return price;
+        if (price != null) return price+ "€";
+        return null;
     }
 
     public void setPrice(String price) {

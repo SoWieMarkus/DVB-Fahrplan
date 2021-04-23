@@ -90,4 +90,9 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
     public long getUniqueId() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return name + " " +place;
+    }
 }

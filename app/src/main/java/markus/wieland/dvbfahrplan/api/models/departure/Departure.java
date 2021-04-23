@@ -1,5 +1,9 @@
 package markus.wieland.dvbfahrplan.api.models.departure;
 
+import android.content.Context;
+
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
@@ -7,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
@@ -162,8 +167,9 @@ public class Departure implements QueryableEntity<String> {
         return getScheduledTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public String getArrivalTimeAsString() {
+    public String getArrivalTimeAsString(Context context) {
         long minutes = getMinutesUntilArriving();
+        if (minutes == 0) return context.getString(R.string.now);
         if (minutes <= 60) return String.valueOf(minutes);
         return getFancyRealTime();
     }

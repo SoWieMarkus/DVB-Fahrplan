@@ -3,8 +3,14 @@ package markus.wieland.dvbfahrplan.ui.routes;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -20,11 +26,12 @@ import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointStatus;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
+import markus.wieland.dvbfahrplan.database.point.PointViewModel;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
 import markus.wieland.dvbfahrplan.ui.routes.route.RouteDetailActivity;
 
-public class RouteActivity extends DefaultActivity implements APIResult<Routes>, SelectPointInteractListener, TextWatcher {
+public class RouteActivity extends DefaultActivity implements TextView.OnEditorActionListener, APIResult<Routes>, SelectPointInteractListener, TextWatcher, View.OnFocusChangeListener {
 
     private TextInputLayout textInputLayoutOrigin;
     private TextInputLayout textInputLayoutDestination;
@@ -41,12 +48,16 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
 
     private Fragment currentFragment;
 
+    private PointViewModel pointViewModel;
+
     public RouteActivity() {
         super(R.layout.activity_route);
     }
 
     @Override
     public void bindViews() {
+        setSupportActionBar(findViewById(R.id.toolbar));
+
         textInputLayoutOrigin = findViewById(R.id.activity_route_origin);
         textInputLayoutDestination = findViewById(R.id.activity_route_destination);
     }
@@ -56,17 +67,16 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
         pointFinderFragment = new PointFinderFragment(this);
         routeFragment = new RouteFragment(this::onClick);
 
+        assert textInputLayoutOrigin.getEditText() != null;
+        assert textInputLayoutDestination.getEditText() != null;
+
         textInputLayoutDestination.getEditText().addTextChangedListener(this);
         textInputLayoutOrigin.getEditText().addTextChangedListener(this);
 
-        textInputLayoutDestination.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-            destinationHasFocus = hasFocus;
-            if (hasFocus) loadFragment(pointFinderFragment);
-        });
-        textInputLayoutOrigin.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-            originHasFocus = hasFocus;
-            if (hasFocus) loadFragment(pointFinderFragment);
-        });
+        textInputLayoutDestination.getEditText().setOnFocusChangeListener(this);
+        textInputLayoutOrigin.getEditText().setOnFocusChangeListener(this);
+
+        pointViewModel = ViewModelProviders.of(this).get(PointViewModel.class);
 
         loadFragment(pointFinderFragment);
     }
@@ -79,12 +89,22 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
     private void searchForRoute() {
         textInputLayoutDestination.setError(null);
         textInputLayoutOrigin.setError(null);
-        if (getOrigin().equals(getDestination())) return;
 
-        if (getOrigin() == null) textInputLayoutOrigin.setError(getString(R.string.error_no_stop));
-        if (getDestination() == null) textInputLayoutOrigin.setError(getString(R.string.error_no_stop));
+        if (getOrigin() == null){
+            textInputLayoutOrigin.setError(getString(R.string.error_no_stop));
+            return;
+        }
+        if (getDestination() == null){
+            textInputLayoutDestination.setError(getString(R.string.error_no_stop));
+            return;
+        }
+        if (getOrigin().equals(getDestination())){
+            textInputLayoutDestination.setError(getString(R.string.error_duplicated_stop));
+            return;
+        }
 
         dvbApi.searchRoute(this, getOrigin(), getDestination());
+        routeFragment.update(null);
         loadFragment(routeFragment);
     }
 
@@ -112,6 +132,8 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
         String valueOrigin = textInputLayoutOrigin.getEditText().getText().toString();
         textInputLayoutDestination.getEditText().setText(valueOrigin);
         textInputLayoutOrigin.getEditText().setText(valueDestination);
+
+        textInputLayoutDestination.getEditText().setOnEditorActionListener(this);
 
         textInputLayoutDestination.getEditText().addTextChangedListener(this);
         textInputLayoutOrigin.getEditText().addTextChangedListener(this);
@@ -141,25 +163,29 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
 
     @Override
     public void onClick(Point point) {
+        pointFinderFragment.update(new ArrayList<>());
+
         if (originHasFocus) {
             originStopId = point.getId();
             updateTextInputLayout(textInputLayoutOrigin, point);
+            textInputLayoutDestination.requestFocus();
         }
-        if (destinationHasFocus) {
+        else if (destinationHasFocus) {
             destinationStopId = point.getId();
             updateTextInputLayout(textInputLayoutDestination, point);
+            textInputLayoutDestination.clearFocus();
         }
+
         if (getDestination() != null && getOrigin() != null) {
             searchForRoute();
         }
-        if (destinationHasFocus) textInputLayoutDestination.clearFocus();
-        else textInputLayoutDestination.getEditText().requestFocus();
-        pointFinderFragment.update(new ArrayList<>());
     }
 
     private void updateTextInputLayout(TextInputLayout textInputLayout, Point point) {
+        assert textInputLayout.getEditText() != null;
+
         textInputLayout.getEditText().removeTextChangedListener(this);
-        textInputLayout.getEditText().setText(point.getName());
+        textInputLayout.getEditText().setText(point.toString());
         textInputLayout.getEditText().addTextChangedListener(this);
     }
 
@@ -190,5 +216,52 @@ public class RouteActivity extends DefaultActivity implements APIResult<Routes>,
     public void onClick(Route route) {
         startActivity(new Intent(this, RouteDetailActivity.class)
                 .putExtra(RouteDetailActivity.ROUTE, new Gson().toJson(route)));
+    }
+
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        originHasFocus = v.equals(textInputLayoutOrigin.getEditText());
+        destinationHasFocus = v.equals(textInputLayoutDestination.getEditText());
+
+        if (originHasFocus) {
+            String content = textInputLayoutOrigin.getEditText().getText().toString();
+            if (content.length() > 0)
+                textInputLayoutOrigin.getEditText().setSelection(content.length()-1);
+        }
+        if (destinationHasFocus) {
+            String content = textInputLayoutDestination.getEditText().getText().toString();
+            if (content.length() > 0)
+                textInputLayoutDestination.getEditText().setSelection(content.length()-1);}
+
+        if (originHasFocus || destinationHasFocus){
+            loadFragment(pointFinderFragment);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentFragment.equals(routeFragment)) {
+            textInputLayoutDestination.getEditText().requestFocus();
+            loadFragment(pointFinderFragment);
+            return;
+        }
+        if (destinationHasFocus) {
+            textInputLayoutOrigin.getEditText().requestFocus();
+            return;
+        }
+        if (originHasFocus) {
+            finish();
+        }
+
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            searchForRoute();
+            return true;
+        }
+        return false;
     }
 }

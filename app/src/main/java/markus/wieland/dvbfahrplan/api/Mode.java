@@ -22,7 +22,7 @@ public enum Mode implements Serializable {
     @SerializedName("CityBus") CITY_BUS(R.drawable.ic_transport_bus, Color.parseColor("#005d79"), R.drawable.item_marker_bus,"bus"),
     @SerializedName(value = "IntercityBus", alternate = {"PlusBus"}) INTER_CITY_BUS(R.drawable.ic_transport_bus, Color.parseColor("#005d79"), R.drawable.item_marker_bus,"bus"),
     @SerializedName("Train") TRAIN(R.drawable.ic_transport_train, Color.parseColor("#555555"), R.drawable.item_marker_train, "train"),
-    @SerializedName("Lift") LIFT(R.drawable.ic_transport_lift, Color.parseColor("#009551"), R.drawable.item_marker_lift,"lift"),
+    @SerializedName(value = "Lift", alternate = {"OverheadRailway"}) LIFT(R.drawable.ic_transport_lift, Color.parseColor("#009551"), R.drawable.item_marker_lift,"lift"),
     @SerializedName("Ferry") FERRY(R.drawable.ic_transport_ferry, Color.parseColor("#00a5dd"), R.drawable.item_marker_ferry,"ferry"),
     @SerializedName(value = "Alita", alternate = {"Taxi"}) ALITA_TAXI(R.drawable.ic_transport_alita, Color.parseColor("#FFD700"), R.drawable.item_marker_alita,"alita"),
     @SerializedName("Footpath") WALKING(R.drawable.ic_transport_footpath, Color.parseColor("#FFFFFF"), R.drawable.item_marker_footpath,"footpath"),

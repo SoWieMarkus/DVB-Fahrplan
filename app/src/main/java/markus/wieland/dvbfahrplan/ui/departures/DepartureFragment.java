@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import markus.wieland.defaultappelements.uielements.fragments.DefaultFragment;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.api.models.departure.Departure;
 import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.lines.Lines;
 

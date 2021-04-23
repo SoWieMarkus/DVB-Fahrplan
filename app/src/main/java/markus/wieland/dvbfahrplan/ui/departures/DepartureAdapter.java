@@ -58,14 +58,17 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
         public void bindItemToViewHolder(Departure departure) {
 
             itemDepartureDelay.setVisibility(departure.getDelay() == 0 ? View.GONE : View.VISIBLE);
-            itemDepartureMinutes.setVisibility(departure.getMinutesUntilArriving() > 60 ? View.GONE : View.VISIBLE);
+            itemDepartureMinutes.setVisibility(departure.getMinutesUntilArriving() > 60
+                    || departure.getMinutesUntilArriving() == 0
+                    ? View.GONE
+                    : View.VISIBLE);
 
             itemDepartureLine.setText(departure.getLineName());
             itemDepartureLine.setBackground(departure.getMode().getBackground(itemView.getContext()));
             itemDepartureName.setText(departure.getDirection());
 
-            itemDepartureInMinutes.setText(departure.getArrivalTimeAsString());
-            itemDeparturePlatform.setText(departure.getPlatform().toString(itemView.getContext()));
+            itemDepartureInMinutes.setText(departure.getArrivalTimeAsString(itemView.getContext()));
+            itemDeparturePlatform.setText(departure.getPlatform() == null ? "" : departure.getPlatform().toString(itemView.getContext()));
             itemDepartureDelay.setText(departure.getDelayAsString());
 
             itemDepartureDelay.setTextColor(Color.RED);

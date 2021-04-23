@@ -98,6 +98,15 @@ function initializeMap() {
             shadowUrl: './marker/marker_shadow.png',
             shadowSize: [16, 16],
             shadowAnchor: [7, 7]
+        }),
+        "destination": L.icon({
+            iconUrl: "./marker/marker_destination.png",
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popAnchor: [16, 0],
+            shadowUrl: './marker/marker_shadow.png',
+            shadowSize: [0, 0],
+            shadowAnchor: [7, 7]
         })
 
     }
@@ -126,7 +135,8 @@ function showRoute(route) {
 
         for (let j = 0; j < partialRoute.nodes.length; j++) {
             let node = partialRoute.nodes[j];
-            path.push([node.x, node.y])
+            let coordinates = [node.x,node.y];
+            path.push(coordinates);
             if (j === 0 || j === (partialRoute.nodes.length - 1)) {
 
                 if (mode === "footpath")  {
@@ -134,7 +144,16 @@ function showRoute(route) {
                     if (j === partialRoute.nodes.length -1 && i !== route.length -1) continue;
                 }
 
-                let marker = L.marker([node.x, node.y], {icon: markersList[mode]}).bindPopup(node.name);
+                let marker;
+                if (j === partialRoute.nodes.length -1 && i === route.length -1) {
+                    marker = L.marker(coordinates, {icon: markersList["destination"]});
+                } else if (j === 0 && i === 0) {
+                    marker = L.marker(coordinates);
+                } else {
+                    marker = L.marker(coordinates, {icon: markersList[mode]});
+                }
+
+                marker.bindPopup(node.name);
                 marker.addTo(map);
                 markers.push(marker);
             }

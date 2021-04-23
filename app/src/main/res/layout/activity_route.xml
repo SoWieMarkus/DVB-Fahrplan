@@ -16,53 +16,71 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="16dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_route_origin"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_route_origin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:nextFocusDown="@+id/activity_route_destination"
-                    android:hint="hint" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:errorEnabled="true"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_route_destination"
-                android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="hint"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:nextFocusDown="@+id/activity_route_destination" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_route_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:errorEnabled="true"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:hint="hint" />
-            </com.google.android.material.textfield.TextInputLayout>
+                app:srcCompat="@drawable/ic_switch" />
 
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
+
 
 
     <FrameLayout

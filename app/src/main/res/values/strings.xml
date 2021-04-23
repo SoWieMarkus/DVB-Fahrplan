@@ -12,4 +12,6 @@
     <string name="error_no_stop">Couldn\'t find a stop with that name.</string>
     <string name="secure_connection">secure connection</string>
     <string name="footpath">footpath</string>
+    <string name="error_duplicated_stop">The origin is identical to the destination.</string>
+    <string name="now">now</string>
 </resources>

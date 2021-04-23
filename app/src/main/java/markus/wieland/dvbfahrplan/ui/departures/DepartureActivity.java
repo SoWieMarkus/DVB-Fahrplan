@@ -25,8 +25,6 @@ import markus.wieland.dvbfahrplan.ui.trip.TripActivity;
 
 public class DepartureActivity extends DefaultActivity implements TextWatcher, SelectPointInteractListener, SwipeRefreshLayout.OnRefreshListener, View.OnFocusChangeListener {
 
-    public static final String DEPARTURE_STOP_ID = "markus.wieland.dvbfahrplan.ui.departures.DEPARTURE_STOP_ID";
-
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private DepartureFragment departureFragment;

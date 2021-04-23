@@ -52,7 +52,7 @@ public class RouteRegularStopAdapter extends DefaultAdapter<Stop, RouteRegularSt
         @Override
         public void bindItemToViewHolder(Stop stop) {
             itemStopLine.setBackgroundColor(mode.getColor());
-            itemStopName.setText(stop.getName());
+            itemStopName.setText(stop.toString());
             itemStopTime.setText(stop.getFancyArrivalTime());
             itemStopMarker.setImageDrawable(mode.getMarker(itemView.getContext()));
         }
