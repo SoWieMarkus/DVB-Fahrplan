@@ -15,4 +15,8 @@
     <string name="footpath">Fußweg</string>
     <string name="error_duplicated_stop">Der Startpunkt ist identisch zum Ziel.</string>
     <string name="now">jetzt</string>
+    <string name="menu_item_route_title">Route</string>
+    <string name="menu_item_route_departure">Haltestellenauskunft</string>
+    <string name="error_nothing_found">Keine Ergebnisse.</string>
+    <string name="departure_station">Haltestelle</string>
 </resources>

@@ -18,6 +18,11 @@ public class RouteFragment extends DefaultFragment {
         routesAdapter = new RoutesAdapter(routesInteractListener);
     }
 
+    public RouteFragment() {
+        super(R.layout.fragment_routes);
+        this.routesAdapter = new RoutesAdapter(null);
+    }
+
     @Override
     public void bindViews() {
         RecyclerView recyclerView = findViewById(R.id.fragment_routes_recycler_view);

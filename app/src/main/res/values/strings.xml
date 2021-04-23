@@ -14,4 +14,9 @@
     <string name="footpath">footpath</string>
     <string name="error_duplicated_stop">The origin is identical to the destination.</string>
     <string name="now">now</string>
+    <string name="menu_item_route_title">Route</string>
+    <string name="menu_item_route_departure">Departure monitor</string>
+    <string name="error_nothing_found">Nothing found.</string>
+    <string name="ago" translatable="false">ago</string>
+    <string name="departure_station">Station</string>
 </resources>

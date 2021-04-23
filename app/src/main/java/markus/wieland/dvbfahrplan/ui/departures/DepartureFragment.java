@@ -1,7 +1,13 @@
 package markus.wieland.dvbfahrplan.ui.departures;
 
+import android.view.View;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
+
+import java.util.ArrayList;
 
 import markus.wieland.defaultappelements.uielements.fragments.DefaultFragment;
 import markus.wieland.dvbfahrplan.R;
@@ -12,6 +18,8 @@ public class DepartureFragment extends DefaultFragment {
 
     private final DepartureAdapter departureAdapter;
     private final LinesAdapter linesAdapter;
+
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public DepartureFragment(DepartureItemInteractListener departureItemInteractListener) {
         super(R.layout.fragment_departure);
@@ -26,6 +34,8 @@ public class DepartureFragment extends DefaultFragment {
         recyclerViewDepartures.setHasFixedSize(true);
         recyclerViewDepartures.setAdapter(departureAdapter);
 
+        shimmerFrameLayout = findViewById(R.id.fragment_departure_loading);
+
         RecyclerView recyclerViewLines = findViewById(R.id.fragment_departure_lines_recycler_view);
         recyclerViewLines.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewLines.setHasFixedSize(true);
@@ -33,7 +43,22 @@ public class DepartureFragment extends DefaultFragment {
     }
 
     public void update(DepartureMonitor departureMonitor) {
-        departureAdapter.submitList(departureMonitor.getDepartures());
+        if (shimmerFrameLayout == null) return;
+        if (departureMonitor == null) {
+            shimmerFrameLayout.setVisibility(View.VISIBLE);
+            departureAdapter.submitList(new ArrayList<>());
+            findViewById(R.id.fragment_departure_empty).setVisibility(View.GONE);
+        } else {
+            shimmerFrameLayout.setVisibility(View.GONE);
+            findViewById(R.id.fragment_departure_empty).setVisibility(departureMonitor.getDepartures() == null
+                    || departureMonitor.getDepartures().isEmpty()
+                    ? View.VISIBLE
+                    : View.GONE);
+            departureAdapter.submitList(departureMonitor.getDepartures() == null
+                    ? new ArrayList<>()
+                    : departureMonitor.getDepartures());
+        }
+
     }
 
     public void update(Lines lines) {

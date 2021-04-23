@@ -57,6 +57,8 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
         @Override
         public void bindItemToViewHolder(Departure departure) {
 
+            itemView.setAlpha(departure.getMinutesUntilArriving() < 0 ? 0.3f : 1f);
+
             itemDepartureDelay.setVisibility(departure.getDelay() == 0 ? View.GONE : View.VISIBLE);
             itemDepartureMinutes.setVisibility(departure.getMinutesUntilArriving() > 60
                     || departure.getMinutesUntilArriving() == 0
@@ -70,8 +72,6 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
             itemDepartureInMinutes.setText(departure.getArrivalTimeAsString(itemView.getContext()));
             itemDeparturePlatform.setText(departure.getPlatform() == null ? "" : departure.getPlatform().toString(itemView.getContext()));
             itemDepartureDelay.setText(departure.getDelayAsString());
-
-            itemDepartureDelay.setTextColor(Color.RED);
 
             itemDepartureTime.setText(departure.getFancyScheduledTime());
 

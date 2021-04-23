@@ -1,6 +1,7 @@
 package markus.wieland.dvbfahrplan.database.point;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -23,8 +24,18 @@ public class PointViewModel extends BaseViewModel<Point, PointDataAccessObject, 
 
     public void updatePoint(Point point) {
         point.setLatestUse(System.currentTimeMillis());
-        if (repository.doesExist(point.getId())) update(point);
-        else insert(point);
+
+        AsyncTask<Void,Void,Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                if (repository.doesExist(point.getId())) update(point);
+                else insert(point);
+                return null;
+            }
+        };
+        asyncTask.execute();
+
+
     }
 
     public LiveData<List<Point>> getRecentPoints() {

@@ -125,21 +125,25 @@ public class Node {
         return TimeConverter.convertToLocalDateTime(realTime);
     }
 
-    public LocalDateTime getTimeAsDateTime(){
+    public LocalDateTime getTimeAsDateTime() {
         return TimeConverter.convertToLocalDateTime(time);
     }
 
-    public String getFancyRealTime(){
+    public String getFancyRealTime() {
         if (realTime == null) return getFancyTime();
         return getRealTimeAsDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public String getFancyTime(){
+    public String getFancyTime() {
         return getTimeAsDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public long delay(){
+    public long delay() {
         if (getRealTime() == null) return 0;
         return TimeConverter.getMinutesBetween(getTimeAsDateTime(), getRealTimeAsDateTime());
+    }
+
+    public String getDelayAsString() {
+        return "+" + delay();
     }
 }

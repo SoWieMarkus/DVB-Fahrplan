@@ -1,6 +1,5 @@
 package markus.wieland.dvbfahrplan.ui.trip;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +40,6 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
     public int getCurrentStopPosition() {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getPosition().equals(Position.CURRENT)) {
-                if (i > 0) return i - 1;
                 return i;
             }
         }
@@ -58,6 +56,7 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
         private TextView itemTripTime;
         private TextView itemTripStopName;
         private TextView itemTripPlatform;
+        private TextView itemTripDelay;
 
         private Node node;
 
@@ -73,6 +72,7 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
             itemTripPlatform = findViewById(R.id.item_trip_platform);
             itemTripTime = findViewById(R.id.item_trip_time);
             itemTripMarker = findViewById(R.id.item_partial_route_start_marker);
+            itemTripDelay = findViewById(R.id.item_trip_delay);
         }
 
         @Override
@@ -80,7 +80,8 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
             this.node = node;
 
             itemTripTime.setText(node.getFancyRealTime());
-            itemTripTime.setTextColor(node.delay() != 0 ? Color.RED : Color.WHITE);
+            itemTripDelay.setVisibility(node.delay() != 0 ? View.VISIBLE : View.GONE);
+            itemTripDelay.setText(node.getDelayAsString());
 
             itemTripStopName.setText(node.getName());
             itemTripStopName.setTypeface(null, node.getPosition().equals(Position.CURRENT) ? Typeface.BOLD : Typeface.NORMAL);
@@ -97,7 +98,6 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
             itemTripTopLine.setBackgroundColor(mode.getColor());
             itemTripBottomLine.setBackgroundColor(mode.getColor());
             itemTripMarker.setImageDrawable(mode.getMarker(itemView.getContext()));
-
 
 
             itemView.setOnClickListener(this);

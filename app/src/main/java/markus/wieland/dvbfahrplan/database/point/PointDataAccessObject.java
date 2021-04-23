@@ -15,7 +15,7 @@ public interface PointDataAccessObject extends BaseDataAccessObject<Point> {
     @Query("SELECT EXISTS(SELECT * FROM point WHERE id = :id)")
     boolean doesExist(String id);
 
-    @Query("SELECT * FROM point ORDER BY latestUse")
+    @Query("SELECT * FROM point ORDER BY latestUse DESC")
     LiveData<List<Point>> getRecentPoints();
 
 }

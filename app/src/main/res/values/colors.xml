@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="darkBackground">#1f1f1f</color>
+
+    <color name="shimmer">#EEEEEE</color>
+
+    <color name="accent_line">#999999</color>
+
+    <color name="accent">#000000</color>
+    <color name="accent_dark">#fec400</color>
 </resources>

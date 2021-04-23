@@ -7,13 +7,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableAdapter;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 
-public class PointAdapter extends QueryableAdapter<String,Point, PointAdapter.PointViewHolder> {
+public class PointAdapter extends QueryableAdapter<String, Point, PointAdapter.PointViewHolder> {
 
     public PointAdapter(SelectPointInteractListener selectPointInteractListener) {
         super(selectPointInteractListener);

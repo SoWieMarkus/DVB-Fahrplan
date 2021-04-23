@@ -80,11 +80,25 @@
                 android:textColor="?attr/main_text_color"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/item_trip_time"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="00:10" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_trip_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:10" />
+
+                <TextView
+                    android:id="@+id/item_trip_delay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="TextView"
+                    android:textColor="@android:color/holo_red_light" />
+            </LinearLayout>
 
         </LinearLayout>
 

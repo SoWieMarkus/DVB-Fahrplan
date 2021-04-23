@@ -11,13 +11,16 @@ import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 
 public class PointFinderFragment extends DefaultFragment {
 
-    private PointAdapter pointAdapter;
-
-    private final SelectPointInteractListener selectPointInteractListener;
+    private final PointAdapter pointAdapter;
 
     public PointFinderFragment(SelectPointInteractListener selectPointInteractListener) {
         super(R.layout.fragment_point);
-        this.selectPointInteractListener = selectPointInteractListener;
+        pointAdapter = new PointAdapter(selectPointInteractListener);
+    }
+
+    public PointFinderFragment() {
+        super(R.layout.fragment_point);
+        pointAdapter = new PointAdapter(null);
     }
 
     @Override
@@ -25,12 +28,11 @@ public class PointFinderFragment extends DefaultFragment {
         RecyclerView recyclerView = findViewById(R.id.fragment_point_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
-        pointAdapter = new PointAdapter(selectPointInteractListener);
-
         recyclerView.setAdapter(pointAdapter);
     }
 
     public void update(List<Point> points) {
+        if (points == null) return;
         pointAdapter.submitList(points);
     }
 

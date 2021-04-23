@@ -9,13 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableAdapter;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 
-public class RoutesAdapter extends QueryableAdapter<Long,Route, RoutesAdapter.RoutesViewHolder> {
+public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.RoutesViewHolder> {
 
     public RoutesAdapter(RoutesInteractListener routesInteractListener) {
         super(routesInteractListener);
@@ -54,9 +53,7 @@ public class RoutesAdapter extends QueryableAdapter<Long,Route, RoutesAdapter.Ro
 
         @Override
         public void bindItemToViewHolder(Route route) {
-
             RouteMotChainAdapter motChainAdapter = new RouteMotChainAdapter();
-
 
             LinearLayoutManager layoutManager
                     = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -66,15 +63,10 @@ public class RoutesAdapter extends QueryableAdapter<Long,Route, RoutesAdapter.Ro
             motChainAdapter.submitList(route.getMotChain());
 
             itemRouteDuration.setText(route.getDurationAsString());
-            itemRoutePrice.setText(route.getPrice() + "€");
+            itemRoutePrice.setText(route.getPrice()+"€");
             itemRouteChanges.setText(route.getInterchanges() + "");
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getOnItemInteractListener().onClick(route);
-                }
-            });
+            itemView.setOnClickListener(v -> getOnItemInteractListener().onClick(route));
 
         }
     }

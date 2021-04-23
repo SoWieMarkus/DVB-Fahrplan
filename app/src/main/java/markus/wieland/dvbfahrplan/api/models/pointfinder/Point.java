@@ -71,6 +71,7 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
     }
 
     public String getPlace() {
+        if (place == null ||place.isEmpty()) return "Dresden";
         return place;
     }
 
@@ -93,6 +94,6 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
 
     @Override
     public String toString() {
-        return name + " " +place;
+        return (name + " " +place).trim();
     }
 }
