@@ -1,4 +1,4 @@
-package markus.wieland.dvbfahrplan.ui.routes.newdesing;
+package markus.wieland.dvbfahrplan.ui.departures;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,9 +22,9 @@ import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.lines.Lines;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
-import markus.wieland.dvbfahrplan.ui.departures.DepartureFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
+import markus.wieland.dvbfahrplan.SearchFragment;
 import markus.wieland.dvbfahrplan.ui.trip.TripActivity;
 
 public class DepartureMainFragment extends SearchFragment implements Observer<List<Point>>,View.OnFocusChangeListener, SelectPointInteractListener, SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener {
@@ -97,13 +97,13 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
     public void onClick(Point point) {
         if (point == null) return;
         pointViewModel.updatePoint(point);
+        textInputLayoutStation.getEditText().removeTextChangedListener(this);
         textInputLayoutStation.getEditText().setText(point.toString());
+        textInputLayoutStation.getEditText().addTextChangedListener(this);
         this.currentPoint = point;
         loadFragment(departureFragment);
         search();
-        textInputLayoutStation.getEditText().clearFocus();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(textInputLayoutStation.getEditText().getWindowToken(), 0);
+        clearFocus(textInputLayoutStation);
     }
 
     @Override

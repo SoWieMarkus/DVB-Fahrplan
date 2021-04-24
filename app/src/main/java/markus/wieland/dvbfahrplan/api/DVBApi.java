@@ -119,6 +119,29 @@ public class DVBApi {
         pointFinderGetRequest.execute();
     }
 
+    public void searchStops(APIResultWithRequestId<PointFinder> result, String query, int requestId) {
+        ApiURL url = new ApiURL(BASE_URL + POINT_FINDER)
+                .append("query", query)
+                .append("stopsOnly", true)
+                .append("regionalOnly", true);
+        GetRequest<PointFinder> pointFinderGetRequest = new GetRequest<>(PointFinder.class, url.toString(), new RequestResultListener<PointFinder>() {
+            @Override
+            public void onLoad(PointFinder response) {
+                try {
+                    context.runOnUiThread(() -> result.onLoad(requestId, response));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
+        pointFinderGetRequest.execute();
+    }
+
     private <T> void notifyClient(T t, APIResult<T> result) {
         try {
             context.runOnUiThread(() -> result.onLoad(t));

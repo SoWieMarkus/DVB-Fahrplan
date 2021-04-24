@@ -1,5 +1,6 @@
 package markus.wieland.dvbfahrplan.ui.trip;
 
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -62,6 +63,8 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
         textViewDirection.setText(getTripDirection());
 
         findViewById(R.id.coordinator_layout).getViewTreeObserver().addOnGlobalLayoutListener(this);
+
+
     }
 
     @Override
@@ -104,6 +107,7 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
     @Override
     public void onLoad(Trip trip) {
+        findViewById(R.id.activity_trip_loading).setVisibility(View.GONE);
         mapViewTrip.showTrip(trip, getMode());
         mapViewTrip.setWebViewClient(new WebViewClient() {
             @Override

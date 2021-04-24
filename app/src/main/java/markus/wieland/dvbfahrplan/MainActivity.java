@@ -7,9 +7,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
-import markus.wieland.dvbfahrplan.ui.routes.newdesing.DepartureMainFragment;
-import markus.wieland.dvbfahrplan.ui.routes.newdesing.RouteMainFragment;
-import markus.wieland.dvbfahrplan.ui.routes.newdesing.SearchFragment;
+import markus.wieland.dvbfahrplan.ui.departures.DepartureMainFragment;
+import markus.wieland.dvbfahrplan.ui.routes.RouteMainFragment;
 
 public class MainActivity extends DefaultActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 

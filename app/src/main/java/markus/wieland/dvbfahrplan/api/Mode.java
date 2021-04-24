@@ -30,6 +30,7 @@ public enum Mode implements Serializable {
     WAITING(R.drawable.ic_transport_wait, Color.parseColor("#FFFFFF"), R.drawable.item_marker_footpath, "waiting"),
     @SerializedName("StayForConnection") STAY_FOR_CONNECTION(R.drawable.ic_transport_wait, Color.parseColor("#FFFFFF"), R.drawable.item_marker_footpath, "waiting"),
     CHANGE_PLATFORM(R.drawable.ic_transport_change, Color.parseColor("#FFFFFF"), R.drawable.item_marker_footpath, "footpath"),
+    ONLY_ONE_PART(R.drawable.ic_transport_footpath, Color.parseColor("#FFFFFF"), R.drawable.item_marker_footpath, "waiting"),
     UNKNOWN(R.drawable.ic_transport_unkown, Color.parseColor("#555555"), R.drawable.item_marker_train, "unknown");
 
     @DrawableRes

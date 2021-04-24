@@ -1,5 +1,7 @@
 package markus.wieland.dvbfahrplan.ui.pointfinder;
 
+import android.view.View;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 public class PointFinderFragment extends DefaultFragment {
 
     private final PointAdapter pointAdapter;
+    private RecyclerView recyclerView;
 
     public PointFinderFragment(SelectPointInteractListener selectPointInteractListener) {
         super(R.layout.fragment_point);
@@ -25,7 +28,7 @@ public class PointFinderFragment extends DefaultFragment {
 
     @Override
     public void bindViews() {
-        RecyclerView recyclerView = findViewById(R.id.fragment_point_recycler_view);
+        recyclerView = findViewById(R.id.fragment_point_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(pointAdapter);
@@ -34,6 +37,9 @@ public class PointFinderFragment extends DefaultFragment {
     public void update(List<Point> points) {
         if (points == null) return;
         pointAdapter.submitList(points);
+
+        if (recyclerView == null) return;
+        findViewById(R.id.fragment_point_empty).setVisibility(points.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
 }

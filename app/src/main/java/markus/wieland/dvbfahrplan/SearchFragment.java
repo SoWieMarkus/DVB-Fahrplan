@@ -1,4 +1,4 @@
-package markus.wieland.dvbfahrplan.ui.routes.newdesing;
+package markus.wieland.dvbfahrplan;
 
 import android.content.Context;
 import android.text.Editable;
@@ -55,6 +55,12 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
         String content = textInputLayout.getEditText().getText().toString().trim();
 
         textInputLayout.getEditText().setSelection(content.length());
+    }
+
+    public void clearFocus(TextInputLayout textInputLayout){
+        textInputLayout.getEditText().clearFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
     }
 
 

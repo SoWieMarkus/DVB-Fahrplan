@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/item_partial_route_start_marker"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/item_marker" />
+
+            <LinearLayout
+                android:id="@+id/item_trip_top"
+                android:layout_width="7dp"
+                android:layout_height="0dp"
+                android:background="#2196F3"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item_partial_route_marker_line"
+                android:layout_width="7dp"
+                android:layout_height="0dp"
+                android:background="#2196F3"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
+                app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_trip_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/shimmer"
+                android:textColor="?attr/main_text_color"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_trip_time"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/shimmer" />
+
+                <TextView
+                    android:id="@+id/item_trip_delay"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:background="@color/shimmer"
+                    android:textColor="@android:color/holo_red_light" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_trip_platform"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@color/shimmer" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

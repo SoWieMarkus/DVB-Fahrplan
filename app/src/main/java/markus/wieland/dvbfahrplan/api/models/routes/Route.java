@@ -3,6 +3,7 @@ package markus.wieland.dvbfahrplan.api.models.routes;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
@@ -88,7 +89,7 @@ public class Route implements QueryableEntity<Long> {
     }
 
     public String getPrice() {
-        if (price != null) return price+ "€";
+        if (price != null) return price + "€";
         return null;
     }
 
@@ -137,8 +138,17 @@ public class Route implements QueryableEntity<Long> {
             PartialRoute partialRoute = baseSet.get(i);
             PartialRoute partialRouteNext = i == baseSet.size() - 1 ? null : baseSet.get(i + 1);
 
+            if (i == 0  && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
+                addSingleStopRoute(partialRoutesFiltered, partialRoute);
+            }
+
             if (partialRoute.getRegularStops() == null) continue;
             partialRoutesFiltered.add(partialRoute);
+
+            if (i == baseSet.size() - 1  && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
+                addSingleStopRoute(partialRoutesFiltered, partialRoute);
+            }
+
 
             addBetweenRoute(partialRoutesFiltered, partialRoute, partialRouteNext);
 
@@ -154,10 +164,21 @@ public class Route implements QueryableEntity<Long> {
         return partialRoutesFiltered;
     }
 
+    private void addSingleStopRoute(List<PartialRoute> partialRoutes, PartialRoute partialRoute) {
+        PartialRoute topRoute = new PartialRoute();
+        Mot mot = new Mot();
+        mot.setMode(Mode.ONLY_ONE_PART);
+        topRoute.setLine(mot);
+        topRoute.setRegularStops(new ArrayList<>(Arrays.asList(partialRoute.getOrigin(), partialRoute.getOrigin())));
+        partialRoutes.add(topRoute);
+    }
+
     private void addBetweenRoute(List<PartialRoute> partialRoutes, PartialRoute partialRoute, PartialRoute next) {
         if (next == null) return;
-        if (partialRoute.getLine().getMode().equals(Mode.WALKING) ||partialRoute.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION)) return;
-        if (next.getLine().getMode().equals(Mode.WALKING) || next.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION)) return;
+        if (partialRoute.getLine().getMode().equals(Mode.WALKING) || partialRoute.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION))
+            return;
+        if (next.getLine().getMode().equals(Mode.WALKING) || next.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION))
+            return;
         if (partialRoute.getDestination() == null || next.getOrigin() == null) return;
 
         long durationBetweenRoutes = TimeConverter.getMinutesBetween(partialRoute.getDestination().getRealArrivalTimeAsLocalDateTime(),

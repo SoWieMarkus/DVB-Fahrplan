@@ -1,7 +1,6 @@
 package markus.wieland.dvbfahrplan.ui.routes.route;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +20,10 @@ import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.routes.Mot;
 import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
-import markus.wieland.dvbfahrplan.api.models.routes.Route;
 
 public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.RouteViewHolder> {
     private static final int BETWEEN_ROUTE = 1;
+    private static final int ONLY_ONE_PART = 3;
     private static final int ROUTE = 2;
 
     public RouteAdapter() {
@@ -36,6 +35,7 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
     public RouteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         @LayoutRes int layoutId = R.layout.item_route_partial_route;
         if (viewType == BETWEEN_ROUTE) layoutId = R.layout.item_route_between;
+        if (viewType == ONLY_ONE_PART) layoutId = R.layout.item_route_top;
         return new RouteViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(layoutId, parent, false));
     }
@@ -48,6 +48,8 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
         if (mot == null || mot.getMode() == null) return ROUTE;
         if (mot.getMode().equals(Mode.WALKING) || mot.getMode().equals(Mode.CHANGE_PLATFORM) || mot.getMode().equals(Mode.STAY_FOR_CONNECTION) || mot.getMode().equals(Mode.WAITING))
             return BETWEEN_ROUTE;
+        if (mot.getMode().equals(Mode.ONLY_ONE_PART))
+            return ONLY_ONE_PART;
 
         return ROUTE;
     }
@@ -123,18 +125,24 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
 
             Context context = itemView.getContext();
 
+            if (mode.equals(Mode.ONLY_ONE_PART)) {
+                itemPartialRouteEndMarker.setImageDrawable(mode.getMarker(context));
+                itemPartialRouteOriginStop.setText(route.getOrigin().toString());
+                return;
+            }
+
             itemPartialRouteModeIcon.setImageDrawable(mode.getIcon(context));
             itemPartialRouteDuration.setText(route.getDurationAsString(context));
 
-            if (mode.equals(Mode.WALKING) || mode.equals(Mode.CHANGE_PLATFORM) || mode.equals(Mode.WAITING)|| mode.equals(Mode.STAY_FOR_CONNECTION))
+            if (mode.equals(Mode.WALKING) || mode.equals(Mode.CHANGE_PLATFORM) || mode.equals(Mode.WAITING) || mode.equals(Mode.STAY_FOR_CONNECTION))
                 return;
 
             itemPartialRouteAmountStops.setText(route.getAmountOfStops(context));
 
             itemPartialRouteDestinationTimeDelay.setVisibility(route.getDestination().getDelayArrival() == 0 ? View.GONE : View.VISIBLE);
             itemPartialRouteOriginTimeDelay.setVisibility(route.getOrigin().getDelayDeparture() == 0 ? View.GONE : View.VISIBLE);
-            itemPartialRouteDestinationTimeDelay.setText("+"+route.getDestination().getDelayArrival());
-            itemPartialRouteOriginTimeDelay.setText("+"+route.getOrigin().getDelayDeparture());
+            itemPartialRouteDestinationTimeDelay.setText("+" + route.getDestination().getDelayArrival());
+            itemPartialRouteOriginTimeDelay.setText("+" + route.getOrigin().getDelayDeparture());
 
             itemPartialRouteEndMarker.setImageDrawable(mode.getMarker(context));
             itemPartialRouteStartMarker.setImageDrawable(mode.getMarker(context));

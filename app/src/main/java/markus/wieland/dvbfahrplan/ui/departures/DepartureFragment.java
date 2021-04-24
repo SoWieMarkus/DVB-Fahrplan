@@ -47,6 +47,7 @@ public class DepartureFragment extends DefaultFragment {
         if (departureMonitor == null) {
             shimmerFrameLayout.setVisibility(View.VISIBLE);
             departureAdapter.submitList(new ArrayList<>());
+            linesAdapter.submitList(new ArrayList<>());
             findViewById(R.id.fragment_departure_empty).setVisibility(View.GONE);
         } else {
             shimmerFrameLayout.setVisibility(View.GONE);
