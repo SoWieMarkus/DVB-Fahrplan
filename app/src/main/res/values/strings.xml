@@ -25,4 +25,7 @@
     <string name="route_string_route">Route:</string>
     <string name="route_string_departure">Departure</string>
     <string name="route_string_arrival">Arrival</string>
+    <string name="content_description_marker" translatable="false">Marker</string>
+    <string name="content_description_vehicle_typ">Vehicle</string>
+    <string name="content_description_next">Next</string>
 </resources>

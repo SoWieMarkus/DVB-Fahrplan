@@ -29,7 +29,7 @@
             android:paddingTop="2dp"
             android:paddingRight="8dp"
             android:paddingBottom="2dp"
-            android:textColor="@color/white" />
+            android:text="12" />
 
         <ImageView
             android:id="@+id/item_mode_next"

@@ -25,4 +25,6 @@
     <string name="route_string_route">Verlauf:</string>
     <string name="route_string_departure">Abfahrt:</string>
     <string name="route_string_arrival">Ankunft:</string>
+    <string name="content_description_vehicle_typ">Fahrzeug</string>
+    <string name="content_description_next">Als nächstes</string>
 </resources>

@@ -63,7 +63,7 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             motChainAdapter.submitList(route.getMotChain());
 
             itemRouteDuration.setText(route.getDurationAsString());
-            itemRoutePrice.setText(route.getPrice()+"€");
+            itemRoutePrice.setText(route.getPrice());
             itemRouteChanges.setText(route.getInterchanges() + "");
 
             itemView.setOnClickListener(v -> getOnItemInteractListener().onClick(route));
