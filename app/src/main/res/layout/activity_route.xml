@@ -7,80 +7,72 @@
     android:background="?attr/main_background_color"
     tools:context=".ui.routes.RouteActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="16dp">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/activity_route_origin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/activity_route_origin"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
+                    android:hint="hint"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:nextFocusDown="@+id/activity_route_destination" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="hint"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:nextFocusDown="@+id/activity_route_destination" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/activity_route_destination"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="hint"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/activity_route_destination"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_switch" />
+
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar>
+        <ImageButton
+            android:id="@+id/activity_route_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_switch" />
 
-
+    </LinearLayout>
 
 
     <FrameLayout
@@ -90,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

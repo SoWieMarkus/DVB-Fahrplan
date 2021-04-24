@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/main_background_color"
             android:elevation="8dp"
+            android:gravity="center"
             android:padding="32dp">
 
             <TextView
@@ -55,6 +56,12 @@
                 android:gravity="center"
                 android:text="TextView"
                 android:textSize="32sp" />
+
+            <ImageButton
+                android:id="@+id/activity_route_detail_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_share" />
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -65,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/activity_route_detail_recycler_view"
                     android:layout_width="match_parent"

@@ -96,7 +96,6 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
 
     public void onClick(Point point) {
         if (point == null) return;
-        pointViewModel.updatePoint(point);
         textInputLayoutStation.getEditText().removeTextChangedListener(this);
         textInputLayoutStation.getEditText().setText(point.toString());
         textInputLayoutStation.getEditText().addTextChangedListener(this);
@@ -132,6 +131,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         if (currentPoint == null) return;
         dvbApi.searchDepartures(this::onLoad, currentPoint.getId());
         dvbApi.searchLines(this::onLoad, currentPoint.getId());
+        pointViewModel.updatePoint(currentPoint);
     }
 
     @Override

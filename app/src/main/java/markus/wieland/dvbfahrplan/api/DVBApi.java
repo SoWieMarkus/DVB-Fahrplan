@@ -11,6 +11,7 @@ import markus.wieland.dvbfahrplan.api.models.lines.Lines;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
+import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
 
 public class DVBApi {
 
@@ -47,9 +48,11 @@ public class DVBApi {
         routesGetRequest.execute();
     }
 
-    public void searchRoute(APIResult<Routes> apiResult, String origin, String destination) {
+    public void searchRoute(APIResult<Routes> apiResult, String origin, String destination, PickedTime time) {
         ApiURL url = new ApiURL(BASE_URL + ROUTE)
                 .append("origin", origin)
+                .append("time", time.getLocalDateTimeAsString())
+                .append("isarrivaltime", time.isArrival())
                 .append("destination", destination);
         GetRequest<Routes> routesGetRequest = new GetRequest<>(Routes.class, url.toString(), new RequestResultListener<Routes>() {
             @Override

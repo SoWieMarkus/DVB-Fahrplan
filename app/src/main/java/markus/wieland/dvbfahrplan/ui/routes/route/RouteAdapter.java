@@ -54,6 +54,8 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
         return ROUTE;
     }
 
+
+
     public class RouteViewHolder extends DefaultViewHolder<PartialRoute> {
 
         private TextView itemPartialRouteOriginStop;
@@ -117,6 +119,9 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
             itemPartialRouteDestinationTimeDelay = findViewById(R.id.item_partial_route_delay_arrival);
         }
 
+        public View getItemView(){
+            return itemView;
+        }
 
         @Override
         public void bindItemToViewHolder(PartialRoute route) {
@@ -127,7 +132,13 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
 
             if (mode.equals(Mode.ONLY_ONE_PART)) {
                 itemPartialRouteEndMarker.setImageDrawable(mode.getMarker(context));
-                itemPartialRouteOriginStop.setText(route.getOrigin().toString());
+                if (getAdapterPosition() == 0) {
+                    itemPartialRouteOriginStop.setText(route.getOrigin().toString());
+                    itemPartialRouteOriginTime.setText(route.getOrigin().getFancyDepartureTime());
+                } else {
+                    itemPartialRouteOriginStop.setText(route.getDestination().toString());
+                    itemPartialRouteOriginTime.setText(route.getDestination().getFancyDepartureTime());
+                }
                 return;
             }
 

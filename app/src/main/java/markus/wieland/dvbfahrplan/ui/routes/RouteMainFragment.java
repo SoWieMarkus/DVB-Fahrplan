@@ -16,17 +16,17 @@ import java.util.List;
 
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.SearchFragment;
-import markus.wieland.dvbfahrplan.api.DVBApi;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
-import markus.wieland.dvbfahrplan.api.models.pointfinder.PointStatus;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
 import markus.wieland.dvbfahrplan.ui.routes.route.RouteDetailActivity;
+import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
+import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerEventListener;
 
-public class RouteMainFragment extends SearchFragment implements SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
+public class RouteMainFragment extends SearchFragment implements TimePickerEventListener, SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
 
     private static final int REQUEST_ORIGIN = 1;
     private static final int REQUEST_DESTINATION = 2;
@@ -37,13 +37,14 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
 
     private TextInputLayout textInputLayoutOrigin;
     private TextInputLayout textInputLayoutDestination;
-    private DVBApi dvbApi;
 
     private boolean destinationHasFocus;
     private boolean originHasFocus;
 
     private Point originPoint;
     private Point destinationPoint;
+
+    private PickedTime pickedTime;
 
     public RouteMainFragment() {
         super(R.layout.activity_route);
@@ -59,27 +60,45 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
         textInputLayoutOrigin = findViewById(R.id.activity_route_origin);
         textInputLayoutDestination = findViewById(R.id.activity_route_destination);
 
+        findViewById(R.id.activity_route_switch).setOnClickListener(this::switchOriginAndDestination);
+
         initializeViews();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (currentFragment.equals(pointFinderFragmentDestination)){
+        if (currentFragment.equals(pointFinderFragmentDestination)) {
             focus(textInputLayoutDestination);
             loadFragment(pointFinderFragmentDestination);
         }
 
-        if (currentFragment.equals(pointFinderFragmentOrigin)){
+        if (currentFragment.equals(pointFinderFragmentOrigin)) {
             focus(textInputLayoutOrigin);
             loadFragment(pointFinderFragmentOrigin);
         }
 
-
-
     }
 
+    private void switchOriginAndDestination(View v) {
+        Point tempPoint = originPoint;
+        originPoint = destinationPoint;
+        destinationPoint = tempPoint;
 
+        textInputLayoutDestination.getEditText().removeTextChangedListener(this);
+        textInputLayoutOrigin.getEditText().removeTextChangedListener(this);
+
+        String valueDestination = textInputLayoutDestination.getEditText().getText().toString();
+        String valueOrigin = textInputLayoutOrigin.getEditText().getText().toString();
+
+        textInputLayoutDestination.getEditText().setText(valueOrigin);
+        textInputLayoutOrigin.getEditText().setText(valueDestination);
+
+        textInputLayoutDestination.getEditText().addTextChangedListener(this);
+        textInputLayoutOrigin.getEditText().addTextChangedListener(this);
+
+        searchRoute();
+    }
 
     private void initializeViews() {
 
@@ -95,8 +114,8 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
     }
 
     private void execute() {
-        dvbApi = new DVBApi(getActivity());
         pointViewModel.getRecentPoints().observe(getActivity(), this);
+        pickedTime = new PickedTime();
         loadFragment(pointFinderFragmentOrigin);
     }
 
@@ -104,10 +123,10 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
     public boolean handleBackPress() {
         if (originHasFocus) return true;
         else if (destinationHasFocus) {
-            focus(textInputLayoutOrigin);
+            textInputLayoutOrigin.getEditText().requestFocus();
             loadFragment(pointFinderFragmentOrigin);
         } else if (currentFragment.equals(routeFragment)) {
-            focus(textInputLayoutDestination);
+            textInputLayoutDestination.getEditText().requestFocus();
             loadFragment(pointFinderFragmentDestination);
         }
         return false;
@@ -156,15 +175,18 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
             clearFocus(textInputLayoutOrigin);
             focus(textInputLayoutDestination);
         }
-        searchStops();
+        searchRoute();
     }
 
-    public void searchStops() {
+    public void searchRoute() {
         if (originPoint == null || destinationPoint == null) return;
         if (originPoint.equals(destinationPoint)) return;
         routeFragment.update(null);
         loadFragment(routeFragment);
-        dvbApi.searchRoute(this::onLoad, originPoint.getId(), destinationPoint.getId());
+        dvbApi.searchRoute(this::onLoad, originPoint.getId(), destinationPoint.getId(), pickedTime);
+
+        pointViewModel.updatePoint(originPoint);
+        pointViewModel.updatePoint(destinationPoint);
     }
 
     private void onLoad(Routes routes) {
@@ -214,11 +236,17 @@ public class RouteMainFragment extends SearchFragment implements SelectPointInte
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
         if (i == EditorInfo.IME_ACTION_DONE) {
-            searchStops();
+            searchRoute();
             clearFocus(textInputLayoutDestination);
             return true;
         }
         return false;
 
+    }
+
+    @Override
+    public void onSetDate(PickedTime pickedTime) {
+        this.pickedTime = pickedTime;
+        searchRoute();
     }
 }

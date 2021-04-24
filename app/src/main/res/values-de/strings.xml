@@ -19,4 +19,10 @@
     <string name="menu_item_route_departure">Haltestellenauskunft</string>
     <string name="error_nothing_found">Keine Ergebnisse.</string>
     <string name="departure_station">Haltestelle</string>
+    <string name="route_string_title">Meine Verbindung:</string>
+    <string name="route_string_from">Von:</string>
+    <string name="route_string_to">Nach:</string>
+    <string name="route_string_route">Verlauf:</string>
+    <string name="route_string_departure">Abfahrt:</string>
+    <string name="route_string_arrival">Ankunft:</string>
 </resources>

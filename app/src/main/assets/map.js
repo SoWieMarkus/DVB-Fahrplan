@@ -126,6 +126,15 @@ function initializeMap() {
 
 function showRoute(route) {
     let markers = [];
+
+    let routeCopy = route;
+    route = [];
+    for (let i = 0; i < routeCopy.length;i++) {
+        if (routeCopy[i].mode !== "waiting")
+            route.push(routeCopy[i]);
+    }
+
+
     for (let i = 0; i < route.length; i++) {
         let partialRoute = route[i];
         let mode = partialRoute.mode;
@@ -139,18 +148,25 @@ function showRoute(route) {
             path.push(coordinates);
             if (j === 0 || j === (partialRoute.nodes.length - 1)) {
 
-                if (mode === "footpath")  {
-                    if (j === 0 && i !== 0) continue;
-                    if (j === partialRoute.nodes.length -1 && i !== route.length -1) continue;
-                }
 
+                console.log("\nj: "+ j);
+                console.log("i: "+ i);
+                console.log("imax: "+ route.length);
+                console.log("jmax: "+ (partialRoute.nodes.length - 1));
+                console.log("mode: "+ mode);
                 let marker;
-                if (j === partialRoute.nodes.length -1 && i === route.length -1) {
+                if (j === (partialRoute.nodes.length -1) && i === (route.length -1)) {
+                    console.log("dest")
                     marker = L.marker(coordinates, {icon: markersList["destination"]});
                 } else if (j === 0 && i === 0) {
+                    console.log("start")
                     marker = L.marker(coordinates);
-                } else {
+                } else if (mode !== "footpath") {
+                    console.log("normal")
                     marker = L.marker(coordinates, {icon: markersList[mode]});
+                } else {
+                    console.log("skip")
+                    continue;
                 }
 
                 marker.bindPopup(node.name);

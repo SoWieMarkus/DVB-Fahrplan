@@ -33,7 +33,6 @@ public class MapView extends WebView {
 
     public MapView(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
-
     }
 
     public MapView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

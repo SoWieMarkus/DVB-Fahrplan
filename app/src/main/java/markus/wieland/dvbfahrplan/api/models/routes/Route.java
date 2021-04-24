@@ -1,5 +1,7 @@
 package markus.wieland.dvbfahrplan.api.models.routes;
 
+import android.content.Context;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
+import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
@@ -138,14 +141,14 @@ public class Route implements QueryableEntity<Long> {
             PartialRoute partialRoute = baseSet.get(i);
             PartialRoute partialRouteNext = i == baseSet.size() - 1 ? null : baseSet.get(i + 1);
 
-            if (i == 0  && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
+            if (i == 0 && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
                 addSingleStopRoute(partialRoutesFiltered, partialRoute);
             }
 
             if (partialRoute.getRegularStops() == null) continue;
             partialRoutesFiltered.add(partialRoute);
 
-            if (i == baseSet.size() - 1  && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
+            if (i == baseSet.size() - 1 && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
                 addSingleStopRoute(partialRoutesFiltered, partialRoute);
             }
 
@@ -169,7 +172,7 @@ public class Route implements QueryableEntity<Long> {
         Mot mot = new Mot();
         mot.setMode(Mode.ONLY_ONE_PART);
         topRoute.setLine(mot);
-        topRoute.setRegularStops(new ArrayList<>(Arrays.asList(partialRoute.getOrigin(), partialRoute.getOrigin())));
+        topRoute.setRegularStops(new ArrayList<>(Arrays.asList(partialRoute.getOrigin(), partialRoute.getDestination())));
         partialRoutes.add(topRoute);
     }
 
@@ -206,5 +209,40 @@ public class Route implements QueryableEntity<Long> {
     }
 
 
+    public String toString(Context context) {
+
+        Stop origin = partialRoutes.get(0).getOrigin();
+        Stop destination = partialRoutes.get(partialRoutes.size() - 1).getDestination();
+
+
+        String routeString = context.getString(R.string.route_string_title);
+        routeString += "\n" + context.getString(R.string.route_string_from) + " " + origin.toString();
+        routeString += "\n" + context.getString(R.string.route_string_to) + " " + destination.toString();
+        routeString += "\n" + origin.getFancyDepartureTime() + " - " + destination.getFancyArrivalTime() + ", " + getDurationAsString();
+
+        /*routeString += "\n\n" + context.getString(R.string.route_string_route) + "\n======";
+
+
+        StringBuilder routeStringBuilder = new StringBuilder(routeString);
+        for (PartialRoute partialRoute : partialRoutes) {
+            if (partialRoute.getRegularStops() == null || partialRoute.getRegularStops().isEmpty())
+                continue;
+
+            if (partialRoute.getLine().getMode().equals(Mode.WALKING)) {
+                routeStringBuilder.append("\n\n");
+                routeStringBuilder.append(context.getString(R.string.footpath));
+            } else {
+                routeStringBuilder.append("\n\n");
+                routeStringBuilder.append(partialRoute.getLine().getName()).append(" ").append(partialRoute.getLine().getDirection());
+
+            }
+            routeStringBuilder.append("\n").append(context.getString(R.string.route_string_departure)).append(": ").append(partialRoute.getOrigin().getFancyDepartureTime()).append(", ").append(partialRoute.getOrigin().toString());
+            routeStringBuilder.append("\n").append(context.getString(R.string.route_string_arrival)).append(": ").append(partialRoute.getDestination().getFancyArrivalTime()).append(", ").append(partialRoute.getDestination().toString());
+        }
+        routeString = routeStringBuilder.toString();*/
+
+
+        return routeString;
+    }
 }
 

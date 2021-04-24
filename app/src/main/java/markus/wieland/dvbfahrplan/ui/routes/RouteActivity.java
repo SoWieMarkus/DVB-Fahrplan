@@ -30,6 +30,7 @@ import markus.wieland.dvbfahrplan.database.point.PointViewModel;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
 import markus.wieland.dvbfahrplan.ui.routes.route.RouteDetailActivity;
+import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
 
 public class RouteActivity extends DefaultActivity implements TextView.OnEditorActionListener, APIResult<Routes>, SelectPointInteractListener, TextWatcher, View.OnFocusChangeListener {
 
@@ -56,7 +57,6 @@ public class RouteActivity extends DefaultActivity implements TextView.OnEditorA
 
     @Override
     public void bindViews() {
-        setSupportActionBar(findViewById(R.id.toolbar));
 
         textInputLayoutOrigin = findViewById(R.id.activity_route_origin);
         textInputLayoutDestination = findViewById(R.id.activity_route_destination);
@@ -103,7 +103,7 @@ public class RouteActivity extends DefaultActivity implements TextView.OnEditorA
             return;
         }
 
-        dvbApi.searchRoute(this, getOrigin(), getDestination());
+        dvbApi.searchRoute(this, getOrigin(), getDestination(), new PickedTime());
         routeFragment.update(null);
         loadFragment(routeFragment);
     }

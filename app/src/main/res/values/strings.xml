@@ -19,4 +19,10 @@
     <string name="error_nothing_found">Nothing found.</string>
     <string name="ago" translatable="false">ago</string>
     <string name="departure_station">Station</string>
+    <string name="route_string_title">My route:</string>
+    <string name="route_string_from">From:</string>
+    <string name="route_string_to">To:</string>
+    <string name="route_string_route">Route:</string>
+    <string name="route_string_departure">Departure</string>
+    <string name="route_string_arrival">Arrival</string>
 </resources>

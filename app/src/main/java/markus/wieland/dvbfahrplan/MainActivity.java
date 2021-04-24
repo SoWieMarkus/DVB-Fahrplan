@@ -6,11 +6,15 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDateTime;
+
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.ui.departures.DepartureMainFragment;
 import markus.wieland.dvbfahrplan.ui.routes.RouteMainFragment;
+import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
+import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerEventListener;
 
-public class MainActivity extends DefaultActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends DefaultActivity implements BottomNavigationView.OnNavigationItemSelectedListener, TimePickerEventListener {
 
     private RouteMainFragment routeFragment;
     private DepartureMainFragment departureFragment;
@@ -70,5 +74,10 @@ public class MainActivity extends DefaultActivity implements BottomNavigationVie
         if (currentFragment.handleBackPress()) {
             finish();
         }
+    }
+
+    @Override
+    public void onSetDate(PickedTime pickedTime) {
+        routeFragment.onSetDate(pickedTime);
     }
 }
