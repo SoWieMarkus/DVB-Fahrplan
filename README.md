@@ -2,6 +2,13 @@
 
 <a href="https://play.google.com/store/apps/details?id=markus.wieland.dvbfahrplan"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Build status" width="50%"></a>
 
+## Features
+
+* get departure times of a station
+* query a route from point A to point B
+* get information about delays
+* share your route with your friends
+
 ## Used frameworks
 
 * <a href="https://leafletjs.com/">Leaflet.js</a> to display route details in a map
