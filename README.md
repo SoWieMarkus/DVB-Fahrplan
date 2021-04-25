@@ -2,7 +2,7 @@
 
 Disclaimer! The app is NOT related to the Dresdner Verkehrsbetriebe (DVB) or the Verkehrsverbund Oberelbe (VVO).
 
-<img height="200px" src="https://github.com/SoWieMarkus/DVB-Fahrplan/blob/main/app/src/main/ic_app_logo-playstore.png"></a><a href="https://play.google.com/store/apps/details?id=markus.wieland.dvbfahrplan"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Build status" height="200px"></a>
+<img height="150px" src="https://github.com/SoWieMarkus/DVB-Fahrplan/blob/main/app/src/main/ic_app_logo-playstore.png"></a><a href="https://play.google.com/store/apps/details?id=markus.wieland.dvbfahrplan"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Build status" height="150px"></a>
 
 ## Features
 
