@@ -1,6 +1,7 @@
 package markus.wieland.dvbfahrplan.ui.routes;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
         private TextView itemRouteDuration;
         private TextView itemRoutePrice;
         private TextView itemRouteChanges;
-        private TextView itemRouteTimes;
+        private TextView itemRouteArrival;
+        private TextView itemRouteDeparture;
 
         public RoutesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -49,7 +51,8 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             itemRouteDuration = findViewById(R.id.item_route_duration);
             itemRoutePrice = findViewById(R.id.item_route_price);
             itemRouteChanges = findViewById(R.id.item_route_changes);
-            itemRouteTimes = findViewById(R.id.item_route_times);
+            itemRouteArrival = findViewById(R.id.item_route_arrival);
+            itemRouteDeparture = findViewById(R.id.item_route_departure);
         }
 
         @Override
@@ -63,12 +66,21 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             itemRouteMotChain.setAdapter(motChainAdapter);
             motChainAdapter.submitList(route.getMotChain());
 
-            itemRouteDuration.setText(route.getDurationAsString());
+            itemRouteDuration.setText(route.getDurationAsString(itemView.getContext()));
             itemRoutePrice.setText(route.getPrice());
-            itemRouteChanges.setText(route.getInterchanges() + "");
-            itemRouteTimes.setText(route.getTimeSpan());
+            itemRouteChanges.setText(route.getInterchangesAsString(itemView.getContext()));
+            itemRouteArrival.setText(route.getArrivalTime(itemView.getContext()));
+            itemRouteDeparture.setText(route.getDepartureTime(itemView.getContext()));
 
-            itemView.setOnClickListener(v -> getOnItemInteractListener().onClick(route));
+            findViewById(R.id.item_route_foreground).setOnClickListener(v -> getOnItemInteractListener().onClick(route));
+            findViewById(R.id.item_route_foreground).setOnTouchListener((v, event) -> {
+                if (event.getAction() == MotionEvent.ACTION_BUTTON_PRESS) {
+                    findViewById(R.id.item_route_foreground).performClick();
+                    return false;
+                }
+                itemRouteMotChain.onTouchEvent(event);
+                return false;
+            });
         }
     }
 }

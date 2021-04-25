@@ -98,7 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="?attr/main_text_color"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/activity_route_show_time_picker"
@@ -106,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_picker_change"
-                android:textColor="@color/accent_dark" />
+                android:textColor="?attr/accent_color" />
         </LinearLayout>
 
         <LinearLayout

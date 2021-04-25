@@ -2,12 +2,9 @@ package markus.wieland.dvbfahrplan.ui.routes.route;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -31,8 +28,9 @@ import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
+import markus.wieland.dvbfahrplan.helper.ShareRoute;
+import markus.wieland.dvbfahrplan.helper.ViewToBitmap;
 import markus.wieland.dvbfahrplan.ui.map.MapView;
 
 import static android.view.View.GONE;
@@ -73,11 +71,11 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
         recyclerViewRoute.setAdapter(routeAdapter);
 
         Route route = getRoute();
-        textViewDuration.setText(route.getDurationAsString());
+        textViewDuration.setText(route.getDurationAsString(this));
         textViewPrice.setVisibility(route.getPrice() == null ? GONE : View.VISIBLE);
         textViewPrice.setText(route.getPrice() == null ? "" : route.getPrice());
 
-        findViewById(R.id.activity_route_detail_share).setOnClickListener(v -> shareImageUri(getImageUri(getWholeListViewItemsToBitmap())));
+        findViewById(R.id.activity_route_detail_share).setOnClickListener(v -> shareImageUri(getImageUri(ViewToBitmap.getBitmapFromMultipleViews(getViewsToShare(), recyclerViewRoute.getWidth()))));
     }
 
     private Route getRoute() {
@@ -120,7 +118,14 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
         startActivity(Intent.createChooser(intentShare, "Shared the text ..."));
     }
 
-    private Bitmap getFromView(View view) {
+    private List<View> getViewsToShare() {
+        List<View> views = new ArrayList<>();
+        views.add(mapViewRoute);
+        views.addAll(new ShareRoute(getRoute().getRouteList(), findViewById(R.id.coordinator_layout)).getViews());
+        return views;
+    }
+
+    /*private Bitmap getFromView(View view) {
         view.measure(View.MeasureSpec.makeMeasureSpec(recyclerViewRoute.getWidth(), View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 
@@ -164,12 +169,11 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
             Bitmap bmp = bmps.get(i);
             bigcanvas.drawBitmap(bmp, 0, iHeight, paint);
             iHeight += bmp.getHeight();
-
         }
 
 
         return bigbitmap;
-    }
+    }*/
 
     private void shareImageUri(Uri uri) {
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
@@ -199,7 +203,6 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
     public Uri getImageUri(Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-
         String path = MediaStore.Images.Media.insertImage(getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }

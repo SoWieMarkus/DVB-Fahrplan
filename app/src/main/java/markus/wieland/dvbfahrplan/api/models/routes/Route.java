@@ -11,8 +11,8 @@ import java.util.List;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
-import markus.wieland.dvbfahrplan.api.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class Route implements QueryableEntity<Long> {
 
@@ -116,11 +116,13 @@ public class Route implements QueryableEntity<Long> {
         this.partialRoutes = partialRoutes;
     }
 
-    public String getDurationAsString() {
+    public String getDurationAsString(Context context) {
         int hours = duration / 60;
         int minutes = duration % 60;
-        if (hours > 0) return hours + "h " + minutes + "min";
-        return minutes + "min";
+        if (hours > 0)
+            return hours + " "+context.getString(R.string.hour_short_term) + " " + minutes + " "+ context.getString(R.string.minute_short);
+        ;
+        return minutes + " " + context.getString(R.string.minute_short);
     }
 
     @Override
@@ -157,6 +159,12 @@ public class Route implements QueryableEntity<Long> {
 
         }
         return partialRoutesFiltered;
+    }
+
+    public String getInterchangesAsString(Context context) {
+        return interchanges + " " + (interchanges == 1
+                ? context.getString(R.string.route_interchange_singular)
+                : context.getString(R.string.route_interchanges));
     }
 
     private List<PartialRoute> removeRedundant() {
@@ -221,8 +229,14 @@ public class Route implements QueryableEntity<Long> {
         return partialRoutes.get(partialRoutes.size() - 1).getDestination();
     }
 
-    public String getTimeSpan(){
-        return getOrigin().getFancyDepartureTime() + "-" + getDestination().getFancyArrivalTime();
+
+    public String getDepartureTime(Context context) {
+        return context.getString(R.string.route_departure) + " " + TimeConverter.getStringOfLocalDateWithDates(getOrigin().getDepartureTimeAsLocalDate());
+    }
+
+    public String getArrivalTime(Context context) {
+        return context.getString(R.string.route_arrival) + " " + TimeConverter.getStringOfLocalDateWithDates(getDestination().getArrivalTimeAsLocalDate());
+
     }
 
     public String toString(Context context) {
@@ -232,7 +246,7 @@ public class Route implements QueryableEntity<Long> {
         String routeString = context.getString(R.string.route_string_title);
         routeString += "\n" + context.getString(R.string.route_string_from) + " " + origin.toString();
         routeString += "\n" + context.getString(R.string.route_string_to) + " " + destination.toString();
-        routeString += "\n" + origin.getFancyDepartureTime() + " - " + destination.getFancyArrivalTime() + ", " + getDurationAsString();
+        routeString += "\n" + origin.getFancyDepartureTime() + " - " + destination.getFancyArrivalTime() + ", " + getDurationAsString(context);
 
         return routeString;
     }

@@ -84,5 +84,7 @@ public class RouteMotChainAdapter extends DefaultAdapter<Mot, RouteMotChainAdapt
             itemModeLine.setText(mot.getName() == null ? "" : mot.getName());
             itemModeNext.setVisibility(getAdapterPosition() == getItemCount() - 1 ? GONE : View.VISIBLE);
         }
+
+
     }
 }

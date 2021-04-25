@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,7 +30,7 @@ import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
 import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerBottomSheetDialog;
 import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerEventListener;
 
-public class RouteMainFragment extends SearchFragment implements View.OnClickListener,TimePickerEventListener, SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
+public class RouteMainFragment extends SearchFragment implements View.OnClickListener, TimePickerEventListener, SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
 
     private static final int REQUEST_ORIGIN = 1;
     private static final int REQUEST_DESTINATION = 2;
@@ -248,7 +249,30 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         TimePickerBottomSheetDialog timePickerBottomSheetDialog = new TimePickerBottomSheetDialog(pickedTime);
-        timePickerBottomSheetDialog.show(getChildFragmentManager(),"Hello");
+        timePickerBottomSheetDialog.show(getChildFragmentManager(), "Hello");
+    }
+
+    private boolean getCustomAnimation(Fragment fragment) {
+        return currentFragment == null || ((fragment.equals(pointFinderFragmentDestination) || fragment.equals(pointFinderFragmentOrigin))
+                && currentFragment.equals(routeFragment))
+
+                || (currentFragment.equals(pointFinderFragmentDestination) || currentFragment.equals(pointFinderFragmentOrigin))
+                && fragment.equals(routeFragment);
+    }
+
+    @Override
+    protected void loadFragment(Fragment fragment) {
+        if (currentFragment != null && currentFragment.equals(fragment)) return;
+        boolean customAnimation = getCustomAnimation(fragment);
+        currentFragment = fragment;
+        if (customAnimation)
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .addToBackStack(null)
+                    .setCustomAnimations(R.anim.slide_in_right_animation, R.anim.slide_out_left_animation)
+                    .replace(R.id.frame_layout, currentFragment).commit();
+        else getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.frame_layout, currentFragment).commit();
     }
 
     private class PointTextWatcher implements TextWatcher {

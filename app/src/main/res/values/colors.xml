@@ -14,6 +14,6 @@
 
     <color name="accent_line">#999999</color>
 
-    <color name="accent">#000000</color>
+    <color name="accent">#FFA200</color>
     <color name="accent_dark">#fec400</color>
 </resources>

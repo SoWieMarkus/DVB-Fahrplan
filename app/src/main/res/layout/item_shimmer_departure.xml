@@ -35,7 +35,7 @@
                     android:id="@+id/item_departure_line"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/item_background"
+                    android:background="@drawable/item_background_shimmer"
                     android:paddingLeft="8dp"
                     android:paddingTop="2dp"
                     android:paddingRight="8dp"

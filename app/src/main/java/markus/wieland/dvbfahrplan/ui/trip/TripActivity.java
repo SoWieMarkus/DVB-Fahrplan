@@ -17,7 +17,7 @@ import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.DVBApi;
 import markus.wieland.dvbfahrplan.api.Mode;
-import markus.wieland.dvbfahrplan.api.TimeConverter;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
 import markus.wieland.dvbfahrplan.ui.map.MapView;

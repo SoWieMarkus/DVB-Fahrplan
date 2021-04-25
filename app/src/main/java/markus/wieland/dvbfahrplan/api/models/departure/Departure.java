@@ -2,8 +2,6 @@ package markus.wieland.dvbfahrplan.api.models.departure;
 
 import android.content.Context;
 
-import androidx.core.content.ContextCompat;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
@@ -13,7 +11,7 @@ import java.util.List;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
-import markus.wieland.dvbfahrplan.api.TimeConverter;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
 

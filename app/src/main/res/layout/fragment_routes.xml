@@ -13,6 +13,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/fragment_route_loading"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/main_background_color"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_shimmer_route" />
+
+            <include layout="@layout/item_shimmer_route" />
+
+            <include layout="@layout/item_shimmer_route" />
+
+            <include layout="@layout/item_shimmer_route" />
+
+            <include layout="@layout/item_shimmer_route" />
+
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/fragment_routes_empty"
         android:layout_width="match_parent"
@@ -23,12 +51,12 @@
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:text="@string/error_nothing_found"
         android:visibility="gone"
+        app:drawableTopCompat="@drawable/ic_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/error_nothing_found"
-        app:layout_constraintTop_toTopOf="parent"
-        app:drawableTopCompat="@drawable/ic_empty" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -110,4 +110,13 @@ public class PartialRoute {
         return "";
     }
 
+    public String getInformation(){
+        StringBuilder information = new StringBuilder();
+        if (infos == null) return information.toString();
+        for (String info : infos) {
+            information.append("\n- ").append(info);
+        }
+        return information.toString();
+    }
+
 }

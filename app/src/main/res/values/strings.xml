@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DVB Fahrplan</string>
+    <string name="app_name">Dresden Fahrplanauskunft</string>
     <string name="platform_short">Platform</string>
     <string name="minute_short">min.</string>
     <string name="departure_selected_station">SELECTED STATION</string>
@@ -34,4 +34,13 @@
     <string name="content_description_expand">Expand</string>
     <string name="content_description_share">Share</string>
     <string name="time_picker_change">Change</string>
+    <string name="route_interchanges">interchanges</string>
+    <string name="route_interchange_singular">interchange</string>
+    <string name="route_departure">dep.</string>
+    <string name="route_arrival">arr.</string>
+    <string name="time_picker_cancel">Cancel</string>
+    <string name="time_picker_save">Save</string>
+    <string name="time_picker_date">Date</string>
+    <string name="time_picker_today">Today</string>
+    <string name="route_informationen">Information</string>
 </resources>

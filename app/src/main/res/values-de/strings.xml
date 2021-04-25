@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DVB Fahrplan</string>
+    <string name="app_name">Dresden Fahrplanauskunft</string>
     <string name="platform_short">Gl.</string>
     <string name="minute_short">Min.</string>
     <string name="departure_selected_station">AUSGEWÄHLTE STATION</string>
@@ -23,8 +23,8 @@
     <string name="route_string_from">Von:</string>
     <string name="route_string_to">Nach:</string>
     <string name="route_string_route">Verlauf:</string>
-    <string name="route_string_departure">Abfahrt:</string>
-    <string name="route_string_arrival">Ankunft:</string>
+    <string name="route_string_departure">Abfahrt</string>
+    <string name="route_string_arrival">Ankunft</string>
     <string name="content_description_vehicle_typ">Fahrzeug</string>
     <string name="content_description_next">Als nächstes</string>
     <string name="time_picker_time">Uhrzeit</string>
@@ -33,4 +33,13 @@
     <string name="content_description_expand">Erweitere</string>
     <string name="content_description_share">Teilen</string>
     <string name="time_picker_change">Ändern</string>
+    <string name="route_interchanges">Umstiege</string>
+    <string name="route_interchange_singular">Umstieg</string>
+    <string name="route_departure">ab</string>
+    <string name="route_arrival">an</string>
+    <string name="time_picker_save">Speichern</string>
+    <string name="time_picker_cancel">Abbrechen</string>
+    <string name="time_picker_date">Datum</string>
+    <string name="time_picker_today">Heute</string>
+    <string name="route_informationen">Hinweise</string>
 </resources>

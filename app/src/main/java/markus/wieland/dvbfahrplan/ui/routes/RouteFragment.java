@@ -5,22 +5,20 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDateTime;
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 
 import markus.wieland.defaultappelements.uielements.fragments.DefaultFragment;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.models.routes.Routes;
-import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
-import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerBottomSheetDialog;
-import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerEventListener;
 
-public class RouteFragment extends DefaultFragment implements TimePickerEventListener {
+public class RouteFragment extends DefaultFragment {
 
     private final RoutesAdapter routesAdapter;
     private RecyclerView recyclerView;
 
-    private PickedTime pickedTime;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public RouteFragment(RoutesInteractListener routesInteractListener) {
         super(R.layout.fragment_routes);
@@ -39,7 +37,9 @@ public class RouteFragment extends DefaultFragment implements TimePickerEventLis
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(routesAdapter);
 
-        pickedTime = new PickedTime();
+        shimmerFrameLayout = findViewById(R.id.fragment_route_loading);
+        if (!routesAdapter.getList().isEmpty())
+            shimmerFrameLayout.setVisibility(View.GONE);
     }
 
     public void update(Routes routes) {
@@ -51,11 +51,10 @@ public class RouteFragment extends DefaultFragment implements TimePickerEventLis
         if (recyclerView != null && routes != null) {
             findViewById(R.id.fragment_routes_empty).setVisibility(routes.getRouteList() == null || routes.getRouteList().isEmpty() ? View.VISIBLE : View.GONE);
         }
+
+        if (shimmerFrameLayout != null) {
+            shimmerFrameLayout.setVisibility(routes == null ? View.VISIBLE : View.GONE);
+        }
     }
 
-
-    @Override
-    public void onSetDate(PickedTime pickedTime) {
-        this.pickedTime = pickedTime;
-    }
 }

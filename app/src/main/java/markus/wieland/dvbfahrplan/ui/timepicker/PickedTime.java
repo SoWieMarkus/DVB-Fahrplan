@@ -1,17 +1,15 @@
 package markus.wieland.dvbfahrplan.ui.timepicker;
 
 import android.content.Context;
+import android.text.format.Time;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.TimeZone;
 
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.api.TimeConverter;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class PickedTime {
 
@@ -54,12 +52,6 @@ public class PickedTime {
     public String getLocalDateTimeAsString() {
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Europe/Berlin"));
         return zonedDateTime.format(DateTimeFormatter.ISO_INSTANT);
-
-        //return localDateTime.format(DateTimeFormatter.ISO_DATE_TIME) + "Z";
-        /*TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
-        return df.format(localDateTime.get);*/
     }
 
     public boolean isArrival() {
@@ -77,4 +69,10 @@ public class PickedTime {
         string += custom ? getLocalDateTimeAsStringToDisplay() : context.getString(R.string.now);
         return string;
     }
+
+   public String getDateAsString(Context context){
+        if (TimeConverter.isSameDay(localDateTime, LocalDateTime.now())) return context.getString(R.string.time_picker_today);
+        if (TimeConverter.isSameYear(localDateTime, LocalDateTime.now())) return localDateTime.format(DateTimeFormatter.ofPattern("dd.MM."));
+        return localDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+   }
 }

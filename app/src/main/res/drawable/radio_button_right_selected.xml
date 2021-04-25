@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
-        android:startColor="@color/accent_dark"
-        android:centerColor="@color/accent_dark"
-        android:endColor="@color/accent_dark"
+        android:startColor="?attr/accent_color"
+        android:centerColor="?attr/accent_color"
+        android:endColor="?attr/accent_color"
         android:angle="270" />
     <stroke
         android:width="0.5dp"
-        android:color="@color/accent_dark" />
+        android:color="?attr/accent_color" />
     <corners
         android:bottomRightRadius="8dp"
         android:topRightRadius="8dp"/>

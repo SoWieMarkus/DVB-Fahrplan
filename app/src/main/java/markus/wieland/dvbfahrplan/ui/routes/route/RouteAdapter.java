@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Collections;
 
 import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
@@ -55,7 +58,6 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
     }
 
 
-
     public class RouteViewHolder extends DefaultViewHolder<PartialRoute> {
 
         private TextView itemPartialRouteOriginStop;
@@ -82,6 +84,8 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
         private LinearLayout itemPartialRouteExpandStops;
 
         private RecyclerView itemPartialRouteRecyclerView;
+
+        private TextView itemPartialRouteInformation;
 
 
         public RouteViewHolder(@NonNull View itemView) {
@@ -113,13 +117,15 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
 
             itemPartialRouteExpandStops = findViewById(R.id.item_partial_route_expand_stops);
 
+            itemPartialRouteInformation = findViewById(R.id.item_partial_route_information);
+
             itemPartialRouteModeName = findViewById(R.id.item_partial_route_mode_name);
             itemPartialRouteModeDirection = findViewById(R.id.item_partial_route_mode_direction);
             itemPartialRouteOriginTimeDelay = findViewById(R.id.item_partial_route_delay_departure);
             itemPartialRouteDestinationTimeDelay = findViewById(R.id.item_partial_route_delay_arrival);
         }
 
-        public View getItemView(){
+        public View getItemView() {
             return itemView;
         }
 
@@ -188,6 +194,9 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
                 route.setExpanded(!route.isExpanded());
                 toggleStopsBetween(route, context);
             });
+
+            itemPartialRouteInformation.setVisibility(route.getInfos() == null || route.getInfos().isEmpty() ? View.GONE : View.VISIBLE);
+            itemPartialRouteInformation.setOnClickListener(v -> getDialog(route).show());
         }
 
         private void toggleStopsBetween(PartialRoute route, Context context) {
@@ -196,5 +205,16 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
                     ? ContextCompat.getDrawable(context, R.drawable.ic_collapse)
                     : ContextCompat.getDrawable(context, R.drawable.ic_expand));
         }
+
+        public AlertDialog getDialog(PartialRoute partialRoute) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+            builder.setCancelable(true);
+            builder.setTitle(itemView.getContext().getString(R.string.route_informationen));
+            builder.setMessage(String.join("\n- ", partialRoute.getInformation()));
+            builder.setPositiveButton(android.R.string.ok, null);
+            return builder.create();
+        }
     }
+
+
 }

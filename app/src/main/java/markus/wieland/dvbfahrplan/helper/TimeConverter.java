@@ -1,8 +1,9 @@
-package markus.wieland.dvbfahrplan.api;
+package markus.wieland.dvbfahrplan.helper;
 
 import androidx.annotation.NonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -50,5 +51,19 @@ public class TimeConverter {
         return "/Date(" + (System.currentTimeMillis() + 1000) + "-0000)/";
     }
 
+    public static boolean isSameYear(LocalDateTime localDateTime, LocalDateTime localDateTime2) {
+        return localDateTime.getYear() == localDateTime2.getYear();
+    }
+
+    public static String getStringOfLocalDateWithDates(LocalDateTime localDateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatterWithDate = DateTimeFormatter.ofPattern("dd.MM., HH:mm");
+        DateTimeFormatter formatterWithDateYear = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
+
+        if (isSameDay(LocalDateTime.now(), localDateTime)) return localDateTime.format(formatter);
+        if (isSameYear(LocalDateTime.now(), localDateTime)) return localDateTime.format(formatterWithDate);
+        return localDateTime.format(formatterWithDateYear);
+
+    }
 
 }

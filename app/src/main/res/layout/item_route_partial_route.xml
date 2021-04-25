@@ -70,6 +70,15 @@
                     android:layout_weight="1" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/item_partial_route_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/route_informationen"
+                app:drawableLeftCompat="@drawable/ic_info" />
+
             <LinearLayout
                 android:id="@+id/item_partial_route_expand_stops"
                 android:layout_width="match_parent"
@@ -101,6 +110,7 @@
                     android:contentDescription="@string/content_description_expand"
                     app:srcCompat="@drawable/ic_expand" />
             </LinearLayout>
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
