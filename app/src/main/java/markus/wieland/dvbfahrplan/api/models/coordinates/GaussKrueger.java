@@ -5,6 +5,8 @@ import java.util.Optional;
 
 public class GaussKrueger {
 
+    private GaussKrueger(){}
+
     /*
      Copyright (c) 2006, HELMUT H. HEIMEIER
      Permission is hereby granted, free of charge, to any person obtaining a

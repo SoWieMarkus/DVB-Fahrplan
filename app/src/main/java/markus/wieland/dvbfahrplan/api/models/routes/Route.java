@@ -121,7 +121,6 @@ public class Route implements QueryableEntity<Long> {
         int minutes = duration % 60;
         if (hours > 0)
             return hours + " "+context.getString(R.string.hour_short_term) + " " + minutes + " "+ context.getString(R.string.minute_short);
-        ;
         return minutes + " " + context.getString(R.string.minute_short);
     }
 

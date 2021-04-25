@@ -102,7 +102,6 @@ public class TripAdapter extends DefaultAdapter<Node, TripAdapter.TripViewHolder
 
             itemView.setOnClickListener(this);
 
-
             Node previousNode = getPreviousNode();
             if (previousNode == null) return;
 

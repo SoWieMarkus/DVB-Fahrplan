@@ -1,5 +1,6 @@
 package markus.wieland.dvbfahrplan.ui.timepicker;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -94,8 +95,10 @@ public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment imple
     }
 
     private void execute() {
+        Activity activity = getActivity();
+        if (activity == null) return;
         datePickerDialog = new DatePickerDialog(
-                getActivity(), this, pickedTime.getYear(), pickedTime.getMonth() - 1, pickedTime.getDayOfMonth());
+                activity, this, pickedTime.getYear(), pickedTime.getMonth() - 1, pickedTime.getDayOfMonth());
     }
 
     @Override

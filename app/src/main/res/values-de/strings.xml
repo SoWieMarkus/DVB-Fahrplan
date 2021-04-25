@@ -42,4 +42,5 @@
     <string name="time_picker_date">Datum</string>
     <string name="time_picker_today">Heute</string>
     <string name="route_informationen">Hinweise</string>
+    <string name="content_description_switch">Wechseln</string>
 </resources>

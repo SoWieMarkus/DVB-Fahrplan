@@ -6,4 +6,5 @@ import markus.wieland.dvbfahrplan.api.models.trip.Node;
 public interface TripItemInteractListener extends OnItemInteractListener<Node> {
 
     void onClick(Node node);
+
 }

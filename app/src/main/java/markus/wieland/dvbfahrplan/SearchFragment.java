@@ -45,6 +45,8 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     public abstract boolean handleBackPress();
 
     public void focus(TextInputLayout textInputLayout) {
+        assert textInputLayout.getEditText() != null;
+
         textInputLayout.getEditText().requestFocus();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);

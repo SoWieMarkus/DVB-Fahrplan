@@ -1,11 +1,9 @@
 
-d
-java:S1128"NRemove this unused import 'markus.wieland.dvbfahrplan.api.models.routes.Stop'.(âä‹ñ
 e
-java:S1874&"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ÜëÚŽþÿÿÿÿ
+java:S1874!"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¾Éú¾þÿÿÿÿ
 e
-java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(å­¬©úÿÿÿÿ
+java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ªÆ»âøÿÿÿÿ
 e
-java:S1874""JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¾Éú¾þÿÿÿÿ
+java:S1874%"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ÜëÚŽþÿÿÿÿ
 e
-java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ªÆ»âøÿÿÿÿ
+java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(å­¬©úÿÿÿÿ

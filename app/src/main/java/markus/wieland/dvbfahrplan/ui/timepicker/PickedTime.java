@@ -1,7 +1,6 @@
 package markus.wieland.dvbfahrplan.ui.timepicker;
 
 import android.content.Context;
-import android.text.format.Time;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -70,9 +69,11 @@ public class PickedTime {
         return string;
     }
 
-   public String getDateAsString(Context context){
-        if (TimeConverter.isSameDay(localDateTime, LocalDateTime.now())) return context.getString(R.string.time_picker_today);
-        if (TimeConverter.isSameYear(localDateTime, LocalDateTime.now())) return localDateTime.format(DateTimeFormatter.ofPattern("dd.MM."));
+    public String getDateAsString(Context context) {
+        if (TimeConverter.isSameDay(localDateTime, LocalDateTime.now()))
+            return context.getString(R.string.time_picker_today);
+        if (TimeConverter.isSameYear(localDateTime, LocalDateTime.now()))
+            return localDateTime.format(DateTimeFormatter.ofPattern("dd.MM."));
         return localDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-   }
+    }
 }

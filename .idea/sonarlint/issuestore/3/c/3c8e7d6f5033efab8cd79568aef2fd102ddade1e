@@ -1,15 +1,19 @@
 
-Z
-java:S1854¡"7Remove this useless assignment to local variable "bmp".(ûÉ’Àûÿÿÿÿ8íõö/
-P
-java:S1128"3Remove this unused import 'android.view.ViewGroup'.(‹îá8ü´Ùõ/
+^	java:S125´"<This block of commented-out lines of code should be removed.(•Îİİÿÿÿÿÿ8³î„²/
 S
-java:S1128"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8Ë¿üõ/
-d
-java:S1128"GRemove this unused import 'markus.wieland.dvbfahrplan.ShowMapActivity'.(Ÿà¾˜8î´‚ö/
+java:S1128
+"7Remove this unused import 'android.provider.Telephony'.(ô·›8Üî¶/
+S
+java:S1144¸"6Remove this unused private "saveImageExternal" method.(©ùÜ_8³î„²/
 w
-java:S2293‚"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ú†øû8íõö/
-E
-java:S1604M"(Make this anonymous inner class a lambda(…ÿ Ë8‰öŠŸ/
-
-java:S1186O"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡é††8‰öŠŸ/
+java:S2293Š"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ú†øû8íõö/
+a
+java:S1874€">Remove this use of "setDrawingCacheEnabled"; it is deprecated.(‰¬áÎşÿÿÿÿ8³î„²/
+U
+java:S1874‚"7Remove this use of "getDrawingCache"; it is deprecated.(Œ¶Û£8³î„²/
+P
+java:S1874Ë"3Remove this use of "insertImage"; it is deprecated.(”É8³î„²/
+P
+java:S1135¹"2Complete the task associated to this TODO comment.(ö–”Û8³î„²/
+W
+java:S1874"9Remove this use of "buildDrawingCache"; it is deprecated.(İ›š¹8³î„²/

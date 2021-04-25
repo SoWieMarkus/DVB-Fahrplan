@@ -20,7 +20,9 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
 
     private long latestUse;
 
-    public Point(){}
+    public Point(){
+        this.id = "";
+    }
 
     public Point(String point) {
         String[] parts = point.split("\\|");

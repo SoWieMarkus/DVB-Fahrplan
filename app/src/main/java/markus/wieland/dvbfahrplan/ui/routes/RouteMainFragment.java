@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -56,7 +55,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     private TextView timePickerValue;
 
     public RouteMainFragment() {
-        super(R.layout.activity_route);
+        super(R.layout.fragment_main_route);
         pointFinderFragmentOrigin = new PointFinderFragment(this);
         pointFinderFragmentDestination = new PointFinderFragment(this);
         routeFragment = new RouteFragment(this::onClick);
