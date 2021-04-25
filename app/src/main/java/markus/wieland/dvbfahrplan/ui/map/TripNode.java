@@ -1,5 +1,7 @@
 package markus.wieland.dvbfahrplan.ui.map;
 
+import java.util.Optional;
+
 import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.coordinates.GKCoordinate;
 import markus.wieland.dvbfahrplan.api.models.coordinates.WGSCoordinate;
@@ -18,7 +20,10 @@ public class TripNode {
     public TripNode(Node node) {
         this.name = node.getName();
         this.position = node.getPosition();
-        WGSCoordinate coordinate = new GKCoordinate((double) node.getLongitude(), (double) node.getLatitude()).asWGS().get();
+
+        Optional<WGSCoordinate> wgsCoordinate = new GKCoordinate((double) node.getLongitude(), (double) node.getLatitude()).asWGS();
+        if (!wgsCoordinate.isPresent()) return;
+        WGSCoordinate coordinate = wgsCoordinate.get();
         this.x = coordinate.getLatitude();
         this.y = coordinate.getLongitude();
     }
@@ -26,7 +31,10 @@ public class TripNode {
     public TripNode(Stop stop) {
         this.name = stop.getName();
         this.position = Position.NEXT;
-        WGSCoordinate coordinate = new GKCoordinate((double) stop.getLongitude(), (double) stop.getLatitude()).asWGS().get();
+
+        Optional<WGSCoordinate> wgsCoordinate = new GKCoordinate((double) stop.getLongitude(), (double) stop.getLatitude()).asWGS();
+        if (!wgsCoordinate.isPresent()) return;
+        WGSCoordinate coordinate = wgsCoordinate.get();
         this.x = coordinate.getLatitude();
         this.y = coordinate.getLongitude();
     }

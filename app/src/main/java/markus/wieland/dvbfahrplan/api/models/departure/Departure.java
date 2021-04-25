@@ -11,9 +11,9 @@ import java.util.List;
 import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.Mode;
-import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class Departure implements QueryableEntity<String> {
 

@@ -120,7 +120,7 @@ public class Route implements QueryableEntity<Long> {
         int hours = duration / 60;
         int minutes = duration % 60;
         if (hours > 0)
-            return hours + " "+context.getString(R.string.hour_short_term) + " " + minutes + " "+ context.getString(R.string.minute_short);
+            return hours + " " + context.getString(R.string.hour_short_term) + " " + minutes + " " + context.getString(R.string.minute_short);
         return minutes + " " + context.getString(R.string.minute_short);
     }
 
@@ -152,7 +152,6 @@ public class Route implements QueryableEntity<Long> {
             if (i == baseSet.size() - 1 && partialRoute.getLine().getMode().equals(Mode.WALKING)) {
                 addSingleStopRoute(partialRoutesFiltered, partialRoute);
             }
-
 
             addBetweenRoute(partialRoutesFiltered, partialRoute, partialRouteNext);
 
@@ -195,18 +194,25 @@ public class Route implements QueryableEntity<Long> {
                 next.getOrigin().getRealDepartureTimeAsLocalDate());
 
         Platform platform = partialRoute.getDestination().getPlatform();
-        Platform platformNext = partialRoute.getOrigin().getPlatform();
+        Platform platformNext = next.getOrigin().getPlatform();
 
         boolean samePlatform;
         boolean sameStation = next.getOrigin().getName().equals(partialRoute.getDestination().getName());
-        if (platform == null || platformNext == null) samePlatform = false;
-        else samePlatform = platform.equals(platformNext);
+        if (platform == null || platformNext == null)
+            samePlatform = false;
+        else
+            samePlatform = platform.equals(platformNext);
 
         PartialRoute betweenRoute = new PartialRoute();
         Mot mot = new Mot();
-        mot.setMode(!sameStation
-                ? Mode.WALKING
-                : (samePlatform ? Mode.WAITING : Mode.CHANGE_PLATFORM));
+
+        Mode mode = Mode.WALKING;
+        if (sameStation) {
+            mode = samePlatform
+                    ? Mode.WAITING
+                    : Mode.CHANGE_PLATFORM;
+        }
+        mot.setMode(mode);
         betweenRoute.setDuration((int) durationBetweenRoutes);
         betweenRoute.setLine(mot);
 
@@ -235,7 +241,6 @@ public class Route implements QueryableEntity<Long> {
 
     public String getArrivalTime(Context context) {
         return context.getString(R.string.route_arrival) + " " + TimeConverter.getStringOfLocalDateWithDates(getDestination().getArrivalTimeAsLocalDate());
-
     }
 
     public String toString(Context context) {

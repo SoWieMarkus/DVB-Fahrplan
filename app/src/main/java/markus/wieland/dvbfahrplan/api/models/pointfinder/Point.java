@@ -10,7 +10,8 @@ import markus.wieland.defaultappelements.uielements.adapter.QueryableEntity;
 @Entity
 public class Point implements QueryableEntity<String>, DatabaseEntity {
 
-    @PrimaryKey @NonNull
+    @PrimaryKey
+    @NonNull
     private String id;
     private String place;
     private String name;
@@ -20,7 +21,7 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
 
     private long latestUse;
 
-    public Point(){
+    public Point() {
         this.id = "";
     }
 
@@ -73,7 +74,7 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
     }
 
     public String getPlace() {
-        if (place == null ||place.isEmpty()) return "Dresden";
+        if (place == null || place.isEmpty()) return "Dresden";
         return place;
     }
 
@@ -96,6 +97,6 @@ public class Point implements QueryableEntity<String>, DatabaseEntity {
 
     @Override
     public String toString() {
-        return (name + " " +place).trim();
+        return (name + " " + place).trim();
     }
 }

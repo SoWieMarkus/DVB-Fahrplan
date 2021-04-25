@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class Node {
 

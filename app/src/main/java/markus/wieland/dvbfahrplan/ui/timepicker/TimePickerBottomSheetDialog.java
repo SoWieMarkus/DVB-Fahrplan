@@ -89,7 +89,7 @@ public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment imple
         dismiss();
     }
 
-    private PickedTime getPickedTime(){
+    private PickedTime getPickedTime() {
         return new PickedTime(LocalDateTime.of(year, month, day, numberPickerHour.getValue(), numberPickerMinute.getValue()), arrivalRadioGroup.getCheckedRadioButtonId() == R.id.time_picker_arrival);
 
     }

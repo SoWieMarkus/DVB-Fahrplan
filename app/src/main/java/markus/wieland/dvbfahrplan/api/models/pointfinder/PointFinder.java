@@ -34,7 +34,7 @@ public class PointFinder {
         this.points = points;
     }
 
-    public List<Point> getResult(){
+    public List<Point> getResult() {
         List<Point> pointsResult = new ArrayList<>();
         if (points == null) return pointsResult;
         for (String point : points) {

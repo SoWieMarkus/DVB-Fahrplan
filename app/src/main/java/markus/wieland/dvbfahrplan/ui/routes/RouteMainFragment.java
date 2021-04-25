@@ -79,6 +79,10 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
+
+        assert textInputLayoutDestination.getEditText() != null;
+        assert textInputLayoutOrigin.getEditText() != null;
+
         if (textInputLayoutDestination.getEditText().getText().toString().trim().isEmpty()) {
             destinationPoint = null;
         }
@@ -103,6 +107,9 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         originPoint = destinationPoint;
         destinationPoint = tempPoint;
 
+        assert textInputLayoutDestination.getEditText() != null;
+        assert textInputLayoutOrigin.getEditText() != null;
+
         textInputLayoutDestination.getEditText().removeTextChangedListener(pointTextWatcherDestination);
         textInputLayoutOrigin.getEditText().removeTextChangedListener(pointTextWatcherOrigin);
 
@@ -119,6 +126,10 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     }
 
     private void initializeViews() {
+
+        assert textInputLayoutDestination.getEditText() != null;
+        assert textInputLayoutOrigin.getEditText() != null;
+
         textInputLayoutDestination.getEditText().addTextChangedListener(pointTextWatcherDestination);
         textInputLayoutOrigin.getEditText().addTextChangedListener(pointTextWatcherOrigin);
 
@@ -132,6 +143,9 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     }
 
     private void execute() {
+
+        assert getActivity() != null;
+
         pointViewModel.getRecentPoints().observe(getActivity(), this);
         pickedTime = new PickedTime();
         timePickerValue.setText(pickedTime.toString(getActivity()));
@@ -140,6 +154,10 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
 
     @Override
     public boolean handleBackPress() {
+
+        assert textInputLayoutDestination.getEditText() != null;
+        assert textInputLayoutOrigin.getEditText() != null;
+
         if (originHasFocus) return true;
         else if (destinationHasFocus) {
             textInputLayoutOrigin.getEditText().requestFocus();
@@ -264,6 +282,9 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         if (currentFragment != null && currentFragment.equals(fragment)) return;
         boolean customAnimation = getCustomAnimation(fragment);
         currentFragment = fragment;
+
+        assert getActivity() != null;
+
         if (customAnimation)
             getActivity().getSupportFragmentManager().beginTransaction()
                     .addToBackStack(null)

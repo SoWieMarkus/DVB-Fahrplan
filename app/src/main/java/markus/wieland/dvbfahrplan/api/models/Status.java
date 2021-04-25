@@ -15,7 +15,7 @@ public class Status {
         this.code = code;
     }
 
-    public boolean isOk(){
+    public boolean isOk() {
         return code.equalsIgnoreCase("ok");
     }
 }

@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class Stop {
 
@@ -158,6 +158,14 @@ public class Stop {
         return TimeConverter.getMinutesBetween(getDepartureTimeAsLocalDate(), getRealDepartureTimeAsLocalDate());
     }
 
+    public String getDelayArrivalAsString(){
+        return "+" + getDelayArrival();
+    }
+
+    public String getDelayDepartureAsString(){
+        return "+" + getDelayDeparture();
+    }
+
     public String getFancyArrivalTime() {
         return getArrivalTimeAsLocalDate().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
@@ -167,7 +175,7 @@ public class Stop {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         if (getPlace().equalsIgnoreCase("Dresden")) return getName();
         return getPlace() + " " + getName();
     }

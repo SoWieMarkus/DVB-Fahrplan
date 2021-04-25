@@ -4,14 +4,16 @@ import android.content.Context;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 import markus.wieland.dvbfahrplan.R;
 
 public class Platform {
 
-    @SerializedName(value="Name")
+    @SerializedName(value = "Name")
     private String name;
 
-    @SerializedName(value="Type")
+    @SerializedName(value = "Type")
     private String type;
 
     public Platform(String name, String type) {
@@ -35,8 +37,21 @@ public class Platform {
         this.type = type;
     }
 
-    public String toString(Context context){
+    public String toString(Context context) {
         return context.getString(R.string.platform_short) + " " + name;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Platform platform = (Platform) o;
+        return Objects.equals(name, platform.name) &&
+                Objects.equals(type, platform.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

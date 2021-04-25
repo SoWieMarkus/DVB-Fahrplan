@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import markus.wieland.dvbfahrplan.helper.TimeConverter;
 import markus.wieland.dvbfahrplan.api.models.Status;
+import markus.wieland.dvbfahrplan.helper.TimeConverter;
 
 public class DepartureMonitor {
 
-    @SerializedName(value="Name")
+    @SerializedName(value = "Name")
     private String name;
 
-    @SerializedName(value="Place")
+    @SerializedName(value = "Place")
     private String place;
 
     @SerializedName("Departures")
@@ -65,7 +65,7 @@ public class DepartureMonitor {
         this.status = status;
     }
 
-    public LocalDateTime getExpirationTimeAsLocalDateTime(){
+    public LocalDateTime getExpirationTimeAsLocalDateTime() {
         return TimeConverter.convertToLocalDateTime(expirationTime);
     }
 }

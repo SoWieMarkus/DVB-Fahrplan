@@ -29,6 +29,8 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     @CallSuper
     @Override
     public void bindViews() {
+        assert getActivity() != null;
+
         pointViewModel = ViewModelProviders.of(getActivity()).get(PointViewModel.class);
         dvbApi = new DVBApi(getActivity());
     }
@@ -36,6 +38,7 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     protected void loadFragment(Fragment fragment) {
         if (currentFragment != null && currentFragment.equals(fragment)) return;
         currentFragment = fragment;
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right_animation, R.anim.slide_out_left_animation)
                 .addToBackStack(null)
@@ -45,11 +48,14 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     public abstract boolean handleBackPress();
 
     public void focus(TextInputLayout textInputLayout) {
-        assert textInputLayout.getEditText() != null;
+        if (textInputLayout.getEditText() == null) return;
+        if (getActivity() == null) return;
 
         textInputLayout.getEditText().requestFocus();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+        if (imm != null)
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         String content = textInputLayout.getEditText().getText().toString().trim();
 
@@ -57,9 +63,14 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     }
 
     public void clearFocus(TextInputLayout textInputLayout) {
+
+        if (textInputLayout.getEditText() == null) return;
+        if (getActivity() == null) return;
+
         textInputLayout.getEditText().clearFocus();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
+        if (imm != null)
+            imm.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
     }
 
     @Override

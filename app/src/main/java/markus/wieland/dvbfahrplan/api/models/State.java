@@ -6,6 +6,6 @@ public enum State {
 
     @SerializedName("InTime") IN_TIME,
     @SerializedName("Delayed") DELAYED,
-    @SerializedName("Unkown") UNKOWN;
+    @SerializedName("Unkown") UNKNOWN;
 
 }

@@ -22,7 +22,7 @@ public class ShareRoute {
         this.routeAdapter.submitList(partialRoutes);
     }
 
-    public List<View> getViews(){
+    public List<View> getViews() {
         List<View> views = new ArrayList<>();
         for (int i = 0; i < partialRoutes.size(); i++) {
             int viewType = routeAdapter.getItemViewType(i);

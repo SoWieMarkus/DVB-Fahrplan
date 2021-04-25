@@ -41,7 +41,7 @@ public class ViewToBitmap {
         for (int i = 0; i < bitmaps.size(); i++) {
             Bitmap bitmap = bitmaps.get(i);
             totalCanvas.drawBitmap(bitmap, 0, currentHeight, paint);
-            currentHeight+= bitmap.getHeight();
+            currentHeight += bitmap.getHeight();
         }
 
         return totalBitmap;

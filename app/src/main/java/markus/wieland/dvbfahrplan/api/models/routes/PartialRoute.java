@@ -106,11 +106,11 @@ public class PartialRoute {
     public String getAmountOfStops(Context context) {
         int stops = getStopsBetween().size();
         if (stops == 1) return "- " + stops + " " + context.getString(R.string.stops_singular);
-        if (stops > 1) return "- " +stops + " " + context.getString(R.string.stops);
+        if (stops > 1) return "- " + stops + " " + context.getString(R.string.stops);
         return "";
     }
 
-    public String getInformation(){
+    public String getInformation() {
         StringBuilder information = new StringBuilder();
         if (infos == null) return information.toString();
         for (String info : infos) {

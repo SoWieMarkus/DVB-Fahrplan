@@ -2,7 +2,6 @@ package markus.wieland.dvbfahrplan.ui.departures;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 
 import markus.wieland.dvbfahrplan.R;
+import markus.wieland.dvbfahrplan.SearchFragment;
 import markus.wieland.dvbfahrplan.api.models.departure.Departure;
 import markus.wieland.dvbfahrplan.api.models.departure.DepartureMonitor;
 import markus.wieland.dvbfahrplan.api.models.lines.Lines;
@@ -24,10 +24,9 @@ import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.PointFinder;
 import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
-import markus.wieland.dvbfahrplan.SearchFragment;
 import markus.wieland.dvbfahrplan.ui.trip.TripActivity;
 
-public class DepartureMainFragment extends SearchFragment implements Observer<List<Point>>,View.OnFocusChangeListener, SelectPointInteractListener, SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener {
+public class DepartureMainFragment extends SearchFragment implements Observer<List<Point>>, View.OnFocusChangeListener, SelectPointInteractListener, SwipeRefreshLayout.OnRefreshListener, TextView.OnEditorActionListener {
 
     private TextInputLayout textInputLayoutStation;
 
@@ -41,7 +40,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
     private Point currentPoint;
 
     public DepartureMainFragment() {
-        super(R.layout.activity_departure);
+        super(R.layout.fragment_main_departure);
     }
 
     @Override
@@ -56,11 +55,15 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         departureFragment = new DepartureFragment(this::onClick);
         pointFinderFragment = new PointFinderFragment(this);
         swipeRefreshLayout.setOnRefreshListener(this);
+
+        assert textInputLayoutStation.getEditText() != null;
+        assert getActivity() != null;
+
         textInputLayoutStation.getEditText().setOnFocusChangeListener(this);
         textInputLayoutStation.getEditText().addTextChangedListener(this);
         textInputLayoutStation.getEditText().setOnEditorActionListener(this);
 
-        pointViewModel.getRecentPoints().observe(getActivity(),this);
+        pointViewModel.getRecentPoints().observe(getActivity(), this);
 
         loadFragment(pointFinderFragment);
         execute();
@@ -76,7 +79,14 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
     @Override
     public void onStop() {
         super.onStop();
+
+        assert textInputLayoutStation.getEditText() != null;
+        assert getActivity() != null;
+
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (imm == null) return;
+
         imm.hideSoftInputFromWindow(textInputLayoutStation.getEditText().getWindowToken(), 0);
     }
 
@@ -96,6 +106,9 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
 
     public void onClick(Point point) {
         if (point == null) return;
+
+        assert textInputLayoutStation.getEditText() != null;
+
         textInputLayoutStation.getEditText().removeTextChangedListener(this);
         textInputLayoutStation.getEditText().setText(point.toString());
         textInputLayoutStation.getEditText().addTextChangedListener(this);
@@ -154,11 +167,6 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        // Just implemented because its part of the TextWatcher Interface
-    }
-
-    @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         String query = charSequence.toString().trim();
         if (query.length() < 3) return;
@@ -166,10 +174,6 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         loadFragment(pointFinderFragment);
     }
 
-    @Override
-    public void afterTextChanged(Editable editable) {
-        // Just implemented because its part of the TextWatcher Interface
-    }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

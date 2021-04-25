@@ -15,8 +15,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collections;
-
 import markus.wieland.defaultappelements.uielements.adapter.DefaultAdapter;
 import markus.wieland.defaultappelements.uielements.adapter.DefaultViewHolder;
 import markus.wieland.dvbfahrplan.R;
@@ -58,7 +56,7 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
     }
 
 
-    public class RouteViewHolder extends DefaultViewHolder<PartialRoute> {
+    public static class RouteViewHolder extends DefaultViewHolder<PartialRoute> {
 
         private TextView itemPartialRouteOriginStop;
         private TextView itemPartialRouteOriginTime;
@@ -158,8 +156,8 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
 
             itemPartialRouteDestinationTimeDelay.setVisibility(route.getDestination().getDelayArrival() == 0 ? View.GONE : View.VISIBLE);
             itemPartialRouteOriginTimeDelay.setVisibility(route.getOrigin().getDelayDeparture() == 0 ? View.GONE : View.VISIBLE);
-            itemPartialRouteDestinationTimeDelay.setText("+" + route.getDestination().getDelayArrival());
-            itemPartialRouteOriginTimeDelay.setText("+" + route.getOrigin().getDelayDeparture());
+            itemPartialRouteDestinationTimeDelay.setText(route.getDestination().getDelayArrivalAsString());
+            itemPartialRouteOriginTimeDelay.setText(route.getOrigin().getDelayDepartureAsString());
 
             itemPartialRouteEndMarker.setImageDrawable(mode.getMarker(context));
             itemPartialRouteStartMarker.setImageDrawable(mode.getMarker(context));

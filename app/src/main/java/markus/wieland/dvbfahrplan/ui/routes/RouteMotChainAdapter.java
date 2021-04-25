@@ -77,7 +77,7 @@ public class RouteMotChainAdapter extends DefaultAdapter<Mot, RouteMotChainAdapt
             itemModeNext.setVisibility(getAdapterPosition() == getItemCount() - 1 ? GONE : View.VISIBLE);
         }
 
-        private void loadVehicle(Mot mot){
+        private void loadVehicle(Mot mot) {
             Mode mode = mot.getMode();
             itemModeIcon.setImageDrawable(mode.getIcon(itemView.getContext()));
             itemModeLine.setBackground(mode.getBackground(itemView.getContext()));
