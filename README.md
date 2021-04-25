@@ -1,8 +1,10 @@
 # DVB-Fahrplan
 
-* <a href="https://leafletjs.com/">Leaflet.js</a>
-* <a href="https://developer.android.com/jetpack/androidx/releases/room">Android Room</a>
-* <a href="https://webapi.vvo-online.de">VVO Api</a> (<a href="https://github.com/kiliankoe/vvo/blob/main/documentation/webapi.md">Documentation</a>)
+## Used frameworks
+
+* <a href="https://leafletjs.com/">Leaflet.js</a> to display route details in a map
+* <a href="https://developer.android.com/jetpack/androidx/releases/room">Android Room</a> to store recently searched stations (only local on the device of the user)
+* <a href="https://webapi.vvo-online.de">VVO Api</a> (<a href="https://github.com/kiliankoe/vvo/blob/main/documentation/webapi.md">Documentation</a>) to get information about departure and routes
 
 ## Screenshots
 
