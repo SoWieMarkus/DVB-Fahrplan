@@ -108,11 +108,6 @@ public class DepartureActivity extends DefaultActivity implements TextWatcher, S
         search();
     }
 
-    @Override
-    public void onLocate(Point point) {
-        // Will be implemented later
-    }
-
     private void search() {
         dvbApi.searchDepartures(this::onLoad, currentPoint.getId());
         dvbApi.searchLines(this::onLoad, currentPoint.getId());

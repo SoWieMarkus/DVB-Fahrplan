@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="?attr/main_background_color"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/main_background_color">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_partial_route_recycler_view"
@@ -27,15 +27,13 @@
             android:layout_weight="1"
             android:textColor="?attr/main_text_color"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="TextView" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_partial_route_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:visibility="gone" />
 
     </LinearLayout>
@@ -46,14 +44,13 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/item_partial_route_arrival"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="11:20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +71,7 @@
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/content_description_marker"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +87,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_end_marker"
             app:layout_constraintEnd_toEndOf="@+id/item_partial_route_end_marker"
             app:layout_constraintStart_toStartOf="@+id/item_partial_route_end_marker"
-            app:layout_constraintTop_toTopOf="@+id/item_partial_route_end_marker"></LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_end_marker" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

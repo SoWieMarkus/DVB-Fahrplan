@@ -2,9 +2,11 @@ package markus.wieland.dvbfahrplan.ui.routes;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
@@ -24,9 +26,10 @@ import markus.wieland.dvbfahrplan.ui.pointfinder.PointFinderFragment;
 import markus.wieland.dvbfahrplan.ui.pointfinder.SelectPointInteractListener;
 import markus.wieland.dvbfahrplan.ui.routes.route.RouteDetailActivity;
 import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
+import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerBottomSheetDialog;
 import markus.wieland.dvbfahrplan.ui.timepicker.TimePickerEventListener;
 
-public class RouteMainFragment extends SearchFragment implements TimePickerEventListener, SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
+public class RouteMainFragment extends SearchFragment implements View.OnClickListener,TimePickerEventListener, SelectPointInteractListener, Observer<List<Point>>, View.OnFocusChangeListener, TextView.OnEditorActionListener {
 
     private static final int REQUEST_ORIGIN = 1;
     private static final int REQUEST_DESTINATION = 2;
@@ -46,11 +49,16 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
 
     private PickedTime pickedTime;
 
+    private final PointTextWatcher pointTextWatcherOrigin;
+    private final PointTextWatcher pointTextWatcherDestination;
+
     public RouteMainFragment() {
         super(R.layout.activity_route);
         pointFinderFragmentOrigin = new PointFinderFragment(this);
         pointFinderFragmentDestination = new PointFinderFragment(this);
         routeFragment = new RouteFragment(this::onClick);
+        pointTextWatcherOrigin = new PointTextWatcher(REQUEST_ORIGIN);
+        pointTextWatcherDestination = new PointTextWatcher(REQUEST_DESTINATION);
     }
 
     @Override
@@ -70,14 +78,14 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
         super.onResume();
         if (currentFragment.equals(pointFinderFragmentDestination)) {
             focus(textInputLayoutDestination);
+            currentFragment = null;
             loadFragment(pointFinderFragmentDestination);
         }
-
         if (currentFragment.equals(pointFinderFragmentOrigin)) {
             focus(textInputLayoutOrigin);
+            currentFragment = null;
             loadFragment(pointFinderFragmentOrigin);
         }
-
     }
 
     private void switchOriginAndDestination(View v) {
@@ -85,8 +93,8 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
         originPoint = destinationPoint;
         destinationPoint = tempPoint;
 
-        textInputLayoutDestination.getEditText().removeTextChangedListener(this);
-        textInputLayoutOrigin.getEditText().removeTextChangedListener(this);
+        textInputLayoutDestination.getEditText().removeTextChangedListener(pointTextWatcherDestination);
+        textInputLayoutOrigin.getEditText().removeTextChangedListener(pointTextWatcherOrigin);
 
         String valueDestination = textInputLayoutDestination.getEditText().getText().toString();
         String valueOrigin = textInputLayoutOrigin.getEditText().getText().toString();
@@ -94,22 +102,22 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
         textInputLayoutDestination.getEditText().setText(valueOrigin);
         textInputLayoutOrigin.getEditText().setText(valueDestination);
 
-        textInputLayoutDestination.getEditText().addTextChangedListener(this);
-        textInputLayoutOrigin.getEditText().addTextChangedListener(this);
+        textInputLayoutDestination.getEditText().addTextChangedListener(pointTextWatcherDestination);
+        textInputLayoutOrigin.getEditText().addTextChangedListener(pointTextWatcherOrigin);
 
         searchRoute();
     }
 
     private void initializeViews() {
-
-        textInputLayoutDestination.getEditText().addTextChangedListener(this);
-        textInputLayoutOrigin.getEditText().addTextChangedListener(this);
+        textInputLayoutDestination.getEditText().addTextChangedListener(pointTextWatcherDestination);
+        textInputLayoutOrigin.getEditText().addTextChangedListener(pointTextWatcherOrigin);
 
         textInputLayoutDestination.getEditText().setOnFocusChangeListener(this);
         textInputLayoutOrigin.getEditText().setOnFocusChangeListener(this);
 
-        textInputLayoutDestination.getEditText().setOnEditorActionListener(this);
+        findViewById(R.id.activity_route_show_time_picker).setOnClickListener(this);
 
+        textInputLayoutDestination.getEditText().setOnEditorActionListener(this);
         execute();
     }
 
@@ -132,19 +140,6 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
         return false;
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        String query = charSequence.toString().trim();
-        if (query.length() < 3) return;
-        dvbApi.searchStops(this::onLoad, query, destinationHasFocus ? REQUEST_DESTINATION : REQUEST_ORIGIN);
-        loadFragment(destinationHasFocus ? pointFinderFragmentDestination : pointFinderFragmentOrigin);
-    }
-
     public void onLoad(int requestId, PointFinder pointFinder) {
         if (pointFinder.getResult() == null) return;
         if (requestId == REQUEST_DESTINATION) {
@@ -155,23 +150,17 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
             pointFinderFragmentOrigin.update(pointFinder.getResult());
             originPoint = pointFinder.getResult().isEmpty() ? null : pointFinder.getResult().get(0);
         }
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-
     }
 
     @Override
     public void onClick(Point point) {
         if (currentFragment.equals(pointFinderFragmentDestination)) {
             destinationPoint = point;
-            updateTextInputLayout(textInputLayoutDestination, point);
+            updateTextInputLayout(textInputLayoutDestination, point, pointTextWatcherDestination);
             clearFocus(textInputLayoutDestination);
         } else {
             originPoint = point;
-            updateTextInputLayout(textInputLayoutOrigin, point);
+            updateTextInputLayout(textInputLayoutOrigin, point, pointTextWatcherOrigin);
             clearFocus(textInputLayoutOrigin);
             focus(textInputLayoutDestination);
         }
@@ -202,11 +191,6 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
     }
 
     @Override
-    public void onLocate(Point point) {
-        // Will be implemented later
-    }
-
-    @Override
     public void onChanged(List<Point> points) {
         pointFinderFragmentDestination.update(points);
         pointFinderFragmentOrigin.update(points);
@@ -225,12 +209,12 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
         }
     }
 
-    private void updateTextInputLayout(TextInputLayout textInputLayout, Point point) {
+    private void updateTextInputLayout(TextInputLayout textInputLayout, Point point, PointTextWatcher pointTextWatcher) {
         assert textInputLayout.getEditText() != null;
 
-        textInputLayout.getEditText().removeTextChangedListener(this);
+        textInputLayout.getEditText().removeTextChangedListener(pointTextWatcher);
         textInputLayout.getEditText().setText(point.toString());
-        textInputLayout.getEditText().addTextChangedListener(this);
+        textInputLayout.getEditText().addTextChangedListener(pointTextWatcher);
     }
 
     @Override
@@ -241,12 +225,50 @@ public class RouteMainFragment extends SearchFragment implements TimePickerEvent
             return true;
         }
         return false;
-
     }
 
     @Override
     public void onSetDate(PickedTime pickedTime) {
         this.pickedTime = pickedTime;
+        ((Button)findViewById(R.id.activity_route_show_time_picker)).setText(pickedTime.toString(getActivity()));
         searchRoute();
+    }
+
+    @Override
+    public void onClick(View view) {
+        TimePickerBottomSheetDialog timePickerBottomSheetDialog = new TimePickerBottomSheetDialog(pickedTime);
+        timePickerBottomSheetDialog.show(getChildFragmentManager(),"Hello");
+    }
+
+    private class PointTextWatcher implements TextWatcher {
+
+        private final int requestCode;
+
+        public PointTextWatcher(int requestCode) {
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            // Has to be implemented because of text watcher interface
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String query = charSequence.toString().trim();
+            if (query.length() == 0) {
+                if (requestCode == REQUEST_DESTINATION) destinationPoint = null;
+                if (requestCode == REQUEST_ORIGIN) originPoint = null;
+            }
+
+            if (query.length() < 3) return;
+            dvbApi.searchStops(RouteMainFragment.this::onLoad, query, requestCode);
+            loadFragment(destinationHasFocus ? pointFinderFragmentDestination : pointFinderFragmentOrigin);
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // Has to be implemented because of text watcher interface
+        }
     }
 }

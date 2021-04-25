@@ -18,7 +18,6 @@ public class MapRoute {
         for (Stop stop : partialRoute.getRegularStops()) {
             nodes.add(new TripNode(stop));
         }
-
     }
 
     public List<TripNode> getNodes() {

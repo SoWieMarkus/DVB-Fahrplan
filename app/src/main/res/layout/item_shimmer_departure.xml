@@ -11,6 +11,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -46,7 +47,7 @@
                     android:id="@+id/item_departure_name"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:background="@color/shimmer"
                     android:textColor="?attr/main_text_color"
                     android:textSize="16sp" />
@@ -68,20 +69,20 @@
                     android:id="@+id/item_departure_delay"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:background="@color/shimmer" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
                     android:layout_width="3dp"
                     android:layout_height="3dp"
                     android:layout_gravity="center"
                     android:layout_margin="4dp"
+                    android:contentDescription="@string/content_description_marker"
                     app:srcCompat="@drawable/item_dot" />
 
                 <TextView
                     android:id="@+id/item_departure_platform"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
@@ -110,9 +111,7 @@
                 android:id="@+id/item_departure_minutes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/minute_short"
-                android:textSize="10sp" />
+                android:gravity="center" />
 
         </LinearLayout>
 

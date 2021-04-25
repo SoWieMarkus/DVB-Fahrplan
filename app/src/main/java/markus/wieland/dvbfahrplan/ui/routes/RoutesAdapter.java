@@ -38,7 +38,6 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
         private TextView itemRoutePrice;
         private TextView itemRouteChanges;
 
-
         public RoutesViewHolder(@NonNull View itemView) {
             super(itemView);
         }
@@ -67,7 +66,6 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             itemRouteChanges.setText(route.getInterchanges() + "");
 
             itemView.setOnClickListener(v -> getOnItemInteractListener().onClick(route));
-
         }
     }
 }

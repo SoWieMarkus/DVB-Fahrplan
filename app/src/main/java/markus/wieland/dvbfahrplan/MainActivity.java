@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.time.LocalDateTime;
-
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.ui.departures.DepartureMainFragment;
 import markus.wieland.dvbfahrplan.ui.routes.RouteMainFragment;
@@ -37,7 +35,7 @@ public class MainActivity extends DefaultActivity implements BottomNavigationVie
         routeFragment = new RouteMainFragment();
         departureFragment = new DepartureMainFragment();
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        showFragment(routeFragment);
+
     }
 
     private void showFragment(SearchFragment fragment) {
@@ -45,19 +43,12 @@ public class MainActivity extends DefaultActivity implements BottomNavigationVie
                 .replace(R.id.activity_main_frame_layout, fragment)
                 .commit();
         currentFragment = fragment;
-
     }
 
     @Override
     public void execute() {
-
-
-        // TODO shimmer
-        // TODO Abfahrtszeiten
-        // TODO fußweg am Anfang oder am ende
-        // TODO Empty Messages
+        showFragment(routeFragment);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

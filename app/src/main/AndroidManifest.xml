@@ -17,7 +17,6 @@
         <activity android:name=".ui.routes.route.RouteDetailActivity" />
         <activity android:name=".ui.routes.RouteActivity" />
         <activity android:name=".ui.departures.DepartureActivity" />
-        <activity android:name=".ShowMapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

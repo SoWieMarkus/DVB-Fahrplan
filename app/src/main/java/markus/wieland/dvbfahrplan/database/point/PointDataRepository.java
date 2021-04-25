@@ -10,7 +10,6 @@ import java.util.List;
 import markus.wieland.databases.BaseRepository;
 import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 import markus.wieland.dvbfahrplan.database.Database;
-import markus.wieland.dvbfahrplan.database.point.PointDataAccessObject;
 
 public class PointDataRepository extends BaseRepository<Point, PointDataAccessObject> {
 
@@ -23,7 +22,7 @@ public class PointDataRepository extends BaseRepository<Point, PointDataAccessOb
         return Database.getInstance(application).getPointDataAccessObject();
     }
 
-    public boolean doesExist(String id){
+    public boolean doesExist(String id) {
         return dataAccessObject.doesExist(id);
     }
 

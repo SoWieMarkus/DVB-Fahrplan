@@ -15,7 +15,6 @@ import java.util.List;
 import markus.wieland.dvbfahrplan.api.Mode;
 import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
-import markus.wieland.dvbfahrplan.api.models.routes.Stop;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
 
@@ -70,14 +69,6 @@ public class MapView extends WebView {
         loadUrl("javascript:focus(" + gson.toJson(new TripNode(node)) + ")");
     }
 
-    public void focus(Coordinate coordinate) {
-        loadUrl("javascript:focus(" + gson.toJson(coordinate) + ")");
-    }
-
-    public void show(Coordinate coordinate) {
-        loadUrl("javascript:show(" + gson.toJson(coordinate) + ")");
-    }
-
     public void showRoute(Route route) {
         List<MapRoute> nodes = new ArrayList<>();
 
@@ -85,8 +76,5 @@ public class MapView extends WebView {
             nodes.add(new MapRoute(partialRoute));
         }
         loadUrl("javascript:showRoute(" + gson.toJson(nodes) + ")");
-
     }
-
-
 }

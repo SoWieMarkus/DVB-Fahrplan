@@ -48,7 +48,6 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
 
         textViewLine = findViewById(R.id.activity_trip_line);
         textViewDirection = findViewById(R.id.activity_trip_direction);
-
     }
 
     @Override
@@ -63,8 +62,6 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
         textViewDirection.setText(getTripDirection());
 
         findViewById(R.id.coordinator_layout).getViewTreeObserver().addOnGlobalLayoutListener(this);
-
-
     }
 
     @Override
@@ -117,7 +114,6 @@ public class TripActivity extends DefaultActivity implements APIResult<Trip>, Tr
         });
         tripAdapter.submitList(trip.getStops());
         recyclerViewTrip.scrollToPosition(tripAdapter.getCurrentStopPosition());
-
     }
 
     @Override

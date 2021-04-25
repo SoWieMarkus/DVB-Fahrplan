@@ -27,4 +27,9 @@
     <string name="route_string_arrival">Ankunft:</string>
     <string name="content_description_vehicle_typ">Fahrzeug</string>
     <string name="content_description_next">Als nächstes</string>
+    <string name="time_picker_time">Uhrzeit</string>
+    <string name="route_destination">Zielhaltestelle</string>
+    <string name="route_origin">Starthaltestelle</string>
+    <string name="content_description_expand">Erweitere</string>
+    <string name="content_description_share">Teilen</string>
 </resources>

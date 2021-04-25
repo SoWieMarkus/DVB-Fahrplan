@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:visibility="visible">
@@ -11,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -32,6 +31,7 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_weight="1"
+            android:contentDescription="@string/content_description_marker"
             app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
             app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
             app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
@@ -46,6 +46,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/content_description_marker"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
             app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
             app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
-            app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -79,16 +80,14 @@
         <TextView
             android:id="@+id/item_stop_arriving"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12:12" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/item_stop_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="1"
-            android:text="TextView" />
+            android:layout_marginStart="8dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

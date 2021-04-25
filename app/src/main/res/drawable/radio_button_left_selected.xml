@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
-        android:startColor="@color/purple_500"
-        android:centerColor="@color/purple_500"
-        android:endColor="@color/purple_500"
+        android:startColor="@color/accent_dark"
+        android:centerColor="@color/accent_dark"
+        android:endColor="@color/accent_dark"
         android:angle="270" />
     <stroke
         android:width="0.5dp"
-        android:color="@color/purple_500" />
+        android:color="@color/accent_dark" />
     <corners
         android:bottomLeftRadius="8dp"
         android:topLeftRadius="8dp"/>

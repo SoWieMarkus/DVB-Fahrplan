@@ -190,11 +190,6 @@ public class RouteActivity extends DefaultActivity implements TextView.OnEditorA
     }
 
     @Override
-    public void onLocate(Point point) {
-        // Will be implemented later
-    }
-
-    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         // Isn't needed
     }

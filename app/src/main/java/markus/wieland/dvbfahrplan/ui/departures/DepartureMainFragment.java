@@ -105,11 +105,6 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         clearFocus(textInputLayoutStation);
     }
 
-    @Override
-    public void onLocate(Point point) {
-
-    }
-
     public void onLoad(DepartureMonitor departureMonitor) {
         swipeRefreshLayout.setRefreshing(false);
         departureFragment.update(departureMonitor);
@@ -160,7 +155,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        // Just implemented because its part of the TextWatcher Interface
     }
 
     @Override
@@ -173,7 +168,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
 
     @Override
     public void afterTextChanged(Editable editable) {
-
+        // Just implemented because its part of the TextWatcher Interface
     }
 
     @Override

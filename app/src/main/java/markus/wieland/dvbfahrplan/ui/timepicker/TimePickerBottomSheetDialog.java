@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +22,10 @@ import markus.wieland.dvbfahrplan.R;
 public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment implements DatePickerDialog.OnDateSetListener {
 
     private TimePickerEventListener eventListener;
-
+    private RadioGroup arrivalRadioGroup;
     private DatePickerDialog datePickerDialog;
 
     private PickedTime pickedTime;
-
-    private boolean isArrival;
 
     private NumberPicker numberPickerHour;
     private NumberPicker numberPickerMinute;
@@ -37,7 +36,6 @@ public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment imple
 
     public TimePickerBottomSheetDialog(PickedTime pickedTime) {
         this.pickedTime = pickedTime;
-        this.isArrival = pickedTime.isArrival();
         this.year = pickedTime.getYear();
         this.month = pickedTime.getMonth();
         this.day = pickedTime.getDayOfMonth();
@@ -54,18 +52,14 @@ public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment imple
 
         numberPickerHour = view.findViewById(R.id.time_picker_hour);
         numberPickerMinute = view.findViewById(R.id.time_picker_minute);
-
+        arrivalRadioGroup = view.findViewById(R.id.time_picker_radio_group);
         initializeViews(view);
         return view;
     }
 
-    private void initializeViews(View view){
-        view.findViewById(R.id.time_picker_date).setOnClickListener(v -> datePickerDialog.show());
-        view.findViewById(R.id.time_picker_set).setOnClickListener(v -> {
-            pickedTime = new PickedTime(LocalDateTime.of(year, month, day, numberPickerHour.getValue(), numberPickerMinute.getValue()), isArrival);
-            eventListener.onSetDate(pickedTime);
-            dismiss();
-        });
+    private void initializeViews(View view) {
+        view.findViewById(R.id.time_picker_date).setOnClickListener(v -> showDatePickerDialog());
+        view.findViewById(R.id.time_picker_set).setOnClickListener(v -> setDate());
 
         numberPickerMinute.setMinValue(0);
         numberPickerMinute.setMaxValue(59);
@@ -77,9 +71,19 @@ public class TimePickerBottomSheetDialog extends BottomSheetDialogFragment imple
         execute();
     }
 
-    private void execute(){
+    private void showDatePickerDialog() {
+        datePickerDialog.show();
+    }
+
+    private void setDate() {
+        pickedTime = new PickedTime(LocalDateTime.of(year, month, day, numberPickerHour.getValue(), numberPickerMinute.getValue()), arrivalRadioGroup.getCheckedRadioButtonId() == R.id.time_picker_arrival);
+        eventListener.onSetDate(pickedTime);
+        dismiss();
+    }
+
+    private void execute() {
         datePickerDialog = new DatePickerDialog(
-                getActivity(), this, pickedTime.getYear(), pickedTime.getMonth(), pickedTime.getDayOfMonth());
+                getActivity(), this, pickedTime.getYear(), pickedTime.getMonth() - 1, pickedTime.getDayOfMonth());
     }
 
     @Override

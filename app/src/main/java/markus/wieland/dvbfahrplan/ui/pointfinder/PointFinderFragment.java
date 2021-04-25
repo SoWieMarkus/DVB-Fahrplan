@@ -40,6 +40,9 @@ public class PointFinderFragment extends DefaultFragment {
 
         if (recyclerView == null) return;
         findViewById(R.id.fragment_point_empty).setVisibility(points.isEmpty() ? View.VISIBLE : View.GONE);
+
+        if (!points.isEmpty())
+            recyclerView.scrollToPosition(0);
     }
 
 }

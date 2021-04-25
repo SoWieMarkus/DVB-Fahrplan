@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -25,6 +24,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:contentDescription="@string/content_description_marker"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
                 app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
-                app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/item_partial_route_marker_line"
@@ -51,7 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -61,11 +61,11 @@
                 app:layout_constraintBottom_toBottomOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintEnd_toEndOf="@+id/item_partial_route_start_marker"
                 app:layout_constraintStart_toStartOf="@+id/item_partial_route_start_marker"
-                app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker"></LinearLayout>
+                app:layout_constraintTop_toTopOf="@+id/item_partial_route_start_marker" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -76,7 +76,6 @@
                 android:id="@+id/item_trip_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:textColor="?attr/main_text_color"
                 android:textSize="16sp" />
 
@@ -88,15 +87,13 @@
                 <TextView
                     android:id="@+id/item_trip_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00:10" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/item_trip_delay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:text="TextView"
+                    android:layout_marginStart="4dp"
                     android:textColor="@android:color/holo_red_light" />
             </LinearLayout>
 
@@ -106,9 +103,7 @@
             android:id="@+id/item_trip_platform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="TextView" />
-
+            android:layout_margin="8dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

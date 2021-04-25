@@ -13,16 +13,13 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.textfield.TextInputLayout;
 
 import markus.wieland.defaultappelements.uielements.fragments.DefaultFragment;
-import markus.wieland.dvbfahrplan.R;
 import markus.wieland.dvbfahrplan.api.DVBApi;
 import markus.wieland.dvbfahrplan.database.point.PointViewModel;
 
 public abstract class SearchFragment extends DefaultFragment implements TextWatcher {
 
     protected Fragment currentFragment;
-
     protected PointViewModel pointViewModel;
-
     protected DVBApi dvbApi;
 
     public SearchFragment(@LayoutRes int layoutId) {
@@ -57,12 +54,24 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
         textInputLayout.getEditText().setSelection(content.length());
     }
 
-    public void clearFocus(TextInputLayout textInputLayout){
+    public void clearFocus(TextInputLayout textInputLayout) {
         textInputLayout.getEditText().clearFocus();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+    }
 
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
 }

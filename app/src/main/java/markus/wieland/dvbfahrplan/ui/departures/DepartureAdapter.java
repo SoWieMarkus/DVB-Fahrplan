@@ -1,6 +1,5 @@
 package markus.wieland.dvbfahrplan.ui.departures;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +76,6 @@ public class DepartureAdapter extends QueryableAdapter<String, Departure, Depart
 
             itemView.setOnClickListener(view -> getItemInteractListener().onClick(departure));
         }
-
 
     }
 

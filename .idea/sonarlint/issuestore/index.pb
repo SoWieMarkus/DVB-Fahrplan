@@ -43,3 +43,9 @@ Mapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RouteMainFragment.java,
 Uapp/src/main/java/markus/wieland/dvbfahrplan/ui/departures/DepartureMainFragment.java,3\3\338dda7692c3b6674260bce329f4e7bd2a995725
 y
 Iapp/src/main/java/markus/wieland/dvbfahrplan/api/models/routes/Route.java,0\3\037dde343ec7bced0f18fb95dbad87e9fbe15975
+v
+Fapp/src/main/java/markus/wieland/dvbfahrplan/ui/trip/TripActivity.java,f\d\fdf3d1114fd463eadbce58193f28e3713f8b7022
+y
+Iapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RoutesAdapter.java,b\6\b6aacaf7866db95f0e015ac9647decbde4bbd338
+€
+Papp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RouteMotChainAdapter.java,6\5\65e670940961826c6f93e91d99abd7c6c5a76b2f

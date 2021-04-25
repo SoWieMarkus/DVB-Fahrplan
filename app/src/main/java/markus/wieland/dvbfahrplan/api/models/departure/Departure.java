@@ -141,7 +141,6 @@ public class Departure implements QueryableEntity<String> {
         this.state = state;
     }
 
-
     public LocalDateTime getRealTimeAsLocalDate() {
         if (realTime == null) return getScheduledTimeAsLocalDate();
         return TimeConverter.convertToLocalDateTime(realTime);

@@ -24,21 +24,27 @@ public class PointViewModel extends BaseViewModel<Point, PointDataAccessObject, 
 
     public void updatePoint(Point point) {
         point.setLatestUse(System.currentTimeMillis());
-
-        AsyncTask<Void,Void,Void> asyncTask = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                if (repository.doesExist(point.getId())) update(point);
-                else insert(point);
-                return null;
-            }
-        };
-        asyncTask.execute();
-
-
+        UpdatePointTask task = new UpdatePointTask(point);
+        task.execute();
     }
 
     public LiveData<List<Point>> getRecentPoints() {
         return repository.getRecentPoints();
+    }
+
+    private class UpdatePointTask extends AsyncTask<Void, Void, Void> {
+
+        private final Point point;
+
+        public UpdatePointTask(Point point) {
+            this.point = point;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if (repository.doesExist(point.getId())) update(point);
+            else insert(point);
+            return null;
+        }
     }
 }

@@ -13,10 +13,7 @@
         android:id="@+id/activity_route_detail_map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-    </markus.wieland.dvbfahrplan.ui.map.MapView>
-
+        android:fitsSystemWindows="true" />
 
     <LinearLayout
         android:id="@+id/bottom_sheet"
@@ -27,7 +24,6 @@
         app:behavior_hideable="false"
         app:behavior_peekHeight="200dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,26 +37,25 @@
                 android:id="@+id/activity_route_detail_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="32sp" />
 
             <TextView
                 android:id="@+id/activity_route_detail_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
                 android:textSize="32sp" />
 
             <ImageButton
                 android:id="@+id/activity_route_detail_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_share"
                 app:srcCompat="@drawable/ic_share" />
         </LinearLayout>
 
@@ -77,8 +72,8 @@
                     android:id="@+id/activity_route_detail_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="32dp"
                     android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -89,10 +84,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-
-
-
     </LinearLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

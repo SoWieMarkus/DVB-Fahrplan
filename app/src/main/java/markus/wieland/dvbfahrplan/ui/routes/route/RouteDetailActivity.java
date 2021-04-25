@@ -9,13 +9,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +30,6 @@ import java.util.List;
 
 import markus.wieland.defaultappelements.uielements.activities.DefaultActivity;
 import markus.wieland.dvbfahrplan.R;
-import markus.wieland.dvbfahrplan.ShowMapActivity;
 import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.ui.map.MapView;
@@ -94,7 +90,7 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
 
     @Override
     public void onGlobalLayout() {
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)mapViewRoute.getLayoutParams();
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mapViewRoute.getLayoutParams();
         params.height = findViewById(R.id.coordinator_layout).getHeight() - BottomSheetBehavior.from(findViewById(R.id.bottom_sheet)).getPeekHeight();
         mapViewRoute.setLayoutParams(params);
         mapViewRoute.setWebViewClient(new WebViewClient() {
@@ -135,15 +131,15 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
 
     public Bitmap getWholeListViewItemsToBitmap() {
 
-        RouteAdapter adapter  = new RouteAdapter();
+        RouteAdapter adapter = new RouteAdapter();
         adapter.submitList(getRoute().getRouteList());
-        int allitemsheight   = 0;
-        List<Bitmap> bmps    = new ArrayList<Bitmap>();
+        int allitemsheight = 0;
+        List<Bitmap> bmps = new ArrayList<Bitmap>();
 
         int j = 0;
 
         bmps.add(getFromView(mapViewRoute));
-        allitemsheight+=mapViewRoute.getMeasuredHeight();
+        allitemsheight += mapViewRoute.getMeasuredHeight();
 
         for (PartialRoute route : getRoute().getRouteList()) {
 
@@ -154,11 +150,11 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
             childView.bindItemToViewHolder(route);
             bmps.add(getFromView(childView.getItemView()));
 
-            allitemsheight+=childView.getItemView().getMeasuredHeight();
+            allitemsheight += childView.getItemView().getMeasuredHeight();
         }
 
-        Bitmap bigbitmap    = Bitmap.createBitmap(recyclerViewRoute.getMeasuredWidth(), allitemsheight, Bitmap.Config.ARGB_8888);
-        Canvas bigcanvas    = new Canvas(bigbitmap);
+        Bitmap bigbitmap = Bitmap.createBitmap(recyclerViewRoute.getMeasuredWidth(), allitemsheight, Bitmap.Config.ARGB_8888);
+        Canvas bigcanvas = new Canvas(bigbitmap);
 
         Paint paint = new Paint();
         int iHeight = 0;
@@ -166,7 +162,7 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
         for (int i = 0; i < bmps.size(); i++) {
             Bitmap bmp = bmps.get(i);
             bigcanvas.drawBitmap(bmp, 0, iHeight, paint);
-            iHeight+=bmp.getHeight();
+            iHeight += bmp.getHeight();
 
         }
 
@@ -174,7 +170,7 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
         return bigbitmap;
     }
 
-    private void shareImageUri(Uri uri){
+    private void shareImageUri(Uri uri) {
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, getRoute().toString(this));

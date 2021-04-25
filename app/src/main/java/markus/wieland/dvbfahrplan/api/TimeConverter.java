@@ -16,6 +16,12 @@ public class TimeConverter {
     private TimeConverter() {
     }
 
+    public static boolean isSameDay(LocalDateTime localDateTime, LocalDateTime localDateTime2){
+        return localDateTime.getYear() == localDateTime2.getYear()
+                && localDateTime.getMonth().getValue() == localDateTime2.getMonth().getValue()
+                && localDateTime.getDayOfMonth() == localDateTime2.getDayOfMonth();
+    }
+
     public static LocalDateTime convertToLocalDateTime(@NonNull String time) {
         Matcher matcher = REGEX_PATTERN.matcher(time);
         if (!matcher.matches()) {

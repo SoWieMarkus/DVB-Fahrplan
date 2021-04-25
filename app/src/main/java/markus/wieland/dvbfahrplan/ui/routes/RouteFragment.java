@@ -40,16 +40,6 @@ public class RouteFragment extends DefaultFragment implements TimePickerEventLis
         recyclerView.setAdapter(routesAdapter);
 
         pickedTime = new PickedTime();
-
-        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerBottomSheetDialog timePickerBottomSheetDialog = new TimePickerBottomSheetDialog(pickedTime);
-                timePickerBottomSheetDialog.show(getChildFragmentManager(),"Hello");
-            }
-        });
-
-
     }
 
     public void update(Routes routes) {

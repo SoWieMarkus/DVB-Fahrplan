@@ -7,7 +7,6 @@
     android:background="?attr/main_background_color"
     tools:context=".ui.departures.DepartureActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -23,21 +22,20 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_departure_station"
             android:layout_width="match_parent"
-            app:endIconMode="clear_text"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
                 android:hint="@string/departure_station"
                 android:imeOptions="actionDone"
-                android:focusable="true"
                 android:inputType="text|textCapSentences"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/activity_departures_swipe_refresh"

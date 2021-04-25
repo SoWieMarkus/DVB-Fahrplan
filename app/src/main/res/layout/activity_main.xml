@@ -7,7 +7,6 @@
     android:background="?attr/main_background_color"
     tools:context=".MainActivity">
 
-
     <FrameLayout
         android:id="@+id/activity_main_frame_layout"
         android:layout_width="0dp"
@@ -27,6 +26,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/activity_main_bottom_navigation" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

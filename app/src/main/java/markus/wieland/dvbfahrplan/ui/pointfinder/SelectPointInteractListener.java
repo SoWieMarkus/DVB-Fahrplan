@@ -6,5 +6,5 @@ import markus.wieland.dvbfahrplan.api.models.pointfinder.Point;
 public interface SelectPointInteractListener extends OnItemInteractListener<Point> {
 
     void onClick(Point point);
-    void onLocate(Point point);
+
 }

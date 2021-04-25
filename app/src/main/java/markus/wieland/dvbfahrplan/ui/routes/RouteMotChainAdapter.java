@@ -22,7 +22,6 @@ public class RouteMotChainAdapter extends DefaultAdapter<Mot, RouteMotChainAdapt
     private static final int LAYOUT_FOOT_PATH = 1;
     private static final int LAYOUT_VEHICLE = 2;
 
-
     public RouteMotChainAdapter() {
         super(null);
     }
@@ -70,17 +69,11 @@ public class RouteMotChainAdapter extends DefaultAdapter<Mot, RouteMotChainAdapt
             } else {
                 loadVehicle(mot);
             }
-
-
         }
 
         private void loadWalking(Mot mot) {
             Mode mode = mot.getMode();
             itemModeIcon.setImageDrawable(mode.getIcon(itemView.getContext()));
-            itemModeLine.setBackground(null);
-            //TODO hier die dauer des Fußwegs einfügen
-            itemModeLine.setText();
-
             itemModeNext.setVisibility(getAdapterPosition() == getItemCount() - 1 ? GONE : View.VISIBLE);
         }
 
@@ -89,11 +82,7 @@ public class RouteMotChainAdapter extends DefaultAdapter<Mot, RouteMotChainAdapt
             itemModeIcon.setImageDrawable(mode.getIcon(itemView.getContext()));
             itemModeLine.setBackground(mode.getBackground(itemView.getContext()));
             itemModeLine.setText(mot.getName() == null ? "" : mot.getName());
-
             itemModeNext.setVisibility(getAdapterPosition() == getItemCount() - 1 ? GONE : View.VISIBLE);
         }
-
-
     }
-
 }
