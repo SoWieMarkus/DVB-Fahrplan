@@ -29,6 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/item_route_times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item_route_mot_chain"
             android:layout_width="match_parent"

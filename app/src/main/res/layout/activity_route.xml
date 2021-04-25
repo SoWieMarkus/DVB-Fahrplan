@@ -12,6 +12,7 @@
         android:id="@+id/linearLayout9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/main_background_color"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:endIconMode="clear_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/route_origin"
-                        android:inputType="text"
+                        android:inputType="text|textCapSentences"
                         android:maxLines="1"
                         android:nextFocusDown="@+id/activity_route_destination" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:endIconMode="clear_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     app:layout_constraintBottom_toTopOf="@+id/textInputLayout_index_card_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/route_destination"
                         android:imeOptions="actionDone"
-                        android:inputType="text"
+                        android:inputType="text|textCapSentences"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,15 +80,43 @@
                 android:id="@+id/activity_route_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
                 app:srcCompat="@drawable/ic_switch" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/activity_route_show_time_picker"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/activity_route_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/activity_route_show_time_picker"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_picker_change"
+                android:textColor="@color/accent_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/accent_line"
+            android:orientation="vertical" />
 
     </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;

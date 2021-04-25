@@ -191,12 +191,15 @@ public class Route implements QueryableEntity<Long> {
         Platform platformNext = partialRoute.getOrigin().getPlatform();
 
         boolean samePlatform;
+        boolean sameStation = next.getOrigin().getName().equals(partialRoute.getDestination().getName());
         if (platform == null || platformNext == null) samePlatform = false;
         else samePlatform = platform.equals(platformNext);
 
         PartialRoute betweenRoute = new PartialRoute();
         Mot mot = new Mot();
-        mot.setMode(samePlatform ? Mode.WAITING : Mode.CHANGE_PLATFORM);
+        mot.setMode(!sameStation
+                ? Mode.WALKING
+                : (samePlatform ? Mode.WAITING : Mode.CHANGE_PLATFORM));
         betweenRoute.setDuration((int) durationBetweenRoutes);
         betweenRoute.setLine(mot);
 
@@ -208,39 +211,28 @@ public class Route implements QueryableEntity<Long> {
         partialRoutes.add(betweenRoute);
     }
 
+    public Stop getOrigin() {
+        if (partialRoutes.isEmpty()) return null;
+        return partialRoutes.get(0).getOrigin();
+    }
+
+    public Stop getDestination() {
+        if (partialRoutes.isEmpty()) return null;
+        return partialRoutes.get(partialRoutes.size() - 1).getDestination();
+    }
+
+    public String getTimeSpan(){
+        return getOrigin().getFancyDepartureTime() + "-" + getDestination().getFancyArrivalTime();
+    }
 
     public String toString(Context context) {
-
-        Stop origin = partialRoutes.get(0).getOrigin();
-        Stop destination = partialRoutes.get(partialRoutes.size() - 1).getDestination();
-
+        Stop origin = getOrigin();
+        Stop destination = getDestination();
 
         String routeString = context.getString(R.string.route_string_title);
         routeString += "\n" + context.getString(R.string.route_string_from) + " " + origin.toString();
         routeString += "\n" + context.getString(R.string.route_string_to) + " " + destination.toString();
         routeString += "\n" + origin.getFancyDepartureTime() + " - " + destination.getFancyArrivalTime() + ", " + getDurationAsString();
-
-        /*routeString += "\n\n" + context.getString(R.string.route_string_route) + "\n======";
-
-
-        StringBuilder routeStringBuilder = new StringBuilder(routeString);
-        for (PartialRoute partialRoute : partialRoutes) {
-            if (partialRoute.getRegularStops() == null || partialRoute.getRegularStops().isEmpty())
-                continue;
-
-            if (partialRoute.getLine().getMode().equals(Mode.WALKING)) {
-                routeStringBuilder.append("\n\n");
-                routeStringBuilder.append(context.getString(R.string.footpath));
-            } else {
-                routeStringBuilder.append("\n\n");
-                routeStringBuilder.append(partialRoute.getLine().getName()).append(" ").append(partialRoute.getLine().getDirection());
-
-            }
-            routeStringBuilder.append("\n").append(context.getString(R.string.route_string_departure)).append(": ").append(partialRoute.getOrigin().getFancyDepartureTime()).append(", ").append(partialRoute.getOrigin().toString());
-            routeStringBuilder.append("\n").append(context.getString(R.string.route_string_arrival)).append(": ").append(partialRoute.getDestination().getFancyArrivalTime()).append(", ").append(partialRoute.getDestination().toString());
-        }
-        routeString = routeStringBuilder.toString();*/
-
 
         return routeString;
     }

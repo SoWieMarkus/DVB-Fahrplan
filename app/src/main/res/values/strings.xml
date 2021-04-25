@@ -33,4 +33,5 @@
     <string name="route_origin">Origin</string>
     <string name="content_description_expand">Expand</string>
     <string name="content_description_share">Share</string>
+    <string name="time_picker_change">Change</string>
 </resources>

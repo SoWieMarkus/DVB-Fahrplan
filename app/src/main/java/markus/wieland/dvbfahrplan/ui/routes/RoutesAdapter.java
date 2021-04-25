@@ -37,6 +37,7 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
         private TextView itemRouteDuration;
         private TextView itemRoutePrice;
         private TextView itemRouteChanges;
+        private TextView itemRouteTimes;
 
         public RoutesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +49,7 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             itemRouteDuration = findViewById(R.id.item_route_duration);
             itemRoutePrice = findViewById(R.id.item_route_price);
             itemRouteChanges = findViewById(R.id.item_route_changes);
+            itemRouteTimes = findViewById(R.id.item_route_times);
         }
 
         @Override
@@ -64,6 +66,7 @@ public class RoutesAdapter extends QueryableAdapter<Long, Route, RoutesAdapter.R
             itemRouteDuration.setText(route.getDurationAsString());
             itemRoutePrice.setText(route.getPrice());
             itemRouteChanges.setText(route.getInterchanges() + "");
+            itemRouteTimes.setText(route.getTimeSpan());
 
             itemView.setOnClickListener(v -> getOnItemInteractListener().onClick(route));
         }

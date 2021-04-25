@@ -52,6 +52,8 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     private final PointTextWatcher pointTextWatcherOrigin;
     private final PointTextWatcher pointTextWatcherDestination;
 
+    private TextView timePickerValue;
+
     public RouteMainFragment() {
         super(R.layout.activity_route);
         pointFinderFragmentOrigin = new PointFinderFragment(this);
@@ -67,6 +69,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
 
         textInputLayoutOrigin = findViewById(R.id.activity_route_origin);
         textInputLayoutDestination = findViewById(R.id.activity_route_destination);
+        timePickerValue = findViewById(R.id.activity_route_time_value);
 
         findViewById(R.id.activity_route_switch).setOnClickListener(this::switchOriginAndDestination);
 
@@ -76,6 +79,13 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
+        if (textInputLayoutDestination.getEditText().getText().toString().trim().isEmpty()) {
+            destinationPoint = null;
+        }
+        if (textInputLayoutOrigin.getEditText().getText().toString().trim().isEmpty()) {
+            originPoint = null;
+        }
+
         if (currentFragment.equals(pointFinderFragmentDestination)) {
             focus(textInputLayoutDestination);
             currentFragment = null;
@@ -124,6 +134,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     private void execute() {
         pointViewModel.getRecentPoints().observe(getActivity(), this);
         pickedTime = new PickedTime();
+        timePickerValue.setText(pickedTime.toString(getActivity()));
         loadFragment(pointFinderFragmentOrigin);
     }
 
@@ -169,7 +180,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
 
     public void searchRoute() {
         if (originPoint == null || destinationPoint == null) return;
-        if (originPoint.equals(destinationPoint)) return;
+        if (originPoint.getId().equals(destinationPoint.getId())) return;
         routeFragment.update(null);
         loadFragment(routeFragment);
         dvbApi.searchRoute(this::onLoad, originPoint.getId(), destinationPoint.getId(), pickedTime);
@@ -230,7 +241,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
     @Override
     public void onSetDate(PickedTime pickedTime) {
         this.pickedTime = pickedTime;
-        ((Button)findViewById(R.id.activity_route_show_time_picker)).setText(pickedTime.toString(getActivity()));
+        timePickerValue.setText(pickedTime.toString(getActivity()));
         searchRoute();
     }
 
