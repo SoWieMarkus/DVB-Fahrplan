@@ -14,6 +14,7 @@
 * <a href="https://leafletjs.com/">Leaflet.js</a> to display route details in a map
 * <a href="https://developer.android.com/jetpack/androidx/releases/room">Android Room</a> to store recently searched stations (only local on the device of the user)
 * <a href="https://webapi.vvo-online.de">VVO Api</a> (<a href="https://github.com/kiliankoe/vvo/blob/main/documentation/webapi.md">Documentation</a>) to get information about departure and routes
+* <a href="https://github.com/SoWieMarkus/DefaultAppComponents">Default app components</a>
 
 ## Screenshots
 
