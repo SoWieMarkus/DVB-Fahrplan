@@ -44,4 +44,5 @@
     <string name="time_picker_today">Today</string>
     <string name="route_informationen">Information</string>
     <string name="content_description_switch">Switch</string>
+    <string name="stay_in_vehicle">Stay in vehicle</string>
 </resources>

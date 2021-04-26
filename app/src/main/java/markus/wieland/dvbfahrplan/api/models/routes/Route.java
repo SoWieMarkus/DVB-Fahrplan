@@ -184,9 +184,9 @@ public class Route implements QueryableEntity<Long> {
 
     private void addBetweenRoute(List<PartialRoute> partialRoutes, PartialRoute partialRoute, PartialRoute next) {
         if (next == null) return;
-        if (partialRoute.getLine().getMode().equals(Mode.WALKING) || partialRoute.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION))
+        if (partialRoute.getLine().getMode().isGapBetweenPartialRoutes())
             return;
-        if (next.getLine().getMode().equals(Mode.WALKING) || next.getLine().getMode().equals(Mode.STAY_FOR_CONNECTION))
+        if (next.getLine().getMode().isGapBetweenPartialRoutes())
             return;
         if (partialRoute.getDestination() == null || next.getOrigin() == null) return;
 

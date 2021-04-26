@@ -90,7 +90,7 @@ function initializeMap() {
             shadowSize: [16, 16],
             shadowAnchor: [7, 7]
         }),
-        "unkown": L.icon({
+        "unknown": L.icon({
             iconUrl: "./marker/marker_train.png",
             iconSize: [16, 16],
             iconAnchor: [8, 8],

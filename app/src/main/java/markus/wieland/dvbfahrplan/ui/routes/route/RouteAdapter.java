@@ -47,10 +47,10 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
         Mot mot = partialRoute.getLine();
 
         if (mot == null || mot.getMode() == null) return ROUTE;
-        if (mot.getMode().equals(Mode.WALKING) || mot.getMode().equals(Mode.CHANGE_PLATFORM) || mot.getMode().equals(Mode.STAY_FOR_CONNECTION) || mot.getMode().equals(Mode.WAITING))
-            return BETWEEN_ROUTE;
         if (mot.getMode().equals(Mode.ONLY_ONE_PART))
             return ONLY_ONE_PART;
+        if (mot.getMode().isGapBetweenPartialRoutes())
+            return BETWEEN_ROUTE;
 
         return ROUTE;
     }
@@ -149,7 +149,7 @@ public class RouteAdapter extends DefaultAdapter<PartialRoute, RouteAdapter.Rout
             itemPartialRouteModeIcon.setImageDrawable(mode.getIcon(context));
             itemPartialRouteDuration.setText(route.getDurationAsString(context));
 
-            if (mode.equals(Mode.WALKING) || mode.equals(Mode.CHANGE_PLATFORM) || mode.equals(Mode.WAITING) || mode.equals(Mode.STAY_FOR_CONNECTION))
+            if (mode.isGapBetweenPartialRoutes())
                 return;
 
             itemPartialRouteAmountStops.setText(route.getAmountOfStops(context));

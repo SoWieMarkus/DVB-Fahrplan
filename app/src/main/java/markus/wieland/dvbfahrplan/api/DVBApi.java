@@ -2,6 +2,7 @@ package markus.wieland.dvbfahrplan.api;
 
 import android.app.Activity;
 
+import markus.wieland.defaultappelements.api.API;
 import markus.wieland.defaultappelements.api.APIResult;
 import markus.wieland.defaultappelements.api.GetRequest;
 import markus.wieland.defaultappelements.api.RequestResultListener;
@@ -13,7 +14,7 @@ import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
 import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
 
-public class DVBApi {
+public class DVBApi extends API {
 
     private static final String BASE_URL = "https://webapi.vvo-online.de/";
 
@@ -23,10 +24,8 @@ public class DVBApi {
     private static final String LINES = "stt/lines";
     private static final String TRIPS = "dm/trip";
 
-    private final Activity context;
-
     public DVBApi(Activity context) {
-        this.context = context;
+        super(context);
     }
 
     public void searchTrip(APIResult<Trip> apiResult, String date, String stopId, String tripId) {
@@ -145,12 +144,5 @@ public class DVBApi {
         pointFinderGetRequest.execute();
     }
 
-    private <T> void notifyClient(T t, APIResult<T> result) {
-        try {
-            context.runOnUiThread(() -> result.onLoad(t));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

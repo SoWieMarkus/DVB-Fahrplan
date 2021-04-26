@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import markus.wieland.dvbfahrplan.api.models.Platform;
 import markus.wieland.dvbfahrplan.api.models.State;
@@ -178,5 +179,19 @@ public class Stop {
     public String toString() {
         if (getPlace().equalsIgnoreCase("Dresden")) return getName();
         return getPlace() + " " + getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Stop stop = (Stop) o;
+        return Objects.equals(name, stop.name) &&
+                Objects.equals(place, stop.place);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, place);
     }
 }
