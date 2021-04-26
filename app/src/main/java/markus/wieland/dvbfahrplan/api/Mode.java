@@ -17,21 +17,25 @@ import markus.wieland.dvbfahrplan.R;
 
 public enum Mode implements Serializable {
 
-    @SerializedName("Tram") TRAM(Vehicle.TRAM),
-    @SerializedName("Bus") BUS(Vehicle.BUS),
-    @SerializedName("CityBus") CITY_BUS(Vehicle.BUS),
-    @SerializedName(value = "IntercityBus", alternate = {"PlusBus"}) INTER_CITY_BUS(Vehicle.BUS),
-    @SerializedName("Train") TRAIN(Vehicle.TRAIN),
-    @SerializedName(value = "Lift", alternate = {"OverheadRailway"}) LIFT(Vehicle.LIFT),
-    @SerializedName("Ferry") FERRY(Vehicle.FERRY),
-    @SerializedName(value = "Alita", alternate = {"Taxi", "HailedSharedTaxi"}) ALITA_TAXI(Vehicle.TAXI),
-    @SerializedName("Footpath") WALKING(Vehicle.WALKING),
-    @SerializedName(value = "RapidTransit", alternate = {"SuburbanRailway"}) RAPID_TRANSIT(Vehicle.METROPOLITAN),
-    @SerializedName("StayForConnection") STAY_FOR_CONNECTION(R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
-    CHANGE_PLATFORM(R.drawable.ic_transport_change, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, "footpath"),
-    WAITING(R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
-    ONLY_ONE_PART(R.drawable.ic_transport_footpath, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
-    UNKNOWN(Vehicle.UNKNOWN);
+    @SerializedName("Tram") TRAM(false, Vehicle.TRAM),
+    @SerializedName("Bus") BUS(false, Vehicle.BUS),
+    @SerializedName("CityBus") CITY_BUS(false, Vehicle.BUS),
+    @SerializedName(value = "IntercityBus", alternate = {"PlusBus"}) INTER_CITY_BUS(false, Vehicle.BUS),
+    @SerializedName("Train") TRAIN(false, Vehicle.TRAIN),
+    @SerializedName(value = "Lift", alternate = {"OverheadRailway"}) LIFT(false, Vehicle.LIFT),
+    @SerializedName("Ferry") FERRY(false, Vehicle.FERRY),
+    @SerializedName(value = "Alita", alternate = {"Taxi", "HailedSharedTaxi"}) ALITA_TAXI(false, Vehicle.TAXI),
+    @SerializedName("Footpath") WALKING(true, Vehicle.WALKING),
+    @SerializedName(value = "RapidTransit", alternate = {"SuburbanRailway"}) RAPID_TRANSIT(true, Vehicle.METROPOLITAN),
+    @SerializedName("StayForConnection") STAY_FOR_CONNECTION(true,R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
+    @SerializedName("StayInVehicle") STAY_IN_VEHICLE(true,R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
+
+    CHANGE_PLATFORM(true,R.drawable.ic_transport_change, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, "footpath"),
+    WAITING(true,R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
+    ONLY_ONE_PART(true,R.drawable.ic_transport_footpath, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
+    UNKNOWN(false, Vehicle.UNKNOWN);
+
+    private final boolean isGapBetweenPartialRoutes;
 
     @DrawableRes
     private final int value;
@@ -44,18 +48,24 @@ public enum Mode implements Serializable {
 
     private final String mapId;
 
-    Mode(Vehicle vehicle) {
+    Mode(boolean isGapBetweenPartialRoutes, Vehicle vehicle) {
+        this.isGapBetweenPartialRoutes = isGapBetweenPartialRoutes;
         this.value = vehicle.getValue();
         this.color = vehicle.getColor();
         this.marker = vehicle.getMarker();
         this.mapId = vehicle.getMapId();
     }
 
-    Mode(int value, int color, int marker, String mapId) {
+    Mode(boolean isGapBetweenPartialRoutes, int value, int color, int marker, String mapId) {
         this.value = value;
+        this.isGapBetweenPartialRoutes = isGapBetweenPartialRoutes;
         this.marker = marker;
         this.color = color;
         this.mapId = mapId;
+    }
+
+    public boolean isGapBetweenPartialRoutes() {
+        return isGapBetweenPartialRoutes;
     }
 
     public String getMapId() {

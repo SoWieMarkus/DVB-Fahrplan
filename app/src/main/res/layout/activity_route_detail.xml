@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="?attr/main_background_color"
 
+    app:layout_anchorGravity="bottom"
     tools:context=".ui.routes.route.RouteDetailActivity">
 
     <markus.wieland.dvbfahrplan.ui.map.MapView
