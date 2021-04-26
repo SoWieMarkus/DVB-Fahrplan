@@ -144,7 +144,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
 
     private void execute() {
 
-        assert getActivity() != null;
+        if (getActivity() == null) return;
 
         pointViewModel.getRecentPoints().observe(getActivity(), this);
         pickedTime = new PickedTime();
@@ -283,7 +283,7 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         boolean customAnimation = getCustomAnimation(fragment);
         currentFragment = fragment;
 
-        assert getActivity() != null;
+        if (getActivity() == null) return;
 
         if (customAnimation)
             getActivity().getSupportFragmentManager().beginTransaction()

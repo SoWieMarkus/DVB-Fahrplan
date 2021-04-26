@@ -29,7 +29,7 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     @CallSuper
     @Override
     public void bindViews() {
-        assert getActivity() != null;
+        if (getActivity() == null) return;
 
         pointViewModel = ViewModelProviders.of(getActivity()).get(PointViewModel.class);
         dvbApi = new DVBApi(getActivity());
@@ -48,8 +48,7 @@ public abstract class SearchFragment extends DefaultFragment implements TextWatc
     public abstract boolean handleBackPress();
 
     public void focus(TextInputLayout textInputLayout) {
-        if (textInputLayout.getEditText() == null) return;
-        if (getActivity() == null) return;
+        if (textInputLayout.getEditText() == null || getActivity() == null) return;
 
         textInputLayout.getEditText().requestFocus();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

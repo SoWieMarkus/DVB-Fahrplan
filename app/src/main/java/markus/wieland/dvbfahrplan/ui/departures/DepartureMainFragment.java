@@ -57,7 +57,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         swipeRefreshLayout.setOnRefreshListener(this);
 
         assert textInputLayoutStation.getEditText() != null;
-        assert getActivity() != null;
+        if(getActivity() == null) return;
 
         textInputLayoutStation.getEditText().setOnFocusChangeListener(this);
         textInputLayoutStation.getEditText().addTextChangedListener(this);
@@ -81,7 +81,7 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         super.onStop();
 
         assert textInputLayoutStation.getEditText() != null;
-        assert getActivity() != null;
+        if(getActivity() == null) return;
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
