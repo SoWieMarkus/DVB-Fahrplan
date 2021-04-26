@@ -2,6 +2,7 @@ package markus.wieland.dvbfahrplan.api;
 
 import android.app.Activity;
 
+import markus.wieland.defaultappelements.api.API;
 import markus.wieland.defaultappelements.api.APIResult;
 import markus.wieland.defaultappelements.api.GetRequest;
 import markus.wieland.defaultappelements.api.RequestResultListener;
@@ -13,7 +14,7 @@ import markus.wieland.dvbfahrplan.api.models.routes.Routes;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
 import markus.wieland.dvbfahrplan.ui.timepicker.PickedTime;
 
-public class DVBApi {
+public class DVBApi extends API {
 
     private static final String BASE_URL = "https://webapi.vvo-online.de/";
 
