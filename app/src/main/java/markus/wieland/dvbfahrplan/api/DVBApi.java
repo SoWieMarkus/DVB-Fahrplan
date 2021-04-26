@@ -24,10 +24,8 @@ public class DVBApi extends API {
     private static final String LINES = "stt/lines";
     private static final String TRIPS = "dm/trip";
 
-    private final Activity context;
-
     public DVBApi(Activity context) {
-        this.context = context;
+        super(context);
     }
 
     public void searchTrip(APIResult<Trip> apiResult, String date, String stopId, String tripId) {
@@ -146,12 +144,5 @@ public class DVBApi extends API {
         pointFinderGetRequest.execute();
     }
 
-    private <T> void notifyClient(T t, APIResult<T> result) {
-        try {
-            context.runOnUiThread(() -> result.onLoad(t));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }
