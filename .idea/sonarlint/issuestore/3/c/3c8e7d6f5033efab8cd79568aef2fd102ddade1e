@@ -1,19 +1,5 @@
 
-^	java:S125´"<This block of commented-out lines of code should be removed.(•Îİİÿÿÿÿÿ8³î„²/
-S
-java:S1128
-"7Remove this unused import 'android.provider.Telephony'.(ô·›8Üî¶/
-S
-java:S1144¸"6Remove this unused private "saveImageExternal" method.(©ùÜ_8³î„²/
-w
-java:S2293Š"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ú†øû8íõö/
-a
-java:S1874€">Remove this use of "setDrawingCacheEnabled"; it is deprecated.(‰¬áÎşÿÿÿÿ8³î„²/
+P
+java:S1874ˆ"3Remove this use of "insertImage"; it is deprecated.(”É8ÿÙí/
 U
-java:S1874‚"7Remove this use of "getDrawingCache"; it is deprecated.(Œ¶Û£8³î„²/
-P
-java:S1874Ë"3Remove this use of "insertImage"; it is deprecated.(”É8³î„²/
-P
-java:S1135¹"2Complete the task associated to this TODO comment.(ö–”Û8³î„²/
-W
-java:S1874"9Remove this use of "buildDrawingCache"; it is deprecated.(İ›š¹8³î„²/
+java:S1128"8Remove this unused import 'android.view.LayoutInflater'.(À¯ÑÇ8ª³¹í/

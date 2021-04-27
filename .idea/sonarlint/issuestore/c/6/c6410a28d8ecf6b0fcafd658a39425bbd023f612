@@ -1,9 +1,0 @@
-
-
-java:S14504"]Remove the "pointViewModel" field and declare it as a local variable in the relevant methods.(…‹ïÄÿÿÿÿÿ8ù¯¥ò/
-T
-java:S10684"2Remove this unused "pointViewModel" private field.(…‹ïÄÿÿÿÿÿ8ˆ¤ò/
-a
-java:S1144{"?Remove this unused private "switchOriginAndDestination" method.(Îü‚‰ıÿÿÿÿ8º™ó/
-Y
-java:S1128"=Remove this unused import 'androidx.appcompat.app.ActionBar'.(·¯z8¯Š§ó/
