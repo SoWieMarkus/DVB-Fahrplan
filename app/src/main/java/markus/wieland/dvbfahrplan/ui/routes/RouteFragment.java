@@ -33,13 +33,21 @@ public class RouteFragment extends DefaultFragment {
     @Override
     public void bindViews() {
         recyclerView = findViewById(R.id.fragment_routes_recycler_view);
+        shimmerFrameLayout = findViewById(R.id.fragment_route_loading);
+    }
+
+    @Override
+    public void initializeViews() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(routesAdapter);
-
-        shimmerFrameLayout = findViewById(R.id.fragment_route_loading);
         if (!routesAdapter.getList().isEmpty())
             shimmerFrameLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void execute() {
+        // Nothing to do here
     }
 
     public void update(Routes routes) {

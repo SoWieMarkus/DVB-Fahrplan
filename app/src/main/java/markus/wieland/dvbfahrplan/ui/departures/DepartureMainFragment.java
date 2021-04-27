@@ -48,10 +48,10 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         super.bindViews();
         textInputLayoutStation = findViewById(R.id.activity_departure_station);
         swipeRefreshLayout = findViewById(R.id.activity_departures_swipe_refresh);
-        initializeViews();
     }
 
-    private void initializeViews() {
+    @Override
+    public void initializeViews() {
         departureFragment = new DepartureFragment(this::onClick);
         pointFinderFragment = new PointFinderFragment(this);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -66,7 +66,6 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         pointViewModel.getRecentPoints().observe(getActivity(), this);
 
         loadFragment(pointFinderFragment);
-        execute();
     }
 
 
@@ -90,7 +89,8 @@ public class DepartureMainFragment extends SearchFragment implements Observer<Li
         imm.hideSoftInputFromWindow(textInputLayoutStation.getEditText().getWindowToken(), 0);
     }
 
-    private void execute() {
+    @Override
+    public void execute() {
         pointFinderFragment.update(pointViewModel.getRecentPoints().getValue());
     }
 
