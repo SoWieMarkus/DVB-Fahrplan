@@ -29,9 +29,18 @@ public class PointFinderFragment extends DefaultFragment {
     @Override
     public void bindViews() {
         recyclerView = findViewById(R.id.fragment_point_recycler_view);
+    }
+
+    @Override
+    public void initializeViews() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(pointAdapter);
+    }
+
+    @Override
+    public void execute() {
+        // Nothing to do here
     }
 
     public void update(List<Point> points) {

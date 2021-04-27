@@ -35,13 +35,23 @@ public class DepartureFragment extends DefaultFragment {
         recyclerViewDepartures.setAdapter(departureAdapter);
 
         shimmerFrameLayout = findViewById(R.id.fragment_departure_loading);
-        if (!departureAdapter.getList().isEmpty())
-            shimmerFrameLayout.setVisibility(View.GONE);
+
 
         RecyclerView recyclerViewLines = findViewById(R.id.fragment_departure_lines_recycler_view);
         recyclerViewLines.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewLines.setHasFixedSize(true);
         recyclerViewLines.setAdapter(linesAdapter);
+    }
+
+    @Override
+    public void initializeViews() {
+        if (!departureAdapter.getList().isEmpty())
+            shimmerFrameLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void execute() {
+        // Nothing to do here
     }
 
     public void update(DepartureMonitor departureMonitor) {

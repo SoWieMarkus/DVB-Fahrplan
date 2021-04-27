@@ -72,8 +72,6 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         timePickerValue = findViewById(R.id.activity_route_time_value);
 
         findViewById(R.id.activity_route_switch).setOnClickListener(this::switchOriginAndDestination);
-
-        initializeViews();
     }
 
     @Override
@@ -125,7 +123,8 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         searchRoute();
     }
 
-    private void initializeViews() {
+    @Override
+    public void initializeViews() {
 
         assert textInputLayoutDestination.getEditText() != null;
         assert textInputLayoutOrigin.getEditText() != null;
@@ -139,10 +138,10 @@ public class RouteMainFragment extends SearchFragment implements View.OnClickLis
         findViewById(R.id.activity_route_show_time_picker).setOnClickListener(this);
 
         textInputLayoutDestination.getEditText().setOnEditorActionListener(this);
-        execute();
     }
 
-    private void execute() {
+    @Override
+    public void execute() {
 
         if (getActivity() == null) return;
 

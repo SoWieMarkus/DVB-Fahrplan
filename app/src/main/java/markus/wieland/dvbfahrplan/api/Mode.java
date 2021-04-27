@@ -26,7 +26,7 @@ public enum Mode implements Serializable {
     @SerializedName("Ferry") FERRY(false, Vehicle.FERRY),
     @SerializedName(value = "Alita", alternate = {"Taxi", "HailedSharedTaxi"}) ALITA_TAXI(false, Vehicle.TAXI),
     @SerializedName("Footpath") WALKING(true, Vehicle.WALKING),
-    @SerializedName(value = "RapidTransit", alternate = {"SuburbanRailway"}) RAPID_TRANSIT(true, Vehicle.METROPOLITAN),
+    @SerializedName(value = "RapidTransit", alternate = {"SuburbanRailway"}) RAPID_TRANSIT(false, Vehicle.METROPOLITAN),
     @SerializedName("StayForConnection") STAY_FOR_CONNECTION(true,R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
     @SerializedName("StayInVehicle") STAY_IN_VEHICLE(true,R.drawable.ic_transport_wait, Vehicle.WALKING.getColor(), R.drawable.item_marker_footpath, Vehicle.WAITING),
 

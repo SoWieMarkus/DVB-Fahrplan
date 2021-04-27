@@ -13,8 +13,6 @@ Qapp/src/main/java/markus/wieland/dvbfahrplan/ui/departures/DepartureFragment.ja
 Yapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/route/RouteRegularStopAdapter.java,1\1\11efd0c417aea0b8efd7723bfea9148da04df5d9
 l
 <app/src/main/java/markus/wieland/dvbfahrplan/api/DVBApi.java,f\d\fd9652e7e498c3189108410ade523cde37892b14
-
-Qapp/src/main/java/markus/wieland/dvbfahrplan/ui/departures/DepartureActivity.java,7\5\757fcfd08c6d1783e79001f807d2b9a4ca1e2231
 €
 Papp/src/main/java/markus/wieland/dvbfahrplan/api/models/departure/Departure.java,d\6\d65b0e5a7f1212ad351c688ceb2d8ad452bb9f2c
 n
@@ -25,8 +23,6 @@ Iapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RouteFragment.java,8\0\
 Papp/src/main/java/markus/wieland/dvbfahrplan/ui/departures/DepartureAdapter.java,d\7\d7c200e267510a56a56fd69a0f43b63e81ebb44b
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-y
-Iapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RouteActivity.java,c\6\c6410a28d8ecf6b0fcafd658a39425bbd023f612
 …
 Uapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/route/RouteDetailActivity.java,3\c\3c8e7d6f5033efab8cd79568aef2fd102ddade1e
 ~
@@ -101,3 +97,13 @@ Rapp/src/main/java/markus/wieland/dvbfahrplan/ui/routes/RoutesInteractListener.j
 Tapp/src/main/java/markus/wieland/dvbfahrplan/ui/pointfinder/PointFinderFragment.java,3\f\3fb81724fcb6ececb44e2ef3a801d711b63f8c3b
 z
 Japp/src/main/java/markus/wieland/dvbfahrplan/ui/timepicker/PickedTime.java,0\d\0dcc96195dcdffacbeca49b5520f80d5f02a1025
+s
+Capp/src/main/java/markus/wieland/dvbfahrplan/helper/ShareRoute.java,d\b\db1445082795fa2d7e137100ba13ab0280d8f21c
+v
+Fapp/src/main/java/markus/wieland/dvbfahrplan/helper/TimeConverter.java,9\8\98fae64ca42f6c8c6cebd0f3c9a86bb23eeb07d8
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+u
+Eapp/src/main/java/markus/wieland/dvbfahrplan/helper/ViewToBitmap.java,7\5\7521ac5483692a937fe5d0301d024f46d5c7d7ef
+s
+Capp/src/main/java/markus/wieland/dvbfahrplan/api/models/ApiURL.java,3\3\337f9161f0af18bb2d664e448808e928712d2931
