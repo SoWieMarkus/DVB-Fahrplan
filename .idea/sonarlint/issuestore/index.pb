@@ -107,3 +107,17 @@ u
 Eapp/src/main/java/markus/wieland/dvbfahrplan/helper/ViewToBitmap.java,7\5\7521ac5483692a937fe5d0301d024f46d5c7d7ef
 s
 Capp/src/main/java/markus/wieland/dvbfahrplan/api/models/ApiURL.java,3\3\337f9161f0af18bb2d664e448808e928712d2931
+|
+Lapp/src/main/java/markus/wieland/dvbfahrplan/api/APIResultWithRequestId.java,8\7\87e68e607e18f3bcdac6eaeb2c069bcd1160d140
+†
+Vapp/src/main/java/markus/wieland/dvbfahrplan/api/models/coordinates/WGSCoordinate.java,f\5\f52282bbb7831b45ff2c1197c582b297db7632ba
+v
+Fapp/src/main/java/markus/wieland/dvbfahrplan/api/models/trip/Trip.java,9\9\994a8fd6d22cf84dfac0f01a29aa5bc6f5e4784d
+v
+Fapp/src/main/java/markus/wieland/dvbfahrplan/api/models/trip/Node.java,a\2\a2ebb60ec6ee79d10b8316574f945974a811bdd5
+~
+Napp/src/main/java/markus/wieland/dvbfahrplan/ui/map/mapdata/MapDataHelper.java,9\4\94d89f0020e5955eb139c38b399b04a94702743c
+x
+Happ/src/main/java/markus/wieland/dvbfahrplan/ui/map/mapdata/MapData.java,a\b\ab6a5ca3f4e8dab46af247ec7214a783a11624dd
+|
+Lapp/src/main/java/markus/wieland/dvbfahrplan/ui/map/mapdata/MapDataPart.java,f\6\f6ba15f1928a0218fab6091f77b1d45f589e10ed

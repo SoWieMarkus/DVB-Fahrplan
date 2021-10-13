@@ -139,7 +139,7 @@ function showRouteOnTrack(mapData) {
             path.push(coordinate);
             if (j === 0 || j === (coordinates.length - 1)) {
                 let marker;
-                if (j === (coordinates - 1) && i === (mapData.mapDataParts.length - 1)) {
+                if (j === (coordinates.length - 1) && i === (mapData.mapDataParts.length - 1)) {
                     marker = L.marker(coordinate, {icon: markersList["destination"]});
                 } else if (j === 0 && i === 0) {
                     marker = L.marker(coordinate);

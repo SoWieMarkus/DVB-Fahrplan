@@ -68,7 +68,7 @@ public class MapView extends WebView {
 
     public void showMapData(Route route) {
         MapData mapData = new MapData(route);
-        loadUrl("javascript:showTrip(" + gson.toJson(mapData) + ")");
+        loadUrl("javascript:showRouteOnTrack(" + gson.toJson(mapData) + ")");
     }
 
     public void focus(Node node) {
