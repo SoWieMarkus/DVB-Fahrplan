@@ -36,7 +36,6 @@ public class DepartureFragment extends DefaultFragment {
 
         shimmerFrameLayout = findViewById(R.id.fragment_departure_loading);
 
-
         RecyclerView recyclerViewLines = findViewById(R.id.fragment_departure_lines_recycler_view);
         recyclerViewLines.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewLines.setHasFixedSize(true);

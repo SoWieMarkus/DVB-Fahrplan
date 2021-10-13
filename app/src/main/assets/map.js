@@ -124,12 +124,61 @@ function initializeMap() {
 
 }
 
+function showRouteOnTrack(mapData) {
+
+    let markers = [];
+
+    for (let i = 0; i < mapData.mapDataParts.length; i++) {
+        console.log(i+"i");
+        let mode = mapData.mapDataParts[i].mode;
+        let coordinates = mapData.mapDataParts[i].wgsCoordinates;
+        let path = [];
+        for (let j = 0; j < coordinates.length; j++) {
+            let coordinate = [coordinates[j].latitude,coordinates[j].longitude];
+            console.log(j+"j");
+            path.push(coordinate);
+            if (j === 0 || j === (coordinates.length - 1)) {
+                let marker;
+                if (j === (coordinates - 1) && i === (mapData.mapDataParts.length - 1)) {
+                    marker = L.marker(coordinate, {icon: markersList["destination"]});
+                } else if (j === 0 && i === 0) {
+                    marker = L.marker(coordinate);
+                } else if (mode !== "footpath") {
+                    marker = L.marker(coordinate, {icon: markersList[mode]});
+                    console.log(marker);
+                } else {
+                    continue;
+                }
+
+                marker.addTo(map);
+                markers.push(marker);
+            }
+        }
+
+        console.log(path);
+
+        L.polyline(path, {
+            color: colors[mode],
+            weight: 5,
+            smoothFactor: 1
+            //dashArray: '10, 10', dashOffset: '0'
+        }).addTo(map);
+
+    }
+
+    var group = new L.featureGroup(markers);
+
+    map.fitBounds(group.getBounds());
+
+
+}
+
 function showRoute(route) {
     let markers = [];
 
     let routeCopy = route;
     route = [];
-    for (let i = 0; i < routeCopy.length;i++) {
+    for (let i = 0; i < routeCopy.length; i++) {
         if (routeCopy[i].mode !== "waiting")
             route.push(routeCopy[i]);
     }
@@ -144,18 +193,12 @@ function showRoute(route) {
 
         for (let j = 0; j < partialRoute.nodes.length; j++) {
             let node = partialRoute.nodes[j];
-            let coordinates = [node.x,node.y];
+            let coordinates = [node.x, node.y];
             path.push(coordinates);
             if (j === 0 || j === (partialRoute.nodes.length - 1)) {
 
-
-                console.log("\nj: "+ j);
-                console.log("i: "+ i);
-                console.log("imax: "+ route.length);
-                console.log("jmax: "+ (partialRoute.nodes.length - 1));
-                console.log("mode: "+ mode);
                 let marker;
-                if (j === (partialRoute.nodes.length -1) && i === (route.length -1)) {
+                if (j === (partialRoute.nodes.length - 1) && i === (route.length - 1)) {
                     console.log("dest")
                     marker = L.marker(coordinates, {icon: markersList["destination"]});
                 } else if (j === 0 && i === 0) {
@@ -173,7 +216,6 @@ function showRoute(route) {
                 marker.addTo(map);
                 markers.push(marker);
             }
-
 
 
         }

@@ -17,6 +17,7 @@ import markus.wieland.dvbfahrplan.api.models.routes.PartialRoute;
 import markus.wieland.dvbfahrplan.api.models.routes.Route;
 import markus.wieland.dvbfahrplan.api.models.trip.Node;
 import markus.wieland.dvbfahrplan.api.models.trip.Trip;
+import markus.wieland.dvbfahrplan.ui.map.mapdata.MapData;
 
 public class MapView extends WebView {
 
@@ -63,6 +64,11 @@ public class MapView extends WebView {
             nodes.add(tripNode);
         }
         loadUrl("javascript:showTrip(" + gson.toJson(nodes) + ")");
+    }
+
+    public void showMapData(Route route) {
+        MapData mapData = new MapData(route);
+        loadUrl("javascript:showTrip(" + gson.toJson(mapData) + ")");
     }
 
     public void focus(Node node) {

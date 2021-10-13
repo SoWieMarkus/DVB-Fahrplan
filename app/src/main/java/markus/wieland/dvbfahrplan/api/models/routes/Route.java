@@ -40,8 +40,19 @@ public class Route implements QueryableEntity<Long> {
     @SerializedName("PartialRoutes")
     private List<PartialRoute> partialRoutes;
 
+    @SerializedName("MapData")
+    private List<String> mapData;
+
     @SerializedName("RouteId")
     private long routeId;
+
+    public List<String> getMapData() {
+        return mapData;
+    }
+
+    public void setMapData(List<String> mapData) {
+        this.mapData = mapData;
+    }
 
     public int getInterchanges() {
         return interchanges;
@@ -254,5 +265,6 @@ public class Route implements QueryableEntity<Long> {
 
         return routeString;
     }
+
 }
 

@@ -91,7 +91,7 @@ public class RouteDetailActivity extends DefaultActivity implements View.OnClick
         mapViewRoute.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                mapViewRoute.showRoute(getRoute());
+                mapViewRoute.showMapData(getRoute());
             }
         });
         findViewById(R.id.coordinator_layout).getViewTreeObserver().removeOnGlobalLayoutListener(this);
