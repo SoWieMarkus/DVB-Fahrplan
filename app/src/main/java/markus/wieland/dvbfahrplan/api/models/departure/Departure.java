@@ -172,7 +172,8 @@ public class Departure implements QueryableEntity<String> {
     }
 
     public String getDelayAsString() {
-        return "+" + getDelay();
+        long delay = getDelay();
+        return delay < 0 ? String.valueOf(delay) : "+" + delay;
     }
 
 

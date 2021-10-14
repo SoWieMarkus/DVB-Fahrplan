@@ -121,3 +121,5 @@ x
 Happ/src/main/java/markus/wieland/dvbfahrplan/ui/map/mapdata/MapData.java,a\b\ab6a5ca3f4e8dab46af247ec7214a783a11624dd
 |
 Lapp/src/main/java/markus/wieland/dvbfahrplan/ui/map/mapdata/MapDataPart.java,f\6\f6ba15f1928a0218fab6091f77b1d45f589e10ed
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
