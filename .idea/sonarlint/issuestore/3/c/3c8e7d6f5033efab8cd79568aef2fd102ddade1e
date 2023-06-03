@@ -1,5 +1,5 @@
 
-U
-java:S1128"8Remove this unused import 'android.view.LayoutInflater'.(À¯ÑÇ8ª³¹í/
 P
 java:S1874ˆ"3Remove this use of "insertImage"; it is deprecated.(”É8ÿÙí/
+U
+java:S1128"8Remove this unused import 'android.view.LayoutInflater'.(À¯ÑÇ8ª³¹í/
