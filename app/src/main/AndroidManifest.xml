@@ -14,7 +14,8 @@
         android:theme="@style/Theme.DVBFahrplan">
         <activity android:name=".ui.trip.TripActivity" />
         <activity android:name=".ui.routes.route.RouteDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
